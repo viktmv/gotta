@@ -22,7 +22,6 @@ class CreateNewList extends React.Component {
                        ${this.state.btn.type == 'submit'
                        ? `value="${this.state.btn.value}" `
                        : `placeholder="${this.state.btn.placeholder}"`}
-
                        />`
 
     return (
@@ -39,8 +38,6 @@ class CreateNewList extends React.Component {
   }
 
   showCreationForm = (e) => {
-    console.log(e)
-    console.log('showCreationForm running')
     return ReactDOM.render(<CreateListItem></CreateListItem>, document.getElementById('new-list-creation'))
   }
 
