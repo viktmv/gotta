@@ -7,17 +7,21 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import Header from './Header.jsx'
+import CreateNewList from './CreateNewList.jsx'
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {
-      name: 'Alice'
-    }
+    this.state = {}
   }
 
   render() {
-    return <Header></Header>
+    return (
+      <div>
+        <Header></Header>
+        <main><CreateNewList /></main>
+      </div>
+    )
   }
 }
 
