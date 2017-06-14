@@ -6,6 +6,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import Header from './Header.jsx'
+
 class App extends React.Component {
   constructor() {
     super()
@@ -15,7 +17,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>Hello, {this.state.name}</div>
+    return <Header></Header>
   }
 }
 
