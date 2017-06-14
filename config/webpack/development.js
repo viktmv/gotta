@@ -29,5 +29,13 @@ module.exports = merge(sharedConfig, {
       ignored: /node_modules/,
       poll: true
     }
-  }
+  },
+
+  externals: {
+     'jsdom': 'window',
+     'cheerio': 'window',
+     'react/lib/ExecutionEnvironment': true,
+     'react/addons': true,
+     'react/lib/ReactContext': 'window'
+   }
 })
