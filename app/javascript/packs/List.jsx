@@ -9,7 +9,7 @@ class List extends React.Component {
   }
   render() {
     return (<div>{this.state.listItems.map(item => {
-      return ( <h1 key={this.generateKey()}>item</h1> )
+      return (<h1 key={this.generateKey()}>{item}</h1> )
     })}</div>)
   }
 
