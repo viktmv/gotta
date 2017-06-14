@@ -58,9 +58,9 @@ class Header extends React.Component {
             <div>
               <ul>
                 <ul>
-                  <li><Link to="/login">Login</Link></li>
-                  <li><Link to="/sign-up">About Us</Link></li>
-                  <li><Link to="/my-lists">My Lists</Link></li>
+                  <li><Link to="/login" className="login-link">Login</Link></li>
+                  <li><Link to="/sign-up" className="singup-link">Sign Up</Link></li>
+                  <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
                 </ul>
               </ul>
               <Route exact path="/login" component={Login}/>
