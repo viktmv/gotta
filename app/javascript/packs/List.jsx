@@ -8,21 +8,26 @@ class List extends React.Component {
     }
   }
   render() {
-    return (<div>{this.state.listItems.map(({itemName, itemDescription, itemLink}) => {
-      return (
-      <div key={this.generateKey()}>
-        <h1>{itemName}</h1>
-        <p>Desctiption: {itemDescription}</p>
-        <p>Link: {itemLink}</p>
-      </div>
-        )
-    })}</div>)
+    return (<div><h2>{this.props.name}</h2>
+              {this.state.listItems.map(({itemName, itemDescription, itemLink, itemKey}) => {
+                return (
+                <div key={itemKey} id={itemKey}>
+                  <b>{itemName}</b>&nbsp;
+                  <span>Description: {itemDescription}</span>&nbsp;&nbsp;
+                  <span>Link: {itemLink}</span>
+                  <button className="rm-list-item" onClick={this.handleRemoveClick}>-</button>
+                </div>
+                  )
+              })}
+            </div>)
   }
 
-  generateKey = (() => {
-    let num = 0
-    return () => `${num++}-key`
-  })()
+  handleRemoveClick = e => {
+    console.log('item', e.target.parentNode.id)
+    this.props.rmItem(e.target.parentNode)
+  }
+
+
 }
 
 export default List

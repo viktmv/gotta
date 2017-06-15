@@ -16,13 +16,15 @@ class CreateListItem extends React.Component {
         <input type="description" onChange={this.updateDescription}placeholder="list-item description" />
         <input type="link" onChange={this.updateLink} placeholder="list-item link" />
         <button className="add-list-item" onClick={this.handleAddClick}>+</button>
+
       </div>
     )
   }
 
   handleAddClick = () => {
     let {itemName, itemDescription, itemLink} = this.state
-    this.props.addItem({itemName, itemDescription, itemLink})
+    let key = this.generateKey()
+    this.props.addItem({itemName, itemDescription, itemLink, itemKey: key})
   }
 
   updateName = (e) => {
@@ -36,6 +38,11 @@ class CreateListItem extends React.Component {
   updateLink = (e) => {
     this.setState({itemLink: e.target.value})
   }
+
+  generateKey = (() => {
+    let num = 0
+    return () => `${num++}-key`
+  })()
 }
 
 export default CreateListItem
