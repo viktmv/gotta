@@ -8,7 +8,7 @@ class CreateNewList extends React.Component {
   constructor() {
     super()
     this.state = {
-      listItems: [1,2,3, 'hey'],
+      listItems: [{itemName: 'item1', itemLink: 'exapmle.com', itemDescription: 'Some Item'}],
       btn: {
         type: 'submit',
         value: 'Create List'
@@ -27,20 +27,27 @@ class CreateNewList extends React.Component {
     return (
       <div id="new-list">
         <span onClick={this.handleClick} dangerouslySetInnerHTML={{__html: input}} />
-        <div id="new-list-creation"> </div>
         <List listItems={this.state.listItems}></List>
+        <div id="new-list-creation"></div>
       </div>
     )
   }
 
   handleClick = (e) => {
+    this.showCreationForm(e)
     this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }})
   }
 
   showCreationForm = (e) => {
-    return ReactDOM.render(<CreateListItem></CreateListItem>, document.getElementById('new-list-creation'))
+    return ReactDOM.render(<CreateListItem addItem={this.addItem}></CreateListItem>, document.getElementById('new-list-creation'))
   }
 
+  addItem = (item) => {
+    let {listItems} = this.state
+
+    listItems.push(item)
+    this.setState({listItems})
+  }
 }
 
 export default CreateNewList

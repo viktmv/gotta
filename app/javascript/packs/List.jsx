@@ -8,8 +8,14 @@ class List extends React.Component {
     }
   }
   render() {
-    return (<div>{this.state.listItems.map(item => {
-      return (<h1 key={this.generateKey()}>{item}</h1> )
+    return (<div>{this.state.listItems.map(({itemName, itemDescription, itemLink}) => {
+      return (
+      <div key={this.generateKey()}>
+        <h1>{itemName}</h1>
+        <p>Desctiption: {itemDescription}</p>
+        <p>Link: {itemLink}</p>
+      </div>
+        )
     })}</div>)
   }
 
