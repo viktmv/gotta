@@ -17,7 +17,8 @@ class CreateNewList extends React.Component {
       btn: {
         type: 'submit',
         value: 'Create List'
-      }
+      },
+      clicked: false
     }
   }
 
@@ -29,18 +30,26 @@ class CreateNewList extends React.Component {
                        : `placeholder="${this.state.btn.placeholder}"`}
                        />`
 
+    let list = ''
+    if (this.state.clicked) {
+      list = <div>
+              <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}>
+              </List>
+              <CreateListItem addItem={this.addItem} />
+            </div>
+    }
     return (
       <div id="new-list">
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
-        <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}></List>
-        <div id="new-list-creation"></div>
+        {list}
+        <br></br>
+        <button>Publish Your List</button>
       </div>
     )
   }
 
   handleClick = e => {
-    this.showCreationForm(e)
-    this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }})
+    this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }, clicked: true})
   }
 
   handleEnter = e => {
@@ -48,7 +57,6 @@ class CreateNewList extends React.Component {
   }
 
   showCreationForm = e => {
-    return ReactDOM.render(<CreateListItem addItem={this.addItem}></CreateListItem>, document.getElementById('new-list-creation'))
   }
 
   addItem = item => {

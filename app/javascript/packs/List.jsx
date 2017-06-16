@@ -12,9 +12,9 @@ class List extends React.Component {
               {this.state.listItems.map(({itemName, itemDescription, itemLink, itemKey}) => {
                 return (
                 <div key={itemKey} id={itemKey}>
-                  <b>{itemName}</b>&nbsp;
-                  <span>Description: {itemDescription}</span>&nbsp;&nbsp;
-                  <span>Link: {itemLink}</span>
+                  <b>{itemName}</b>&nbsp;/&nbsp;
+                  <span>Description: {itemDescription}</span>&nbsp;/&nbsp;
+                  <span>Link: {itemLink}</span>&nbsp;&nbsp;
                   <button className="rm-list-item" onClick={this.handleRemoveClick}>-</button>
                 </div>
                   )
@@ -23,11 +23,8 @@ class List extends React.Component {
   }
 
   handleRemoveClick = e => {
-    console.log('item', e.target.parentNode.id)
     this.props.rmItem(e.target.parentNode)
   }
-
-
 }
 
 export default List
