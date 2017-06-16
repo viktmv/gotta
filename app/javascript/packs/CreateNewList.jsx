@@ -8,11 +8,17 @@ class CreateNewList extends React.Component {
   constructor() {
     super()
     this.state = {
-      listItems: [{itemName: 'item1', itemLink: 'exapmle.com', itemDescription: 'Some Item'}],
+      listName: '',
+      listItems: [{itemName: 'Your first thing to add',
+                  itemLink: 'exapmle.com',
+                  itemDescription: 'Something you wanna get back to',
+                  itemKey: 'example-item'
+                }],
       btn: {
         type: 'submit',
         value: 'Create List'
-      }
+      },
+      clicked: false
     }
   }
 
@@ -24,28 +30,46 @@ class CreateNewList extends React.Component {
                        : `placeholder="${this.state.btn.placeholder}"`}
                        />`
 
+    let list = ''
+    if (this.state.clicked) {
+      list = <div>
+              <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}>
+              </List>
+              <CreateListItem addItem={this.addItem} />
+            </div>
+    }
     return (
       <div id="new-list">
-        <span onClick={this.handleClick} dangerouslySetInnerHTML={{__html: input}} />
-        <List listItems={this.state.listItems}></List>
-        <div id="new-list-creation"></div>
+        <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
+        {list}
+        <br></br>
+        <button>Publish Your List</button>
       </div>
     )
   }
 
-  handleClick = (e) => {
-    this.showCreationForm(e)
-    this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }})
+  handleClick = e => {
+    this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }, clicked: true})
   }
 
-  showCreationForm = (e) => {
-    return ReactDOM.render(<CreateListItem addItem={this.addItem}></CreateListItem>, document.getElementById('new-list-creation'))
+  handleEnter = e => {
+    if (e.key == 'Enter') this.setState({listName: e.target.value})
   }
 
-  addItem = (item) => {
+  showCreationForm = e => {
+  }
+
+  addItem = item => {
     let {listItems} = this.state
 
     listItems.push(item)
+    this.setState({listItems})
+  }
+
+  rmItem = item => {
+    let {listItems} = this.state
+
+    listItems.splice(listItems.findIndex(listItem => listItem.itemKey == item.id ), 1)
     this.setState({listItems})
   }
 }
