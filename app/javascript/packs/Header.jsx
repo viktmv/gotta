@@ -51,22 +51,22 @@ class Header extends React.Component {
   render() {
     return (
       <header className="main-header">
-        <div className="logo">Logo</div>
         <nav className="login-register-controls">
-          <Router>
-            <div>
-              <ul>
+          <div className="brand-logo">Logo</div>
+            <Router>
+              <div>
                 <ul>
-                  <li><Link to="/login" className="login-link">Login</Link></li>
-                  <li><Link to="/sign-up" className="singup-link">Sign Up</Link></li>
-                  <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
+                  <ul>
+                    <li><Link to="/login" className="login-link">Login</Link></li>
+                    <li><Link to="/sign-up" className="singup-link">Sign Up</Link></li>
+                    <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
+                  </ul>
                 </ul>
-              </ul>
-              <Route exact path="/login" component={Login}/>
-              <Route path="/sign-up" component={SignUp}/>
-              <Route path="/my-lists" component={LoL}/>
-            </div>
-          </Router>
+                <Route exact path="/login" component={Login}/>
+                <Route path="/sign-up" component={SignUp}/>
+                <Route path="/my-lists" component={LoL}/>
+              </div>
+            </Router>
         </nav>
       </header>
     )

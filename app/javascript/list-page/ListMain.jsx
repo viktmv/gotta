@@ -11,7 +11,7 @@ class List extends React.Component {
 
   render() {
     return (<div>
-              <h2>{this.props.name}</h2>
+              <h3>{this.props.name}</h3>
               {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
             </div>)
   }
