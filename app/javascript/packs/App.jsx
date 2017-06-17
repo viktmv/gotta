@@ -6,8 +6,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import Header from './Header.jsx'
-import CreateNewList from './CreateNewList.jsx'
+import Header from '../index/Header.jsx'
+import CreateNewList from '../index/CreateNewList.jsx'
+
+let _sessionState = {
+  authRequestInProgress: false,
+  authErrors: [],
+  authToken: null,
+  username: null,
+  userId: null
+}
 
 class App extends React.Component {
   constructor() {

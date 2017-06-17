@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer'
 import {shallow} from 'enzyme';
 
-import Header from '../Header.jsx';
+import Header from '../../index/Header.jsx';
 
 test('Router renders the component when link is clicked', () => {
   const header = renderer.create(<Header></Header>)

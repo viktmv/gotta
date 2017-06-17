@@ -9,24 +9,8 @@ import {
   Switch
 } from 'react-router-dom'
 
-const Login = () => (
-  <div>
-    <h2>Login</h2>
-    <input name="email" type="email" placeholder="Email" />
-    <input name="password" type="password" placeholder="password" />
-    <button>Login</button>
-  </div>
-)
-
-const SignUp = () => (
-  <div>
-    <h2>Sign-up</h2>
-    <input name="email" type="email" placeholder="Email" />
-    <input name="password" type="password" placeholder="password" />
-    <input name="password-confirmation" type="password" placeholder="password" />
-    <button>Sing- up</button>
-  </div>
-)
+import SignUp from './SignUp'
+import Login from './Login'
 
 const LoL = () => (
   <div>
@@ -62,7 +46,7 @@ class Header extends React.Component {
                   <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
                 </ul>
               </ul>
-              <Route exact path="/login" component={Login}/>
+              <Route exact path="/login" name="hey" component={Login}/>
               <Route path="/sign-up" component={SignUp}/>
               <Route path="/my-lists" component={LoL}/>
             </div>

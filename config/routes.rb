@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root :to => 'home#index'
 
   post '/users' => 'users#create'
+  post '/login' => 'session#create'
   get '/lists/new' => 'home#new'
   get '*path', to: 'home#index'
 
