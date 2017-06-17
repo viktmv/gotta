@@ -32,6 +32,13 @@ const LoL = () => (
 )
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: this.props.user
+    }
+  }
   render() {
     return (
       <header className="main-header">
@@ -46,14 +53,21 @@ class Header extends React.Component {
                   <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
                 </ul>
               </ul>
-              <Route exact path="/login" name="hey" component={Login}/>
-              <Route path="/sign-up" component={SignUp}/>
-              <Route path="/my-lists" component={LoL}/>
+              <Switch>
+                <Route exact path="/login" render={this.renderLoginWithProps}/>
+                <Route path="/sign-up" component={SignUp}/>
+                <Route path="/my-lists" component={LoL}/>
+              </Switch>
             </div>
           </Router>
         </nav>
       </header>
     )
+  }
+
+  renderLoginWithProps = () => {
+    let props = this.props
+    return <Login {...props} />
   }
 }
 

@@ -1,21 +1,36 @@
 import React from 'react'
+import Auth from '../modules/Auth'
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      user: this.props.user
+    }
+  }
+
+  componentWillMount = () => {
+    console.log(this.props)
+    return this.props.authWithToken()
+  }
 
   render() {
+    let text = this.state.user.auth_token ? 'Logout' : 'Login'
+
     return (
       <div>
         <h2>Login</h2>
         <form className="login-form">
           <input name="email" type="email" placeholder="Email" />
           <input name="password" type="password" placeholder="password" />
-          <button onClick={this.handleLogin}>Login</button>
+          <button onClick={this.handleLogin}>{text}</button>
         </form>
       </div>
     )
   }
 
-  handleLogin(e) {
+  handleLogin = e => {
     e.preventDefault()
 
     let form = document.querySelector('.login-form')
@@ -31,10 +46,13 @@ class Login extends React.Component {
       body: data
     }
 
-    fetch('/login', init).then(function(response) {
+    fetch('/login', init).then(response => {
       return response.json()
-    }).then(function(res) {
-      console.log(res.user)
+    }).then(res => {
+      let {user} = res
+      console.log(user)
+      Auth.authenticateUser(user)
+      this.setState({user})
     }).catch(err => console.log(err))
   }
 }

@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 
 import Header from '../index/Header.jsx'
 import CreateNewList from '../index/CreateNewList.jsx'
+import Auth from '../modules/Auth'
 
 let _sessionState = {
   authRequestInProgress: false,
@@ -23,13 +24,28 @@ class App extends React.Component {
     this.state = {}
   }
 
+  componentWillMount = () => {
+    return this.authWithToken()
+  }
+
   render() {
     return (
       <div>
-        <Header></Header>
-        <main><CreateNewList /></main>
+        <Header user={this.state.user} authWithToken={this.authWithToken}></Header>
+        <main><CreateNewList user={this.state.user} /></main>
       </div>
     )
+  }
+
+  setUser = (user) => {
+    this.setState({user})
+  }
+
+  authWithToken = () => {
+    if (Auth.isUserAuthenticated()) {
+      let user = Auth.getUser()
+      this.setState({user})
+    }
   }
 }
 
