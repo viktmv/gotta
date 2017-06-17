@@ -10,14 +10,6 @@ import Header from '../index/Header.jsx'
 import CreateNewList from '../index/CreateNewList.jsx'
 import Auth from '../modules/Auth'
 
-let _sessionState = {
-  authRequestInProgress: false,
-  authErrors: [],
-  authToken: null,
-  username: null,
-  userId: null
-}
-
 class App extends React.Component {
   constructor() {
     super()
@@ -25,13 +17,13 @@ class App extends React.Component {
   }
 
   componentWillMount = () => {
-    return this.authWithToken()
+    this.authWithToken()
   }
 
   render() {
     return (
       <div>
-        <Header user={this.state.user} authWithToken={this.authWithToken}></Header>
+        <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
         <main><CreateNewList user={this.state.user} /></main>
       </div>
     )
@@ -42,8 +34,10 @@ class App extends React.Component {
   }
 
   authWithToken = () => {
+    console.log(Auth.isUserAuthenticated())
     if (Auth.isUserAuthenticated()) {
       let user = Auth.getUser()
+      console.log(user)
       this.setState({user})
     }
   }

@@ -32,14 +32,21 @@ const LoL = () => (
 )
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      user: this.props.user
-    }
-  }
   render() {
+
+    let loggedIn = this.props.user ? true : false
+    let link = ''
+      , text = ''
+
+    if (loggedIn) {
+      text = 'Logout'
+      link = <Link to="/my-lists" className="my-lists-link">My Lists</Link>
+    }
+    else {
+      text = 'Login'
+      link = <Link to="/sign-up" className="singup-link">Sign Up</Link>
+    }
+
     return (
       <header className="main-header">
         <div className="logo">Logo</div>
@@ -48,9 +55,8 @@ class Header extends React.Component {
             <div>
               <ul>
                 <ul>
-                  <li><Link to="/login" className="login-link">Login</Link></li>
-                  <li><Link to="/sign-up" className="singup-link">Sign Up</Link></li>
-                  <li><Link to="/my-lists" className="my-lists-link">My Lists</Link></li>
+                  <li><Link to="/login" className="login-link">{text}</Link></li>
+                  <li>{link}</li>
                 </ul>
               </ul>
               <Switch>
