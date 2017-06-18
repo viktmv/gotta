@@ -66,13 +66,13 @@ nav {
     white-space: nowrap;
 
     &.center {
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: translateX(0);
     }
 
     @media #{$medium-and-down} {
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      transform: translateX(0);
 
       &.left, &.right {
         padding: 0;

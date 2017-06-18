@@ -1,7 +1,23 @@
 html {
 
+  nav {
+
+      .brand-logo {
+          margin-left: 10px;
+          float: left;
+      }
+
+       ul {
+          float: right;
+      }
+    }
+
   body {
-    background-color: #C0FFEE;
+
+    h2, h3, h4, h5 {
+        font-family: "Abel", "Roboto", sans-serif;
+        color: grey;
+    }
 
     .wrapper {
         width: 60%;
@@ -10,6 +26,9 @@ html {
         align-items: center;
         justify-content: center;
     }
+
+
+
   }
 
 }
