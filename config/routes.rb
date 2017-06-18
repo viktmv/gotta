@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
   post '/login' => 'session#create'
   post '/logout' => 'session#destroy'
-  get '/lists/new' => 'home#new'
-  get '*path', to: 'home#index'
 
+  get '/lists/new' => 'home#new'
+  post '/lists/create' => 'list#create'
+
+  get '*path', to: 'home#index'
 
 end
