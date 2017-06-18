@@ -1,7 +1,15 @@
 html {
+
   body {
-    div {
-      background-color: #C0FFEE;
+    background-color: #C0FFEE;
+
+    .wrapper {
+        width: 60%;
+        max-width: 900px;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
     }
   }
+
 }

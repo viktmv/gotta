@@ -24,7 +24,7 @@ class CreateNewList extends React.Component {
 
   render() {
     let input = `<input type=${this.state.btn.type}
-                       className="start-new-list"
+                       className="waves-effect waves-light btn"
                        ${this.state.btn.type == 'submit'
                        ? `value="${this.state.btn.value}" `
                        : `placeholder="${this.state.btn.placeholder}"`}
@@ -39,11 +39,11 @@ class CreateNewList extends React.Component {
             </div>
     }
     return (
-      <div id="new-list">
+      <div>
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
-        <button>Publish Your List</button>
+        <button className="waves-effect waves-light btn">Publish Your List</button>
       </div>
     )
   }

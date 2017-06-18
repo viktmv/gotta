@@ -27,7 +27,11 @@ class ListView extends React.Component {
     return (
       <div>
         <Header></Header>
-        <main><ListMain name={this.state.listName} listItems={this.state.listItems} /></main>
+          <main>
+            <div className="wrapper">
+             <ListMain name={this.state.listName} listItems={this.state.listItems} />
+            </div>
+          </main>
       </div>
     )
   }

@@ -51,6 +51,7 @@ class Header extends React.Component {
       <header className="main-header">
         <div className="logo">Logo</div>
         <nav className="login-register-controls">
+        <div className="brand-logo">Logo</div>
           <Router>
             <div>
               <ul>

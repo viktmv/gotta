@@ -15,7 +15,7 @@ class List extends React.Component {
                   <b>{itemName}</b>&nbsp;/&nbsp;
                   <span>Description: {itemDescription}</span>&nbsp;/&nbsp;
                   <span>Link: {itemLink}</span>&nbsp;&nbsp;
-                  <button className="rm-list-item" onClick={this.handleRemoveClick}>-</button>
+                  <button className="rm-list-item waves-effect waves-light btn" onClick={this.handleRemoveClick}>-</button>
                 </div>
                   )
               })}
