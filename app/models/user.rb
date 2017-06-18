@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   before_validation :trim_downcase_email
-
+  has_many :lists
+  
   has_secure_password
 
   def self.authenticate_with_credentials(email, password)
