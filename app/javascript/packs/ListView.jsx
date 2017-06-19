@@ -23,6 +23,14 @@ class ListView extends React.Component {
     }
   }
 
+  componentWillMount() {
+    let url = window.location.pathname
+
+    let id = url.substring(url.search(/\d+/gi))
+
+    fetch()
+  }
+
   render() {
     return (
       <div>

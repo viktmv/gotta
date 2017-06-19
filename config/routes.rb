@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   post '/logout' => 'session#destroy'
 
   get '/lists/new' => 'home#new'
+  get '/lists/:id' => 'list#show'
   post '/lists/create' => 'list#create'
+
 
   get '*path', to: 'home#index'
 

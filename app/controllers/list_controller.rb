@@ -1,4 +1,11 @@
 class ListController < ApplicationController
+  def show
+    @list = List.find(params[:id])
+
+    render json: @list
+  end
+
+  def 
 
   def create
     puts 'List create request received'
