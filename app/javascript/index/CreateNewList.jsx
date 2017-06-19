@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class CreateNewList extends React.Component {
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
-        <button onClick={this.handleCreate}>Publish Your List</button>
+        <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate}></RaisedButton>
       </div>
     )
   }

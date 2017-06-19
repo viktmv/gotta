@@ -10,42 +10,54 @@ import Header from '../index/Header.jsx'
 import CreateNewList from '../index/CreateNewList.jsx'
 import Auth from '../modules/Auth'
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {}
-  }
+///// Material UI stuff ////////
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+/////////////////////////////////
 
-  componentWillMount = () => {
-    this.authWithToken()
-  }
 
-  render() {
-    return (
-      <div>
-        <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
-        <main><CreateNewList user={this.state.user} /></main>
-      </div>
-    )
-  }
+  class App extends React.Component {
+    constructor() {
+      super()
+      this.state = {}
+    }
 
-  setUser = (user) => {
-    this.setState({user})
-  }
+    componentWillMount = () => {
+      this.authWithToken()
+    }
 
-  authWithToken = () => {
-    console.log(Auth.isUserAuthenticated())
-    if (Auth.isUserAuthenticated()) {
-      let user = Auth.getUser()
-      console.log(user)
+    render() {
+      return (
+        <MuiThemeProvider>
+        <div>
+          <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
+          <main><CreateNewList user={this.state.user} /></main>
+        </div>
+        </MuiThemeProvider>
+      )
+    }
+
+    setUser = (user) => {
       this.setState({user})
     }
-  }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <App />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+    authWithToken = () => {
+      console.log(Auth.isUserAuthenticated())
+      if (Auth.isUserAuthenticated()) {
+        let user = Auth.getUser()
+        console.log(user)
+        this.setState({user})
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ReactDOM.render(
+      <App />,
+      document.body.appendChild(document.createElement('div')),
+    )
+  })

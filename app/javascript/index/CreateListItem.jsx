@@ -1,4 +1,5 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class CreateListItem extends React.Component {
   constructor(props) {
@@ -15,8 +16,7 @@ class CreateListItem extends React.Component {
         <input type="name" onChange={this.updateName} placeholder="list-item name" />
         <input type="description" onChange={this.updateDescription}placeholder="list-item description" />
         <input type="link" onChange={this.updateLink} placeholder="list-item link" />
-        <button className="add-list-item" onClick={this.handleAddClick}>+</button>
-
+        <RaisedButton label="+" primary={true} onClick={this.handleAddClick}></RaisedButton>
       </div>
     )
   }
