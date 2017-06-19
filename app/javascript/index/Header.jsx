@@ -50,13 +50,14 @@ class Header extends React.Component {
     }
 
     return (
-      <AppBar title="GOTTA">
+
       <header className="main-header">
         <nav className="login-register-controls">
+         <AppBar title="GOTTA" showMenuIconButton={false}>
           <Router>
             <div>
               <ul>
-                <ul>
+                <ul className="navItems">
                   <li><Link to="/login" className="login-link">{text}</Link></li>
                   <li>{link}</li>
                 </ul>
@@ -68,9 +69,10 @@ class Header extends React.Component {
               </Switch>
             </div>
           </Router>
+         </AppBar>
         </nav>
       </header>
-      </AppBar>
+
     )
   }
 
