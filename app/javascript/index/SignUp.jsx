@@ -25,7 +25,6 @@ class SignUp extends React.Component {
   //  let password_confirmation = document.querySelector('.sign-up-form input[name=password-confirmation]').value
 
    let form = document.querySelector('.sign-up-form form')
-
    let meta = document.querySelector('meta[name="csrf-token"]').content
 
    let data = new FormData(form)
