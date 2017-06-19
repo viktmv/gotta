@@ -2,10 +2,8 @@ class ListController < ApplicationController
   def show
     @list = List.find(params[:id])
 
-    render json: @list
+    render 'show', layout: 'list'
   end
-
-  def 
 
   def create
     puts 'List create request received'
@@ -21,6 +19,8 @@ class ListController < ApplicationController
                         link: item[:itemLink])
     end
 
-    render json: list
+    respond_to do |format|
+      format.json { render json: list }
+    end
   end
 end

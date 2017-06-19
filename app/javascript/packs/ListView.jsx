@@ -6,44 +6,47 @@ import ListMain from '../list-page/ListMain.jsx'
 import Header from '../index/Header.jsx'
 
 class ListView extends React.Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
-      listItems: [{itemName: 'Your first thing to add',
-                  itemLink: 'exapmle.com',
-                  itemDescription: 'Something you wanna get back to',
-                  itemKey: 'example-item'
-                },
-                {itemName: 'Your first thing to add',
-                            itemLink: 'exapmle.com',
-                            itemDescription: 'Something you wanna get back to',
-                            itemKey: 'example-item2'
-                }],
-      listName: 'Test List #1'
+      user: '',
+      listItems: props.data.items,
+      listName: props.data.name
     }
   }
 
   componentWillMount() {
-    let url = window.location.pathname
-
-    let id = url.substring(url.search(/\d+/gi))
-
-    fetch()
+    console.log(this.props)
+    console.log(this.props.data.items)
   }
 
   render() {
     return (
       <div>
-        <Header></Header>
         <main><ListMain name={this.state.listName} listItems={this.state.listItems} /></main>
       </div>
     )
   }
+
+  setUser = (user) => {
+    this.setState({user})
+  }
+
+  authWithToken = () => {
+    if (Auth.isUserAuthenticated()) {
+      let user = Auth.getUser()
+      this.setState({user})
+    }
+  }
+
 }
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
+  let listData = JSON.parse(document.body.querySelector('#list-data').getAttribute('data'))
   ReactDOM.render(
-    <ListView />,
+    <ListView data={listData} />,
     document.body.appendChild(document.createElement('div')),
   )
 })

@@ -4,9 +4,9 @@ import React from 'react'
 class ListItem extends React.Component {
   render() {
     return (<div className="list-item" key={this.props.data.itemKey}>
-              <h2>1{this.props.data.itemName}</h2>
-              <p>{this.props.data.itemDescription}</p>
-              <p>{this.props.data.itemLink}</p>
+              <h2>{this.props.data.name}</h2>
+              <p>{this.props.data.description}</p>
+              <p>{this.props.data.link}</p>
             </div>)
   }
 }

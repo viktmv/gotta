@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>List</title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'ListView' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
-</html>
+<%= content_tag :div,
+  id: "list-data",
+  data: {
+    name: @list.name,
+    id: @list.id,
+    items: @list.items
+}.to_json do %>
+<% end %>
