@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 
 import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
+import ConfirmationPopUp from '../index/ConfirmationPopUp'
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class CreateNewList extends React.Component {
         type: 'submit',
         value: 'Create List'
       },
-      clicked: false
+      clicked: false,
+      published: false
     }
   }
 
@@ -38,12 +40,16 @@ class CreateNewList extends React.Component {
               <CreateListItem addItem={this.addItem} />
             </div>
     }
+
+    let popup = this.state.published ? <ConfirmationPopUp list={this.state.listID} /> : ''
+
     return (
       <div id="new-list">
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
         <button onClick={this.handleCreate}>Publish Your List</button>
+        {popup}
       </div>
     )
   }
@@ -57,6 +63,10 @@ class CreateNewList extends React.Component {
   }
 
   showCreationForm = e => {
+  }
+
+  publishList = (list) => {
+    this.setState({published: true, listID: list.id})
   }
 
   handleCreate = e => {
@@ -78,11 +88,16 @@ class CreateNewList extends React.Component {
                  body: JSON.stringify(list)
                }
 
+    // console.log(init.body)
+
     fetch('/lists/create', init).then(response => {
       return response.json()
-    }).then(myBlob => {
-      console.log(myBlob)
-    }).catch(err => console.log(err))
+    }).then(result => {
+      console.log(this)
+      this.publishList(result)
+      // window.location = `/lists/${result.id}`
+    })
+    .catch(err => console.log(err))
   }
 
   addItem = item => {

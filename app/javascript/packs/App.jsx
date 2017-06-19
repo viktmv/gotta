@@ -6,14 +6,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import Header from '../index/Header.jsx'
-import CreateNewList from '../index/CreateNewList.jsx'
+import Header from '../index/Header'
+import CreateNewList from '../index/CreateNewList'
 import Auth from '../modules/Auth'
+
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      published: false
+    }
   }
 
   componentWillMount = () => {
@@ -29,9 +32,10 @@ class App extends React.Component {
     )
   }
 
-  setUser = (user) => {
+  setUser = user => {
     this.setState({user})
   }
+
 
   authWithToken = () => {
     console.log(Auth.isUserAuthenticated())
