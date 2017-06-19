@@ -7,6 +7,11 @@
 # Ignore bundler config.
 /.bundle
 
+#public/packs-test/
+
+/public/packs-test/
+
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal

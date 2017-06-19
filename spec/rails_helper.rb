@@ -22,6 +22,7 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
+require 'webpacker'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
