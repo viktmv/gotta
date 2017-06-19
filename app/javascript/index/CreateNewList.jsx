@@ -5,7 +5,7 @@ import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
 
 class CreateNewList extends React.Component {
-  constructor() {
+  constructor(props) {
     super()
     this.state = {
       listName: '',
@@ -43,7 +43,7 @@ class CreateNewList extends React.Component {
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
-        <button>Publish Your List</button>
+        <button onClick={this.handleCreate}>Publish Your List</button>
       </div>
     )
   }
@@ -57,6 +57,32 @@ class CreateNewList extends React.Component {
   }
 
   showCreationForm = e => {
+  }
+
+  handleCreate = e => {
+    // helper
+    let $ = el => document.querySelector(el)
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+
+    let list = {
+      name: this.state.listName,
+      items: this.state.listItems,
+      user: this.props.user
+    }
+
+    let init = {
+                 method: 'POST',
+                 headers: headers,
+                 body: JSON.stringify(list)
+               }
+
+    fetch('/lists/create', init).then(response => {
+      return response.json()
+    }).then(myBlob => {
+      console.log(myBlob)
+    }).catch(err => console.log(err))
   }
 
   addItem = item => {
