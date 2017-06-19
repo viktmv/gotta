@@ -7,7 +7,7 @@ class ListItem extends React.Component {
               <b className="list-item-name">Name: {this.props.data.itemName}</b>
               <span className="list-item-description">Description: {this.props.data.itemDescription}</span>
               <span className="list-item-link">Link: {this.props.data.itemLink}</span>
-               <RaisedButton label="Primary" primary={true} className="rm-list-item" onClick={this.props.handleRemoveClick}>-</RaisedButton>
+               <RaisedButton label="-" primary={true} className="rm-list-item" onClick={this.props.handleRemoveClick}></RaisedButton>
             </div>)
   }
 }

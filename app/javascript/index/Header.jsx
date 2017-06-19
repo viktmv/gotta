@@ -12,6 +12,8 @@ import {
 import SignUp from './SignUp'
 import Login from './Login'
 
+import AppBar from 'material-ui/AppBar';
+
 const LoL = () => (
   <div>
     <h2>My lists</h2>
@@ -48,8 +50,8 @@ class Header extends React.Component {
     }
 
     return (
+      <AppBar title="GOTTA">
       <header className="main-header">
-        <div className="logo">Logo</div>
         <nav className="login-register-controls">
           <Router>
             <div>
@@ -68,6 +70,7 @@ class Header extends React.Component {
           </Router>
         </nav>
       </header>
+      </AppBar>
     )
   }
 
