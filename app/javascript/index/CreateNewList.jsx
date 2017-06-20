@@ -78,6 +78,7 @@ class CreateNewList extends React.Component {
       items: this.state.listItems,
       user: this.props.user
     }
+    
     // Options for request
     let init = {
                  method: 'POST',
@@ -89,9 +90,7 @@ class CreateNewList extends React.Component {
     fetch('/lists/create', init).then(response => {
       return response.json()
     }).then(result => {
-      console.log(this)
       this.publishList(result)
-      // window.location = `/lists/${result.id}`
     })
     .catch(err => console.log(err))
   }

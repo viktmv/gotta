@@ -19,7 +19,7 @@ class List extends React.Component {
   }
 
   handleRemoveClick = e => {
-    this.props.rmItem(e.target.parentNode)
+    this.props.rmItem(e.target.closest('.list-item'))
   }
 }
 

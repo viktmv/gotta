@@ -10,7 +10,7 @@ const style = {
 
 class ListItem extends React.Component {
   render() {
-    return (<div className="list-item" key={this.props.data.itemKey}>
+    return (<div id={this.props.data.itemKey} className="list-item" key={this.props.data.itemKey}>
               <div className="item-image" style={{ backgroundImage: `url(${this.props.data.itemImage})`, width: '72px', height: '72px'}}></div>
               <b className="list-item-name">Name: {this.props.data.itemName}</b><br />
               <span className="list-item-description">Description: {this.props.data.itemDescription}</span><br />
