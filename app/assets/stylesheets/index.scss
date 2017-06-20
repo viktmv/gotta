@@ -1,7 +1,47 @@
+
 html {
-  body {
-    div {
-      background-color: #C0FFEE;
+  a {
+    text-decoration: none;
+  }
+
+  header {
+    ul {
+      list-style: none;
+
+        .navItems {
+          display: flex;
+          flex-direction: row;
+
+          li {
+            padding: 0 7px;
+          }
+        }
     }
   }
+
+
+  body {
+      margin: 0;
+      padding: 0;
+
+    .wrapper {
+        max-width: 1080px;
+        width: 50%;
+        margin: 0 auto;
+        padding-top: 30px;
+
+          #new-list {
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: center;
+            text-align: center;
+
+                #start-new-list {
+                    width: 200px;
+                    height: 50px;
+                    border-radius: 5px;
+                  }
+              }
+          }
+      }
 }

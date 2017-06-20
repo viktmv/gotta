@@ -13,6 +13,9 @@ import SignUp from './SignUp'
 import Login from './Login'
 import LoL from './LoL'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+
 class Header extends React.Component {
   render() {
 
@@ -30,13 +33,14 @@ class Header extends React.Component {
     }
 
     return (
+
       <header className="main-header">
-        <div className="logo">Logo</div>
         <nav className="login-register-controls">
+         <AppBar title="GOTTA" showMenuIconButton={false}>
           <Router>
             <div>
               <ul>
-                <ul>
+                <ul className="navItems">
                   <li><Link to="/login" className="login-link">{text}</Link></li>
                   <li>{link}</li>
                 </ul>
@@ -48,8 +52,10 @@ class Header extends React.Component {
               </Switch>
             </div>
           </Router>
+         </AppBar>
         </nav>
       </header>
+
     )
   }
 

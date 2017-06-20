@@ -11,6 +11,15 @@ import CreateNewList from '../index/CreateNewList'
 import Auth from '../modules/Auth'
 
 
+///// Material UI stuff ////////
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+/////////////////////////////////
+
 class App extends React.Component {
   constructor() {
     super()
@@ -25,17 +34,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
-        <main><CreateNewList user={this.state.user} /></main>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
+          <main><div className="wrapper"><CreateNewList user={this.state.user} /></div></main>
+        </div>
+      </MuiThemeProvider>
     )
   }
 
-  setUser = user => {
+  setUser = (user) => {
     this.setState({user})
   }
-
 
   authWithToken = () => {
     console.log(Auth.isUserAuthenticated())
