@@ -1,4 +1,13 @@
 import React from 'react'
+import RaisedButton from 'material-ui/RaisedButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import TextField from 'material-ui/TextField';
+
+const style = {
+  marginLeft: 10,
+  verticalAlign: -10,
+};
 
 class CreateListItem extends React.Component {
   constructor(props) {
@@ -6,25 +15,40 @@ class CreateListItem extends React.Component {
     this.state = {
       itemName: '',
       itemDescription: '',
-      itemLink: ''
+      itemLink: '',
+      itemImage: ''
     }
   }
   render () {
     return (
       <div>
-        <input type="link" onChange={this.updateLink} placeholder="list-item link" />
-        <input type="name" onChange={this.updateName} placeholder="list-item name" />
-        <input type="description" onChange={this.updateDescription}placeholder="list-item description" />
-        <button className="add-list-item" onClick={this.handleAddClick}>+</button>
-
+        <div className="create-image item-image"></div>
+        <input className="create-link" type="link" onChange={this.updateLink} placeholder="list-item link" />
+        <input className="create-name" type="name" onChange={this.updateName} placeholder="list-item name" />
+        <input className="create-description" type="description" onChange={this.updateDescription}placeholder="list-item description" />
+        <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }
 
   handleAddClick = () => {
-    let {itemName, itemDescription, itemLink} = this.state
+    const $ = el => document.querySelector(el)
+
+    let {itemName, itemDescription, itemLink, itemImage} = this.state
     let key = this.generateKey()
-    this.props.addItem({itemName, itemDescription, itemLink, itemKey: key})
+    this.props.addItem({itemName, itemDescription, itemLink, itemKey: key, itemImage})
+
+    $('.create-name').value = ''
+    $('.create-link').value = ''
+    $('.create-description').value = ''
+    $('.create-image').setAttribute('style', '');
+
+    this.setState({
+      itemName: '',
+      itemDescription: '',
+      itemLink: '',
+      itemImage: ''
+    })
   }
 
   updateName = (e) => {
@@ -36,16 +60,15 @@ class CreateListItem extends React.Component {
   }
 
   updateLink = (e) => {
+    // Helper
+    const $ = el => document.querySelector(el)
 
+    let data = { url: e.target.value }
+    if (!data.url) return
+
+    // request options
     let meta = document.querySelector('meta[name="csrf-token"]').content
-
-    // let url = JSON.stringify({ url: e.target.value })
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json'})
-
-    let data = {
-      url: e.target.value
-    }
-
     let init = {
                  method: 'POST',
                  headers: headers,
@@ -53,18 +76,20 @@ class CreateListItem extends React.Component {
                }
 
     fetch('/connect', init)
-    .then(response => {
-      console.log(init)
-      return response
-    }).then(res => {
-      // let {user} = res
-      console.log(res)
-      // if (user) Auth.authenticateUser(user)
-      // this.props.setUser(user)
+    .then(response => response.json())
+    .then(res => {
+      let {title, site_name, description, url, image} = res
 
-    }).catch(err => console.log(err))
-    // fetch(e.target.value).then(res => res.json).then(console.log)
-    this.setState({itemLink: e.target.value})
+      $('.create-name').value = title[0]._value
+      $('.create-description').value = description[0]._value
+      $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
+
+      this.setState({itemName: title[0]._value,
+                     itemLink: url[0]._value,
+                     itemDescription: description[0]._value,
+                     itemImage: image[0]._value})
+    })
+    .catch(err => console.log(err))
   }
 
   generateKey = (() => {
