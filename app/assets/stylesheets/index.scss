@@ -29,15 +29,22 @@ html {
         width: 50%;
         margin: 0 auto;
         padding-top: 30px;
-      }
 
-      #new-list {
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: center;
-        text-align: center;
-      }
+          #new-list {
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: center;
+            text-align: center;
 
-  }
+                #start-new-list {
+                    width: 200px;
+                    height: 50px;
+                    border-radius: 5px;
+                  }
+              }
+
+          }
+
+      }
 
 }

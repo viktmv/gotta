@@ -26,7 +26,7 @@ class CreateNewList extends React.Component {
 ////Fancy button
   render() {
     let input = `<input type=${this.state.btn.type}
-                       className="start-new-list"
+                       id="start-new-list"
                        ${this.state.btn.type == 'submit' //Initially type is submit
                        ? `value="${this.state.btn.value}" `
                        : `placeholder="${this.state.btn.placeholder}"`}
@@ -50,7 +50,7 @@ class CreateNewList extends React.Component {
     )
   }
 
-  //Fancy button - on click the type turns to text
+  //Fancy button - on click the type turns from submit to text
   handleClick = e => {
     this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }, clicked: true})
   }
