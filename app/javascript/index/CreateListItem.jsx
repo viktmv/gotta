@@ -12,9 +12,9 @@ class CreateListItem extends React.Component {
   render () {
     return (
       <div>
+        <input type="link" onChange={this.updateLink} placeholder="list-item link" />
         <input type="name" onChange={this.updateName} placeholder="list-item name" />
         <input type="description" onChange={this.updateDescription}placeholder="list-item description" />
-        <input type="link" onChange={this.updateLink} placeholder="list-item link" />
         <button className="add-list-item" onClick={this.handleAddClick}>+</button>
 
       </div>
@@ -36,6 +36,7 @@ class CreateListItem extends React.Component {
   }
 
   updateLink = (e) => {
+    fetch(e.target.value).then(res)
     this.setState({itemLink: e.target.value})
   }
 
