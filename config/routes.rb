@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/lists/:id' => 'list#show'
 
   get '/lists/all/:id' => 'list#user_lists'
+
+  post '/connect' => 'list#connect'
   post '/lists/create' => 'list#create'
 
 
