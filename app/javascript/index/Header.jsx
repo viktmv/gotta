@@ -11,7 +11,7 @@ import {
 
 import SignUp from './SignUp'
 import Login from './Login'
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
 const LoL = () => (

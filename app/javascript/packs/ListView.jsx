@@ -5,6 +5,15 @@ import PropTypes from 'prop-types'
 import ListMain from '../list-page/ListMain.jsx'
 import Header from '../index/Header.jsx'
 
+////// Material UI stuff ////////
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+/////////////////////////////////
+
 class ListView extends React.Component {
   constructor() {
     super()
@@ -15,7 +24,7 @@ class ListView extends React.Component {
                   itemKey: 'example-item'
                 },
                 {itemName: 'Your first thing to add',
-                            itemLink: 'exapmle.com',
+                            itemLink: 'example.com',
                             itemDescription: 'Something you wanna get back to',
                             itemKey: 'example-item2'
                 }],
@@ -25,10 +34,12 @@ class ListView extends React.Component {
 
   render() {
     return (
-      <div>
-        <Header></Header>
-        <main><ListMain name={this.state.listName} listItems={this.state.listItems} /></main>
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <Header></Header>
+          <main><div className="wrapper"><ListMain name={this.state.listName} listItems={this.state.listItems} /></div></main>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

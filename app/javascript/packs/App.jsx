@@ -33,10 +33,10 @@ injectTapEventPlugin();
     render() {
       return (
         <MuiThemeProvider>
-        <div>
-          <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
-          <main><CreateNewList user={this.state.user} /></main>
-        </div>
+          <div>
+            <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
+            <main><div className="wrapper"><CreateNewList user={this.state.user} /></div></main>
+          </div>
         </MuiThemeProvider>
       )
     }

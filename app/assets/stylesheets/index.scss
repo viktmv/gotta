@@ -19,6 +19,12 @@ html {
   body {
       margin: 0;
       padding: 0;
+
+      .wrapper {
+        max-width: 1080px;
+        width: 50%;
+        margin:0 auto;
+      }
   }
 
 }
