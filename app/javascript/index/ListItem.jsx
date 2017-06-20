@@ -1,5 +1,7 @@
 import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentRemove from 'material-ui/svg-icons/content/remove';
 
 class ListItem extends React.Component {
   render() {
@@ -7,7 +9,7 @@ class ListItem extends React.Component {
               <b className="list-item-name">Name: {this.props.data.itemName}</b>
               <span className="list-item-description">Description: {this.props.data.itemDescription}</span>
               <span className="list-item-link">Link: {this.props.data.itemLink}</span>
-               <RaisedButton label="-" primary={true} className="rm-list-item" onClick={this.props.handleRemoveClick}></RaisedButton>
+               <FloatingActionButton mini={true} primary={true} className="rm-list-item" onClick={this.props.handleRemoveClick}><ContentRemove /></FloatingActionButton>
             </div>)
   }
 }

@@ -11,6 +11,10 @@ html {
         .navItems {
           display: flex;
           flex-direction: row;
+
+          li {
+            padding: 0 7px;
+          }
         }
     }
   }
@@ -20,11 +24,20 @@ html {
       margin: 0;
       padding: 0;
 
-      .wrapper {
+    .wrapper {
         max-width: 1080px;
         width: 50%;
-        margin:0 auto;
+        margin: 0 auto;
+        padding-top: 30px;
       }
+
+      #new-list {
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
+        text-align: center;
+      }
+
   }
 
 }
