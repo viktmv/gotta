@@ -44,7 +44,7 @@ class CreateListItem extends React.Component {
   }
 
   updateLink = (e) => {
-    fetch(e.target.value).then(res)
+    fetch(e.target.value).then(console.log)
     this.setState({itemLink: e.target.value})
   }
 

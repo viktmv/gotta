@@ -11,31 +11,10 @@ import {
 
 import SignUp from './SignUp'
 import Login from './Login'
-<<<<<<< HEAD
 import LoL from './LoL'
-=======
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-
-const LoL = () => (
-  <div>
-    <h2>My lists</h2>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-    </ul>
-  </div>
-)
->>>>>>> d39e6bc586e8f67abd4021b8c628cada0cb6ca05
 
 class Header extends React.Component {
   render() {
