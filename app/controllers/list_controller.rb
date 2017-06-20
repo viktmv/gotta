@@ -23,4 +23,9 @@ class ListController < ApplicationController
       format.json { render json: list }
     end
   end
+
+  def user_lists
+    user = User.find(params[:id])
+    render json: user.lists
+  end
 end

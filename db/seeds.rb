@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+list = List.create(name: 'My list of cool stuff')
+
+list.items.create(name: 'Cool thing #1', description: 'Something extremely cool #1', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #2', description: 'Something extremely cool #2', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #3', description: 'Something extremely cool #3', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #4', description: 'Something extremely cool #4', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #5', description: 'Something extremely cool #5', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #6', description: 'Something extremely cool #6', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #7', description: 'Something extremely cool #7', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #8', description: 'Something extremely cool #8', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #9', description: 'Something extremely cool #9', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #10', description: 'Something extremely cool #10', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #11', description: 'Something extremely cool #11', link: 'coolstuff.com')
+list.items.create(name: 'Cool thing #12', description: 'Something extremely cool #12', link: 'coolstuff.com')
