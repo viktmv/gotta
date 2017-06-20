@@ -70,8 +70,6 @@ class CreateNewList extends React.Component {
   }
 
   handleCreate = e => {
-    // helper
-    let $ = el => document.querySelector(el)
 
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })

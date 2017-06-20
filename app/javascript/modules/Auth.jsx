@@ -8,6 +8,7 @@ class Auth {
     localStorage.setItem('auth_token', user.auth_token)
     localStorage.setItem('email', user.email)
     localStorage.setItem('name', user.name)
+    localStorage.setItem('id', user.id)
   }
 
   /**
@@ -38,6 +39,7 @@ class Auth {
     user.name = localStorage.getItem('name')
     user.email = localStorage.getItem('email')
     user.auth_token = localStorage.getItem('token')
+    user.id = localStorage.getItem('id')
 
     return user
   }
