@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   get '/lists/new' => 'home#new'
   get '/lists/:id' => 'list#show'
+
+  get '/lists/all/:id' => 'list#user_lists'
   post '/lists/create' => 'list#create'
 
 
