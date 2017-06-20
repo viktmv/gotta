@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
 import ConfirmationPopUp from '../index/ConfirmationPopUp'
+import RaisedButton from 'material-ui/RaisedButton'
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -24,10 +25,11 @@ class CreateNewList extends React.Component {
     }
   }
 
+////Fancy button
   render() {
     let input = `<input type=${this.state.btn.type}
-                       className="start-new-list"
-                       ${this.state.btn.type == 'submit'
+                       id="start-new-list"
+                       ${this.state.btn.type == 'submit' //Initially type is submit
                        ? `value="${this.state.btn.value}" `
                        : `placeholder="${this.state.btn.placeholder}"`}
                        />`
@@ -48,12 +50,13 @@ class CreateNewList extends React.Component {
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
-        <button onClick={this.handleCreate}>Publish Your List</button>
+        <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate}></RaisedButton>
         {popup}
       </div>
     )
   }
 
+  //Fancy button - on click the type turns from submit to text
   handleClick = e => {
     this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }, clicked: true})
   }
