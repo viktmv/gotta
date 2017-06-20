@@ -3,6 +3,11 @@ import RaisedButton from 'material-ui/RaisedButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+const style = {
+  marginLeft: 10,
+  verticalAlign: -10,
+};
+
 class CreateListItem extends React.Component {
   constructor(props) {
     super(props)
@@ -18,7 +23,7 @@ class CreateListItem extends React.Component {
         <input type="name" onChange={this.updateName} placeholder="list-item name" />
         <input type="description" onChange={this.updateDescription}placeholder="list-item description" />
         <input type="link" onChange={this.updateLink} placeholder="list-item link" />
-        <FloatingActionButton mini={true} primary={true} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+        <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }
