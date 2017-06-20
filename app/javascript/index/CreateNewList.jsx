@@ -78,7 +78,7 @@ class CreateNewList extends React.Component {
       items: this.state.listItems,
       user: this.props.user
     }
-    
+
     // Options for request
     let init = {
                  method: 'POST',

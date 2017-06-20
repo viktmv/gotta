@@ -4,6 +4,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 
+//Style for round Material UI buttons
 const style = {
   marginLeft: 10,
   verticalAlign: -10,
@@ -21,7 +22,7 @@ class CreateListItem extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className="list-form">
         <div className="create-image item-image"></div>
         <input className="create-link" type="link" onChange={this.updateLink} placeholder="list-item link" />
         <input className="create-name" type="name" onChange={this.updateName} placeholder="list-item name" />
