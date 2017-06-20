@@ -36,7 +36,34 @@ class CreateListItem extends React.Component {
   }
 
   updateLink = (e) => {
-    fetch(e.target.value).then(res)
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+
+    // let url = JSON.stringify({ url: e.target.value })
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json'})
+
+    let data = {
+      url: e.target.value
+    }
+
+    let init = {
+                 method: 'POST',
+                 headers: headers,
+                 body: JSON.stringify(data)
+               }
+
+    fetch('/connect', init)
+    .then(response => {
+      console.log(init)
+      return response
+    }).then(res => {
+      // let {user} = res
+      console.log(res)
+      // if (user) Auth.authenticateUser(user)
+      // this.props.setUser(user)
+
+    }).catch(err => console.log(err))
+    // fetch(e.target.value).then(res => res.json).then(console.log)
     this.setState({itemLink: e.target.value})
   }
 
