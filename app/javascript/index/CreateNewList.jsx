@@ -65,15 +65,11 @@ class CreateNewList extends React.Component {
     if (e.key == 'Enter') this.setState({listName: e.target.value})
   }
 
-  showCreationForm = e => {
-  }
-
   publishList = (list) => {
     this.setState({published: true, listID: list.id})
   }
 
   handleCreate = e => {
-
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
@@ -82,15 +78,14 @@ class CreateNewList extends React.Component {
       items: this.state.listItems,
       user: this.props.user
     }
-
+    // Options for request
     let init = {
                  method: 'POST',
                  headers: headers,
                  body: JSON.stringify(list)
                }
 
-    // console.log(init.body)
-
+    // Post the creation request
     fetch('/lists/create', init).then(response => {
       return response.json()
     }).then(result => {

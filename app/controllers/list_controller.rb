@@ -1,4 +1,12 @@
+require 'net/http'
+require 'httparty'
+require 'opengraph_parser'
+
 class ListController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  include HTTParty
+
   def show
     @list = List.find(params[:id])
 
@@ -16,12 +24,21 @@ class ListController < ApplicationController
     params[:items].each do |item|
       list.items.create(name: item[:itemName],
                         description: item[:itemDescription],
-                        link: item[:itemLink])
+                        link: item[:itemLink],
+                        img: item[:itemImage])
     end
 
     respond_to do |format|
       format.json { render json: list }
     end
+  end
+
+  # Handle metadata request
+  def connect
+    og = OpenGraph.new(params[:url])
+    p og.metadata
+
+    render json: og.metadata
   end
 
   def user_lists

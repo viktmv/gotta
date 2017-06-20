@@ -51,8 +51,6 @@ class ListView extends React.Component {
   }
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
   let listData = JSON.parse(document.body.querySelector('#list-data').getAttribute('data'))
   ReactDOM.render(

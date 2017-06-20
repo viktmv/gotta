@@ -19,7 +19,6 @@ class List extends React.Component {
   handleRemoveClick = e => {
     this.props.rmItem(e.target.parentNode)
   }
-
 }
 
 export default List
