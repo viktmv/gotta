@@ -1,6 +1,9 @@
 import React from 'react'
 import ListItem from './ListItem'
 
+import IconButton from 'material-ui/IconButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+
 class List extends React.Component {
   constructor(props) {
     super(props)
@@ -55,18 +58,33 @@ class List extends React.Component {
     let body = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
     let subj = `You just gotta check this out!`.replace('%20', ' ')
 
+    let style = {
+      width: 300,
+      float: 'right',
+      background: 'none'
+    }
     return (<div>
-              <div className="socials">
-                <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>Email Your Friends!</a>
-                <div id="fb-root"></div>
-                <div className="fb-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
-                <div><a className="twitter-share-button"
-                        data-size="large"
-                        href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff">
-                        Tweet
-                      </a>
-                </div>
-              </div>
+              <Toolbar style={style}>
+                <ToolbarGroup className="socials" lastChild={true} firstChild={true}>
+                  <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>Email Your Friends!</a>
+                  <div id="fb-root"></div>
+                  <div className="fb-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
+                    <IconButton
+                      iconClassName="muidocs-icon-custom-github" tooltip="bottom-right"
+                      tooltipPosition="bottom-right"
+                      className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</IconButton>
+                  </div>
+                  <div>
+                    <IconButton className="twitter-share-button"
+                      iconClassName="muidocs-icon-custom-github" tooltip="bottom-right"
+                      tooltipPosition="bottom-right"
+                      data-size="large"
+                      href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff">
+                      Tweet
+                    </IconButton>
+                  </div>
+                </ToolbarGroup>
+              </Toolbar>
               {fb(document, 'script', 'facebook-jssdk')}
               {twttr()}
               <h2>{this.props.name}</h2>
