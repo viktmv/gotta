@@ -105,7 +105,6 @@ export default class LoginDialog extends React.Component {
         this.handleClose()
       }
       this.props.setUser(user)
-
     }).catch(err => console.log(err))
   }
 

@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 import Auth from '../modules/Auth'
 
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
-import SignUp from './SignUp'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 /**
  * Dialog with action buttons. The actions are passed in as an array of React objects,
@@ -15,15 +14,15 @@ import TextField from 'material-ui/TextField'
 export default class LoginDialog extends React.Component {
   state = {
     open: false,
-  };
+  }
 
   handleOpen = () => {
-    this.setState({open: true});
-  };
+    this.setState({open: true})
+  }
 
   handleClose = () => {
-    this.setState({open: false});
-  };
+    this.setState({open: false})
+  }
 
   render() {
     const actions = [
@@ -38,7 +37,7 @@ export default class LoginDialog extends React.Component {
         keyboardFocused={true}
         onTouchTap={this.signUpHandler}
       />,
-    ];
+    ]
 
     return (
       <div>
@@ -105,7 +104,7 @@ export default class LoginDialog extends React.Component {
      console.log(init.headers.get('X-CSRF-Token'))
      return response.json()
    }).then(user => {
-     console.log(user);
+     console.log(user)
      if (user) {
        Auth.authenticateUser(user)
        this.handleClose()
