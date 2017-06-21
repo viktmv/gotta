@@ -18,9 +18,7 @@ class ListView extends React.Component {
   constructor(props) {
     super()
     this.state = {
-      user: '',
-      listItems: props.data.items,
-      listName: props.data.name
+      user: ''
     }
   }
 
@@ -33,7 +31,7 @@ class ListView extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <main><div className="wrapper"><ListMain name={this.state.listName} listItems={this.state.listItems} /></div></main>
+          <main><div className="wrapper"><ListMain name={this.props.data.name} id={this.props.data.id} listItems={this.props.data.items} /></div></main>
         </div>
       </MuiThemeProvider>
     )

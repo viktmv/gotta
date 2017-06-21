@@ -9,6 +9,7 @@ class List extends React.Component {
       listItems: this.props.listItems
     }
   }
+
   render() {
     return (<div>
               <h2>{this.props.name}</h2>
