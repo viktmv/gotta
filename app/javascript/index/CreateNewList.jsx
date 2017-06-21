@@ -5,6 +5,8 @@ import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
 import ConfirmationPopUp from '../index/ConfirmationPopUp'
 import RaisedButton from 'material-ui/RaisedButton'
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -21,9 +23,20 @@ class CreateNewList extends React.Component {
         value: 'Create List'
       },
       clicked: false,
-      published: false
+      published: false,
+      confirmationPopupOpen: false,
+      };
+      this.handleOpen = this.handleOpen.bind(this)
+      this.handleClose = this.handleClose.bind(this)
     }
-  }
+
+handleOpen = () => {
+  this.setState({confirmationPopupOpen: true});
+};
+
+handleClose = () => {
+  this.setState({confirmationPopupOpen: false});
+};
 
 ////Fancy button
   render() {
@@ -40,17 +53,19 @@ class CreateNewList extends React.Component {
               <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}>
               </List>
               <CreateListItem addItem={this.addItem} />
-            </div>
+             </div>
     }
 
-    let popup = this.state.published ? <ConfirmationPopUp list={this.state.listID} /> : ''
+    let popup = this.state.published ? (<ConfirmationPopUp list={this.state.listID}
+                confirmationPopupOpen={this.state.confirmationPopupOpen}
+                handleClose={this.handleClose} />) : ('')
 
     return (
       <div id="new-list">
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         <br></br>
-        <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate}></RaisedButton>
+        <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
         {popup}
       </div>
     )
@@ -73,12 +88,14 @@ class CreateNewList extends React.Component {
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
+    this.setState({confirmationPopupOpen: true});
+
     let list = {
       name: this.state.listName,
       items: this.state.listItems,
       user: this.props.user
     }
-    
+
     // Options for request
     let init = {
                  method: 'POST',
@@ -93,6 +110,9 @@ class CreateNewList extends React.Component {
       this.publishList(result)
     })
     .catch(err => console.log(err))
+
+
+
   }
 
   addItem = item => {
