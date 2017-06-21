@@ -6,6 +6,8 @@ import ContentRemove from 'material-ui/svg-icons/content/remove';
 const style = {
   marginLeft: 10,
   verticalAlign: 30,
+  cssFloat: "right",
+  marginRight: 30,
 };
 
 class ListItem extends React.Component {

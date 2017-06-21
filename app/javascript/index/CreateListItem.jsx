@@ -7,7 +7,9 @@ import TextField from 'material-ui/TextField';
 //Style for round Material UI buttons
 const style = {
   marginLeft: 10,
-  verticalAlign: -10,
+  verticalAlign: 30,
+  cssFloat: "right",
+  marginRight: 30,
 };
 
 class CreateListItem extends React.Component {
@@ -24,9 +26,9 @@ class CreateListItem extends React.Component {
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
-        <input className="create-link" type="link" onChange={this.updateLink} placeholder="list-item link" />
-        <input className="create-name" type="name" onChange={this.updateName} placeholder="list-item name" />
-        <input className="create-description" type="description" onChange={this.updateDescription}placeholder="list-item description" />
+        <TextField hintText="Type or paste link here" className="create-link" type="link" onChange={this.updateLink} />
+        <div hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
+        <div hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
