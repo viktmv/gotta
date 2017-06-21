@@ -9,9 +9,9 @@ import {
   Switch
 } from 'react-router-dom'
 
-import SignUp from './SignUp'
-import Login from './Login'
 import LoL from './LoL'
+import LoginDialog from './LoginDialog'
+import SignUpDialog from './SignUpDialog'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
@@ -19,21 +19,11 @@ import AppBar from 'material-ui/AppBar';
 class Header extends React.Component {
   render() {
 
-    let loggedIn = this.props.user ? true : false
-    let link = ''
-      , text = ''
-
-    if (loggedIn) {
-      text = 'Logout'
-      link = <Link to="/my-lists" className="my-lists-link">My Lists</Link>
-    }
-    else {
-      text = 'Login'
-      link = <Link to="/sign-up" className="singup-link">Sign Up</Link>
-    }
+    let controls = this.props.user
+                ? <LoL {...this.props} />
+                : <SignUpDialog {...this.props}>SignUp</SignUpDialog>
 
     return (
-
       <header className="main-header">
         <nav className="login-register-controls">
          <AppBar title="GOTTA" showMenuIconButton={false}>
@@ -41,13 +31,11 @@ class Header extends React.Component {
             <div>
               <ul>
                 <ul className="navItems">
-                  <li><Link to="/login" className="login-link">{text}</Link></li>
-                  <li>{link}</li>
+                  <li><LoginDialog {...this.props}>Login</LoginDialog></li>
+                  <li>{controls}</li>
                 </ul>
               </ul>
               <Switch>
-                <Route exact path="/login" render={this.renderLoginWithProps}/>
-                <Route path="/sign-up" component={SignUp}/>
                 <Route path="/my-lists" component={this.renderLoLWithProps}/>
               </Switch>
             </div>
@@ -55,7 +43,6 @@ class Header extends React.Component {
          </AppBar>
         </nav>
       </header>
-
     )
   }
 
