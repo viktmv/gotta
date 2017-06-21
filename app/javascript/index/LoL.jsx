@@ -1,11 +1,21 @@
-
 import React from 'react'
+
+import Drawer from 'material-ui/Drawer'
+import RaisedButton from 'material-ui/RaisedButton'
+import IconButton from 'material-ui/IconButton'
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors'
+import ActionAndroid from 'material-ui/svg-icons/action/android'
+import {List, ListItem} from 'material-ui/List'
 
 class LoL extends React.Component {
   constructor() {
     super()
     this.state = {
-      lists: []
+      lists: [],
+      open: false
     }
   }
 
@@ -27,17 +37,61 @@ class LoL extends React.Component {
   }
 
   render() {
+
+    const style = {
+      margin: 5,
+    }
+
+    let edit = <div><a href="/">edit</a><a>delete</a></div>
+
+    const iconButtonElement = (
+      <IconButton
+        touch={true}
+        tooltipPosition="bottom-left"
+        >
+        <MoreVertIcon color={grey400} />
+      </IconButton>
+    )
+
+    const rightIconMenu = (
+      <IconMenu iconButtonElement={iconButtonElement}>
+        <MenuItem>Edit</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </IconMenu>
+    )
+
     return (
-      <div>
-        <h2>My lists</h2>
-        <ul>
+      <div >
+        <RaisedButton
+          label="My Lists"
+          onTouchTap={this.handleToggle}
+        />
+        <Drawer
+          docked={false}
+          openSecondary={true}
+          width={250}
+          open={this.state.open}
+          onRequestChange={(open) => this.setState({open})}
+        >
+        <div>
+          <h2 style={{textAlign: 'center'}}>My lists</h2>
           {this.state.lists.map((list, i) => {
-            return (<li key={i}><a href={`lists/${list.id}`} target="_blank">{list.name}</a></li>)
+            return (
+              <ListItem
+                rightIconButton={rightIconMenu}
+                key={i}>
+                  <a href={`lists/${list.id}`}
+                    target="_blank">{list.name}
+                  </a>
+              </ListItem>)
           })}
-        </ul>
-      </div>
+        </div>
+      </Drawer>
+    </div>
     )
   }
+
+  handleToggle = () => this.setState({open: !this.state.open})
 }
 
 export default LoL

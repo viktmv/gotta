@@ -36,6 +36,8 @@ class CreateListItem extends React.Component {
 
     let {itemName, itemDescription, itemLink, itemImage} = this.state
     let key = this.generateKey()
+
+    // Add item to the list of items on the CreateNewList component
     this.props.addItem({itemName, itemDescription, itemLink, itemKey: key, itemImage})
 
     $('.create-name').value = ''
@@ -88,8 +90,7 @@ class CreateListItem extends React.Component {
                      itemLink: url[0]._value,
                      itemDescription: description[0]._value,
                      itemImage: image[0]._value})
-    })
-    .catch(err => console.log(err))
+    }).catch(err => console.log(err))
   }
 
   generateKey = (() => {
