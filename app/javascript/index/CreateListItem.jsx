@@ -68,6 +68,9 @@ class CreateListItem extends React.Component {
     let data = { url: e.target.value }
     if (!data.url) return
 
+    // Check for the regular string TODO: Add some logic to handle not-link cases
+    if (!data.url.startsWith('http')) return console.log('this is a regular string')
+
     // request options
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json'})
@@ -82,9 +85,12 @@ class CreateListItem extends React.Component {
     .then(res => {
       let {title, site_name, description, url, image} = res
 
-      $('.create-name').value = title[0]._value
-      $('.create-description').value = description[0]._value
-      $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
+      if (title)
+        $('.create-name').value = title[0]._value
+      if (description)
+        $('.create-description').value = description[0]._value
+      if (image)
+        $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
       this.setState({itemName: title[0]._value,
                      itemLink: url[0]._value,
