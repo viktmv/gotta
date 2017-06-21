@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     p params
     p user_params
-    if @user.save
+    if @user.save!
       session[:user_id] = @user.id
-      redirect_to '/'
+      render json: @user
     else
       # TODO: Flash messages to inform of errors
       puts 'Error'
@@ -22,5 +22,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :name, :password, :password_confirmation)
   end
-
 end
