@@ -26,7 +26,7 @@ html {
   body {
     margin: 0;
     padding: 0;
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Fira Sans', sans-serif;
     color: #303030;
 
     .wrapper {
@@ -44,11 +44,52 @@ html {
         background-size: cover;
       }
 
-      .list-item,
+      .list-item-description {
+        font-size: 0.8em;
+        line-height: 0.5em;
+        width: 100px;
+      }
+
+      .list-item-name {
+        font-size: 1em;
+        width: 100px;
+      }
+
       .list-form {
         width: 100%;
         padding: 15px 0;
         border-bottom: solid 1px grey;
+      }
+
+      .list-item, {
+        width: 100%;
+        padding: 15px 0;
+        border-bottom: solid 1px grey;
+
+        .item-image {
+          margin-right: 15px;
+          float: left;
+          border-radius: 50px;
+          vertical-align: middle;
+          background-position: center;
+          background-size: cover;
+          display: inline-block;
+        }
+
+        .list-item-name {
+          font-size: 1em;
+          width: 60%;
+          display: inline-block;
+          margin-bottom: 5px;
+        }
+
+        .list-item-description {
+          font-size: 0.8em;
+          line-height: 1.1em;
+          width: 60%;
+          display: inline-block;
+        }
+
       }
 
       #new-list {
@@ -84,7 +125,6 @@ html {
           width: 200px;
           height: 50px;
           border-radius: 5px;
-
 
         }
       }
