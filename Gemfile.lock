@@ -86,6 +86,7 @@ GEM
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
     jwt (1.5.6)
+    libxml-ruby (3.0.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -206,6 +207,10 @@ GEM
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.3)
+    twilio-ruby (5.0.0.rc23)
+      faraday (~> 0.9)
+      jwt (~> 1.5)
+      libxml-ruby (= 3.0.0)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -254,6 +259,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   stripe
   turbolinks (~> 5)
+  twilio-ruby (~> 5.0.0.rc21)
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

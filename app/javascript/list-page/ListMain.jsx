@@ -38,7 +38,7 @@ class List extends React.Component {
       <FlatButton
         label="Submit"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.sendMessage}
       />,
     ];
 
@@ -81,7 +81,7 @@ class List extends React.Component {
     }
 
     let customContentStyle = {
-      width: 150
+      width: 350
     }
     return (<div>
               <Toolbar style={style}>
@@ -120,9 +120,10 @@ class List extends React.Component {
                      >
                        <TextField
                          id="text-field-controlled"
+                         className="phone-sms"
                          name="Phone number"
                          type="tel"
-                         floatingLabelText="Enter your phone number"
+                         floatingLabelText="Friend's phone number"
                        />
                      </Dialog>
                   </div>
@@ -138,6 +139,32 @@ class List extends React.Component {
   handleOpen = () => {
     this.setState({open: true})
   };
+
+  sendMessage = () => {
+    const $ = el => document.querySelector(el)
+
+    let tel = $('.phone-sms input').value
+    let description = `You've gotta check this out! ${window.location}`
+    let data = { name, tel, description }
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+
+    // Options for request
+    let init = {
+                 method: 'POST',
+                 headers: headers,
+                 body: JSON.stringify(data)
+               }
+
+    // Post the creation request
+    fetch(`/lists/${this.props.id}/sms`, init)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(err => console.log(err))
+
+    this.handleClose()
+  }
 
   handleClose = () => {
     this.setState({open: false})

@@ -15,7 +15,6 @@ class ListController < ApplicationController
 
   def create
     puts 'List create request received'
-
     user = params[:user].present? ? User.find_by(email: params[:user][:email]) : nil
 
     list = List.new(name: params[:name], user: user )
@@ -44,5 +43,31 @@ class ListController < ApplicationController
   def user_lists
     user = User.find(params[:id])
     render json: user.lists
+  end
+
+  def text_message
+    require 'twilio-ruby'
+
+    # put your own credentials here
+    account_sid = ENV['TWILIO_ACCOUNT_SID']
+    auth_token = ENV['TWILIO_AUTH_TOKEN']
+
+    puts "Auth token is #{auth_token}"
+    puts "SID is #{account_sid}"
+
+    # and then you can create a new client without parameters
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    from = '+14388004405'
+    to = params[:tel]
+    text = params[:description]
+    @client.api.account.messages.create(
+      from: from,
+      to: to,
+      body: text
+    )
+
+    puts "Sent message to #{to}"
+    render json: 'lol'
   end
 end
