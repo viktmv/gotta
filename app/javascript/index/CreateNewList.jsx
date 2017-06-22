@@ -54,7 +54,6 @@ handleClose = () => {
               </List>
               <CreateListItem addItem={this.addItem} />
               <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
-              {popup}
              </div>
     }
 
@@ -66,6 +65,7 @@ handleClose = () => {
       <div id="new-list">
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
+        {popup}
         <br></br>
 
       </div>
