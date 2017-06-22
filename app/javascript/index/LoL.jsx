@@ -37,7 +37,7 @@ class LoL extends React.Component {
   render() {
 
     const style = {
-      margin: 5,
+      margin: 5
     }
 
     let edit = <div><a href="/">edit</a><a>delete</a></div>
