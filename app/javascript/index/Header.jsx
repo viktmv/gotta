@@ -25,7 +25,7 @@ class Header extends React.Component {
 
     return (
       <header className="main-header">
-        <h1 id="brand-logo">GOTTA</h1>
+        <div id="brand-logo"><h1>GOTTA</h1></div>
           <Router>
             <nav className="login-register-controls">
                 <ul className="navItems">
