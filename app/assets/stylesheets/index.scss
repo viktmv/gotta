@@ -32,7 +32,30 @@ html {
     text-decoration: none;
   }
 
-  header {
+  h1 {
+      margin: 0;
+    }
+
+     #brand-logo {
+      margin: 10px;
+    }
+
+  header.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .login-register-controls {
+      background-color: none;
+    }
+
+    nav{
+      background-color: rgba(65, 234, 212, 1);
+      border-radius: 0 0 0 25px;
+      display: flex;
+      flex-direction: row;
+    }
+
     ul {
       list-style: none;
 
@@ -154,9 +177,14 @@ html {
         }
 
         #start-new-list {
-          width: 200px;
-          height: 50px;
-          border-radius: 5px;
+          width: 150px;
+          height: 150px;
+          border-radius: 100px;
+          border: none;
+          background-color: rgba(255, 32, 110, 1);
+          color: white;
+          font-size: 1em;
+          text-transform: uppercase;
 
         }
       }
