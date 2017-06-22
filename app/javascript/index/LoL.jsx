@@ -33,7 +33,6 @@ class LoL extends React.Component {
     .then(res => res.json())
     .then(lists => this.setState({lists}))
     .catch(err => console.warn(err))
-
   }
 
   render() {
