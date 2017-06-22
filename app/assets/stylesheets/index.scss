@@ -32,6 +32,18 @@ html {
   }
 
   header {
+    background-color: rgba(65, 234, 212, 1);
+    display: flex;
+    flex-direction: row;
+
+    #brand-logo {
+      margin: 0
+    }
+
+    .login-register-controls {
+      background-color: none;
+    }
+
     ul {
       list-style: none;
 

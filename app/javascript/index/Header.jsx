@@ -25,23 +25,18 @@ class Header extends React.Component {
 
     return (
       <header className="main-header">
-        <nav className="login-register-controls">
-         <AppBar title="GOTTA" showMenuIconButton={false}>
+        <h1 id="brand-logo">GOTTA</h1>
           <Router>
-            <div>
-              <ul>
+            <nav className="login-register-controls">
                 <ul className="navItems">
                   <li><LoginDialog {...this.props}>Login</LoginDialog></li>
                   <li>{controls}</li>
                 </ul>
-              </ul>
-              <Switch>
-                <Route path="/my-lists" component={this.renderLoLWithProps}/>
-              </Switch>
-            </div>
+                <Switch>
+                  <Route path="/my-lists" component={this.renderLoLWithProps}/>
+                </Switch>
+            </nav>
           </Router>
-         </AppBar>
-        </nav>
       </header>
     )
   }

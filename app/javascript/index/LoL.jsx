@@ -65,7 +65,7 @@ class LoL extends React.Component {
           label="My Lists"
           onTouchTap={this.handleToggle}
         />
-        <Drawer
+        <Drawer // Sidebar where the LoL is kept
           docked={false}
           openSecondary={true}
           width={250}
