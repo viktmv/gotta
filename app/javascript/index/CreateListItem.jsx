@@ -19,16 +19,27 @@ class CreateListItem extends React.Component {
       itemName: '',
       itemDescription: '',
       itemLink: '',
-      itemImage: ''
+      itemImage: '',
+
+      link: false,
+      name: false
     }
   }
   render () {
+    let textFields
+
+    if (this.state.link || this.state.name) {
+      textFields = <div>
+                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
+                      <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
+                    </div>
+    }
+
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
         <TextField hintText="Type or paste link here" className="create-link" type="link" onChange={this.updateLink} />
-        <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
-        <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
+        {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
@@ -36,6 +47,9 @@ class CreateListItem extends React.Component {
 
   handleAddClick = () => {
     const $ = el => document.querySelector(el)
+
+    // Reset text fields display
+    this.setState({link: false, name: false})
 
     let {itemName, itemDescription, itemLink, itemImage} = this.state
     let key = this.generateKey()
@@ -45,6 +59,7 @@ class CreateListItem extends React.Component {
 
     $('.create-name input').value = ''
     $('.create-link input').value = ''
+    $('.create-link > div').style.opacity = 1
     $('.create-description input').value = ''
 
     $('.create-image').setAttribute('style', '');
@@ -69,11 +84,19 @@ class CreateListItem extends React.Component {
     // Helper
     const $ = el => document.querySelector(el)
 
+    // hide placeholder text
+    $('.create-link > div').style.opacity = 0
+
     let data = { url: e.target.value }
-    if (!data.url) return
+    if (!data.url) return this.setState({link: false, name: false})
 
     // Check for the regular string TODO: Add some logic to handle not-link cases
-    if (!data.url.startsWith('http')) return console.log('this is a regular string')
+    // Show other input fields
+    if (!data.url.startsWith('http')) {
+      return this.setState({name: true, link: false})
+    }
+
+    this.setState({link: true})
 
     // request options
     let meta = document.querySelector('meta[name="csrf-token"]').content
@@ -91,9 +114,11 @@ class CreateListItem extends React.Component {
 
       if (title) {
         $('.create-name input').value = title[0]._value
+        $('.create-name > div').style.opacity = 0
       }
       if (description) {
         $('.create-description input').value = description[0]._value
+        $('.create-description > div').style.opacity = 0
       }
       if (image)
         $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
@@ -101,7 +126,8 @@ class CreateListItem extends React.Component {
       this.setState({itemName: title[0]._value,
                      itemLink: url[0]._value,
                      itemDescription: description[0]._value,
-                     itemImage: image[0]._value})
+                     itemImage: image[0]._value,
+                   })
     }).catch(err => console.log(err))
   }
 
