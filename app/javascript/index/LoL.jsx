@@ -60,10 +60,7 @@ class LoL extends React.Component {
 
     return (
       <div >
-        <RaisedButton
-          label="My Lists"
-          onTouchTap={this.handleToggle}
-        />
+        <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
         <Drawer // Sidebar where the LoL is kept
           docked={false}
           openSecondary={true}

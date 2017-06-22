@@ -36,8 +36,8 @@ export default class LoginDialog extends React.Component {
 
     // Dynamic Login-logout btn
     let sessionBtn = this.props.user
-                   ? <RaisedButton label="Logout" onTouchTap={this.handleLogout} />
-                   : <RaisedButton label="Login" onTouchTap={this.handleOpen} />
+                   ? <div className="nav-button" onTouchTap={this.handleLogout}>Logout</div>
+                   : <div className="nav-button" onTouchTap={this.handleOpen}>Login</div>
     return (
       <div>
         {sessionBtn}
