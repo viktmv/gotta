@@ -110,9 +110,6 @@ handleClose = () => {
       this.publishList(result)
     })
     .catch(err => console.log(err))
-
-
-
   }
 
   addItem = item => {

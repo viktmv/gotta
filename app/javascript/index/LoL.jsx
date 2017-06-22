@@ -23,7 +23,6 @@ class LoL extends React.Component {
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
-
     let init = {
                  method: 'GET',
                  headers: headers,
@@ -33,7 +32,6 @@ class LoL extends React.Component {
     .then(res => res.json())
     .then(lists => this.setState({lists}))
     .catch(err => console.warn(err))
-
   }
 
   render() {
@@ -55,7 +53,7 @@ class LoL extends React.Component {
 
     const rightIconMenu = (
       <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem>Edit</MenuItem>
+        <MenuItem onTouchTap={this.handleEdit}>Edit</MenuItem>
         <MenuItem>Delete</MenuItem>
       </IconMenu>
     )
@@ -78,6 +76,7 @@ class LoL extends React.Component {
           {this.state.lists.map((list, i) => {
             return (
               <ListItem
+                className="my-list-item"
                 rightIconButton={rightIconMenu}
                 key={i}>
                   <a href={`lists/${list.id}`}
@@ -90,7 +89,7 @@ class LoL extends React.Component {
     </div>
     )
   }
-
+  handleEdit = e => console.log(e.target.closest('.my-list-item'))
   handleToggle = () => this.setState({open: !this.state.open})
 }
 

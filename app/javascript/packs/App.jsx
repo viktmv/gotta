@@ -43,8 +43,12 @@ class App extends React.Component {
     )
   }
 
-  setUser = (user) => {
+  setUser = user => {
     this.setState({user})
+  }
+
+  editList = list => {
+
   }
 
   authWithToken = () => {
