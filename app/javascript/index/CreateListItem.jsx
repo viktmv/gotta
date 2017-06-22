@@ -27,8 +27,8 @@ class CreateListItem extends React.Component {
       <div className="list-form">
         <div className="create-image item-image"></div>
         <TextField hintText="Type or paste link here" className="create-link" type="link" onChange={this.updateLink} />
-        <div hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
-        <div hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
+        <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
+        <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
@@ -43,9 +43,10 @@ class CreateListItem extends React.Component {
     // Add item to the list of items on the CreateNewList component
     this.props.addItem({itemName, itemDescription, itemLink, itemKey: key, itemImage})
 
-    $('.create-name').value = ''
-    $('.create-link').value = ''
-    $('.create-description').value = ''
+    $('.create-name input').value = ''
+    $('.create-link input').value = ''
+    $('.create-description input').value = ''
+
     $('.create-image').setAttribute('style', '');
 
     this.setState({
@@ -88,10 +89,12 @@ class CreateListItem extends React.Component {
     .then(res => {
       let {title, site_name, description, url, image} = res
 
-      if (title)
-        $('.create-name').value = title[0]._value
-      if (description)
-        $('.create-description').value = description[0]._value
+      if (title) {
+        $('.create-name input').value = title[0]._value
+      }
+      if (description) {
+        $('.create-description input').value = description[0]._value
+      }
       if (image)
         $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
