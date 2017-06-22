@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import Header from '../index/Header'
 import CreateNewList from '../index/CreateNewList'
 import Auth from '../modules/Auth'
+import SelectBackground from '../index/SelectBackground'
 
 
 ///// Material UI stuff ////////
@@ -38,6 +39,7 @@ class App extends React.Component {
         <div>
           <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
           <main><div className="wrapper"><CreateNewList user={this.state.user} /></div></main>
+          <SelectBackground />
         </div>
       </MuiThemeProvider>
     )

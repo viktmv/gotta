@@ -26,6 +26,8 @@
 // $color5: rgba(255, 255, 255, 1);
 
 html {
+  background-color: #EFFDE0;
+
   a {
     text-decoration: none;
   }
@@ -50,6 +52,21 @@ html {
     padding: 0;
     font-family: 'Fira Sans', sans-serif;
     color: #303030;
+
+    .select-bg-colour {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .colour-controls {
+      margin: 0 25px;
+      width: 35px;
+      height: 35px;
+      border: 6px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
 
     .wrapper {
       max-width: 600px;
