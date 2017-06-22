@@ -26,6 +26,7 @@
 // $color5: rgba(255, 255, 255, 1);
 
 html {
+
   a {
     text-decoration: none;
   }
@@ -137,12 +138,21 @@ html {
         }
 
         #start-new-list {
-          width: 200px;
-          height: 50px;
-          border-radius: 5px;
+          width: 150px;
+          height: 150px;
+          border-radius: 100px;
+          border: none;
+          background-color: rgba(255, 32, 110, 1);
+          color: white;
+          font-size: 1em;
+          text-transform: uppercase;
 
         }
       }
     }
   }
 }
+}
+
+
+
