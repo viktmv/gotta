@@ -49,7 +49,7 @@ class ListController < ApplicationController
     render json: og.metadata
   end
 
-  def user_lists
+  def get_user_lists
     user = User.find(params[:id])
     render json: user.lists
   end

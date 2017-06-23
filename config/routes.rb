@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/lists/:id/edit' => 'list#edit'
   delete '/lists/:id/delete' => 'list#delete'
 
-  get '/lists/all/:id' => 'list#user_lists'
+  get '/lists/all/:id' => 'list#get_user_lists'
   post '/lists/create' => 'list#create'
 
 

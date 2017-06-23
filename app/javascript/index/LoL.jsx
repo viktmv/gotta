@@ -22,18 +22,7 @@ class LoL extends React.Component {
   }
 
   componentWillMount = () => {
-    let meta = document.querySelector('meta[name="csrf-token"]').content
-    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
-
-    let init = {
-                 method: 'GET',
-                 headers: headers,
-               }
-
-    fetch('/lists/all/' + this.props.user.id)
-    .then(res => res.json())
-    .then(lists => this.setState({lists}))
-    .catch(err => console.warn(err))
+    this.fetchUserLists()
   }
 
   render() {
@@ -46,7 +35,6 @@ class LoL extends React.Component {
       width: 25,
       height: 25
     }
-
 
     const iconButtonElement = (
       <IconButton
@@ -100,14 +88,16 @@ class LoL extends React.Component {
     this.setState({open: false})
   }
 
-    // <div>
+  fetchUserLists = () => {
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+    let init = { method: 'GET', headers}
 
-                    //   <RaisedButton
-                    //     icon={<ActionAndroid />}
-                    //     style={btnStyle}
-                    //     onTouchTap={this.props.handleDelete}
-                    //   />
-                    // </div>
+    return fetch('/lists/all/' + this.props.user.id)
+           .then(res => res.json())
+           .then(lists => this.setState({lists}))
+           .catch(err => console.warn(err))
+  }
 
   handleDeleteClick = e => {
     this.props.handleDelete(e)

@@ -99,6 +99,7 @@ class App extends React.Component {
     return fetch(`/lists/${listID}/delete`, init)
            .then(response => response.json())
            .then(result => this.setState({list: '', listItems: [] }))
+           .catch(err => console.log(err))
   }
 
   // Add item to the list
