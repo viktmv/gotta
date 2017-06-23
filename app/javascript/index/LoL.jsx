@@ -8,6 +8,7 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors'
 import ActionAndroid from 'material-ui/svg-icons/action/android'
+import ActionDelete from 'material-ui/svg-icons/action/delete'
 import {List, ListItem} from 'material-ui/List'
 import FontIcon from 'material-ui/FontIcon'
 
@@ -21,18 +22,7 @@ class LoL extends React.Component {
   }
 
   componentWillMount = () => {
-    let meta = document.querySelector('meta[name="csrf-token"]').content
-    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
-
-    let init = {
-                 method: 'GET',
-                 headers: headers,
-               }
-
-    fetch('/lists/all/' + this.props.user.id)
-    .then(res => res.json())
-    .then(lists => this.setState({lists}))
-    .catch(err => console.warn(err))
+    this.fetchUserLists()
   }
 
   render() {
@@ -46,7 +36,6 @@ class LoL extends React.Component {
       height: 25
     }
 
-
     const iconButtonElement = (
       <IconButton
         touch={true}
@@ -56,56 +45,69 @@ class LoL extends React.Component {
       </IconButton>
     )
 
-
-    const edilete =  <RaisedButton
+    return (
+        <div >
+          <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
+          <Drawer
+            docked={false}
+            openSecondary={true}
+            width={250}
+            open={this.state.open}
+            onRequestChange={(open) => this.setState({open})}
+          >
+          <div>
+            <h2 style={{textAlign: 'center'}}>My lists</h2>
+            {this.state.lists.map((list, i) => {
+              return (
+                <ListItem
+                  className="my-list-item"
+                  data-id={list.id}
+                  key={i}>
+                    <a href={`lists/${list.id}`}
+                      target="_blank">{list.name}
+                    </a>
+                    <RaisedButton
                        icon={<ActionAndroid />}
                        style={btnStyle}
                        onTouchTap={this.handleEditClick}
                      />
-
-    // <div>
-
-                    //   <RaisedButton
-                    //     icon={<ActionAndroid />}
-                    //     style={btnStyle}
-                    //     onTouchTap={this.props.handleDelete}
-                    //   />
-                    // </div>
-
-  return (
-      <div >
-        <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
-        <Drawer // Sidebar where the LoL is kept
-          docked={false}
-          openSecondary={true}
-          width={250}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})}
-        >
-        <div>
-          <h2 style={{textAlign: 'center'}}>My lists</h2>
-          {this.state.lists.map((list, i) => {
-            return (
-              <ListItem
-                className="my-list-item"
-                rightIconButton={edilete}
-                data-id={list.id}
-                key={i}>
-                  <a href={`lists/${list.id}`}
-                    target="_blank">{list.name}
-                  </a>
-              </ListItem>)
-          })}
-        </div>
-      </Drawer>
-    </div>
-    )
+                     <RaisedButton
+                        icon={<ActionDelete />}
+                        style={btnStyle}
+                        onTouchTap={this.handleDeleteClick}
+                      />
+                </ListItem>)
+            })}
+          </div>
+        </Drawer>
+      </div>
+      )
   }
-  handleEditClick = (e) => {
+  handleEditClick = e => {
     this.props.handleEdit(e)
     this.setState({open: false})
   }
-  handleToggle = () => this.setState({open: !this.state.open})
+
+  fetchUserLists = () => {
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+    let init = { method: 'GET', headers}
+
+    return fetch('/lists/all/' + this.props.user.id)
+           .then(res => res.json())
+           .then(lists => this.setState({lists}))
+           .catch(err => console.warn(err))
+  }
+
+  handleDeleteClick = e => {
+    this.props.handleDelete(e)
+    .then(this.fetchUserLists)
+  }
+
+  handleToggle = () => {
+    this.fetchUserLists()
+    .then(() => this.setState({open: !this.state.open}))
+  }
 }
 
 export default LoL

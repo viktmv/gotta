@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+// Components
 import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
+// Material-ui components
 import ConfirmationPopUp from '../index/ConfirmationPopUp'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog';
@@ -31,22 +32,14 @@ class CreateNewList extends React.Component {
     this.setState({confirmationPopupOpen: false});
   };
 
-  ////Fancy button
   render() {
 
     // Check if a list is already there
     let {list} = this.props
     let listExists = !!Object.keys(list).length
 
+    // Render various inputs depending on state
     let input
-    // = `<input type=${this.state.btn.type}
-    //                    id="start-new-list"
-    //                    ${this.state.btn.type == 'submit' //Initially type is submit
-    //                    ? `value="${this.state.btn.value}" `
-    //                    : `placeholder="${this.state.btn.placeholder}"`}
-    //                    />`
-
-
     if (this.state.btn.type == 'submit' && !listExists) {
       input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
     }
@@ -58,7 +51,6 @@ class CreateNewList extends React.Component {
     }
 
     let listStructure = ''
-
     if (this.state.clicked || listExists) {
       listStructure = <div>
               <List name={this.props.listName} rmItem={this.props.rmItem} listItems={this.props.listItems}>
@@ -94,33 +86,42 @@ class CreateNewList extends React.Component {
 
   // handle list creation request
   handleCreate = e => {
+    let {list} = this.props
+    let id = Object.keys(list).length ? list.id : ''
+
+
+    if (id) {
+      let meta = document.querySelector('meta[name="csrf-token"]').content
+      let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+      let options = {method: 'DELETE', headers, body: JSON.stringify({id})}
+
+       fetch(`/lists/${id}/delete`, options)
+       .then(response => response.json())
+       .catch(err => console.log(err))
+    }
+
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
     this.setState({confirmationPopupOpen: true});
 
-    let list = {
+    let newList = {
       name: this.props.list.name,
       items: this.props.listItems,
       user: this.props.user
     }
 
     // Options for request
-    let init = {
-                 method: 'POST',
-                 headers: headers,
-                 body: JSON.stringify(list)
-               }
+    let options = {method: 'POST', headers, body: JSON.stringify(newList)}
 
     // Post the creation request
-    fetch('/lists/create', init).then(response => {
+    fetch('/lists/create', options).then(response => {
       return response.json()
     }).then(result => {
       this.publishList(result)
     })
     .catch(err => console.log(err))
   }
-
 }
 
 export default CreateNewList
