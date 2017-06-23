@@ -101,10 +101,8 @@ export default class LoginDialog extends React.Component {
               }
 
     fetch('/users', init).then(response => {
-     console.log(init.headers.get('X-CSRF-Token'))
      return response.json()
    }).then(user => {
-     console.log(user)
      if (user) {
        Auth.authenticateUser(user)
        this.handleClose()

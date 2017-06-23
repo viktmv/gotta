@@ -9,6 +9,7 @@ import MenuItem from 'material-ui/MenuItem'
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors'
 import ActionAndroid from 'material-ui/svg-icons/action/android'
 import {List, ListItem} from 'material-ui/List'
+import FontIcon from 'material-ui/FontIcon'
 
 class LoL extends React.Component {
   constructor() {
@@ -40,7 +41,11 @@ class LoL extends React.Component {
       margin: 5
     }
 
-    let edit = <div><a href="/">edit</a><a>delete</a></div>
+    const btnStyle = {
+      width: 25,
+      height: 25
+    }
+
 
     const iconButtonElement = (
       <IconButton
@@ -51,14 +56,23 @@ class LoL extends React.Component {
       </IconButton>
     )
 
-    const rightIconMenu = (
-      <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem onTouchTap={this.handleEdit}>Edit</MenuItem>
-        <MenuItem>Delete</MenuItem>
-      </IconMenu>
-    )
 
-    return (
+    const edilete =  <RaisedButton
+                       icon={<ActionAndroid />}
+                       style={btnStyle}
+                       onTouchTap={this.handleEditClick}
+                     />
+
+    // <div>
+
+                    //   <RaisedButton
+                    //     icon={<ActionAndroid />}
+                    //     style={btnStyle}
+                    //     onTouchTap={this.props.handleDelete}
+                    //   />
+                    // </div>
+
+  return (
       <div >
         <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
         <Drawer // Sidebar where the LoL is kept
@@ -74,7 +88,8 @@ class LoL extends React.Component {
             return (
               <ListItem
                 className="my-list-item"
-                rightIconButton={rightIconMenu}
+                rightIconButton={edilete}
+                data-id={list.id}
                 key={i}>
                   <a href={`lists/${list.id}`}
                     target="_blank">{list.name}
@@ -86,7 +101,10 @@ class LoL extends React.Component {
     </div>
     )
   }
-  handleEdit = e => console.log(e.target.closest('.my-list-item'))
+  handleEditClick = (e) => {
+    this.props.handleEdit(e)
+    this.setState({open: false})
+  }
   handleToggle = () => this.setState({open: !this.state.open})
 }
 

@@ -146,7 +146,7 @@ class List extends React.Component {
     // Post the creation request
     fetch(`/lists/${this.props.id}/sms`, init)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => console.log(result)) // TODO: Clean up console.logs before deploying
     .catch(err => console.log(err))
 
     this.handleClose()

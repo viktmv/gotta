@@ -5,15 +5,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 class List extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      listItems: this.props.listItems
-    }
   }
 
   render() {
     return (<div>
               <h2>{this.props.name}</h2>
-              {this.state.listItems.map((item, i)=> <ListItem key={i}
+              {this.props.listItems.map((item, i) => <ListItem key={i}
                                                               data={item}
                                                               handleRemoveClick={this.handleRemoveClick}/>)}
             </div>)

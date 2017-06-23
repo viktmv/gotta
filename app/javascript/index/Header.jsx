@@ -20,8 +20,8 @@ class Header extends React.Component {
   render() {
 
     let controls = this.props.user
-                ? <LoL {...this.props} />
-                : <SignUpDialog {...this.props}>SignUp</SignUpDialog>
+                 ? <LoL {...this.props} />
+                 : <SignUpDialog {...this.props}>SignUp</SignUpDialog>
 
     return (
       <header className="main-header">
