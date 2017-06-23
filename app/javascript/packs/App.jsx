@@ -64,6 +64,7 @@ class App extends React.Component {
     this.setState({user})
   }
 
+  // Authenticate the user
   authWithToken = () => {
     console.log(Auth.isUserAuthenticated())
     if (Auth.isUserAuthenticated()) {
@@ -89,7 +90,6 @@ class App extends React.Component {
 
   // Delete the list entirely
   handleDelete = e => {
-    console.log('running')
     let listID =  e.target.closest('.my-list-item').dataset.id
 
     let meta = document.querySelector('meta[name="csrf-token"]').content

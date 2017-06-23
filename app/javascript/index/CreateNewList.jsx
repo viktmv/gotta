@@ -86,26 +86,36 @@ class CreateNewList extends React.Component {
 
   // handle list creation request
   handleCreate = e => {
+    let {list} = this.props
+    let id = Object.keys(list).length ? list.id : ''
+
+
+    if (id) {
+      let meta = document.querySelector('meta[name="csrf-token"]').content
+      let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+      let options = {method: 'DELETE', headers, body: JSON.stringify({id})}
+
+       fetch(`/lists/${id}/delete`, options)
+       .then(response => response.json())
+       .catch(err => console.log(err))
+    }
+
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
     this.setState({confirmationPopupOpen: true});
 
-    let list = {
+    let newList = {
       name: this.props.list.name,
       items: this.props.listItems,
       user: this.props.user
     }
 
     // Options for request
-    let init = {
-                 method: 'POST',
-                 headers: headers,
-                 body: JSON.stringify(list)
-               }
+    let options = {method: 'POST', headers, body: JSON.stringify(newList)}
 
     // Post the creation request
-    fetch('/lists/create', init).then(response => {
+    fetch('/lists/create', options).then(response => {
       return response.json()
     }).then(result => {
       this.publishList(result)
