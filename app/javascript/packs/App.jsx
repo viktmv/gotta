@@ -73,6 +73,7 @@ class App extends React.Component {
     }
   }
 
+  // Edit the list
   handleEdit = e => {
     let listID =  e.target.closest('.my-list-item').dataset.id
 
@@ -86,9 +87,18 @@ class App extends React.Component {
     .catch(err => console.log(err))
   }
 
+  // Delete the list entirely
   handleDelete = e => {
+    console.log('running')
     let listID =  e.target.closest('.my-list-item').dataset.id
-    console.log(listID)
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+    let init = {method: 'DELETE', headers, body: JSON.stringify({id: listID})}
+
+    return fetch(`/lists/${listID}/delete`, init)
+           .then(response => response.json())
+           .then(result => this.setState({list: '', listItems: [] }))
   }
 
   // Add item to the list

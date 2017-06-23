@@ -8,6 +8,7 @@ import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
 import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors'
 import ActionAndroid from 'material-ui/svg-icons/action/android'
+import ActionDelete from 'material-ui/svg-icons/action/delete'
 import {List, ListItem} from 'material-ui/List'
 import FontIcon from 'material-ui/FontIcon'
 
@@ -56,12 +57,48 @@ class LoL extends React.Component {
       </IconButton>
     )
 
-
-    const edilete =  <RaisedButton
+    return (
+        <div >
+          <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
+          <Drawer
+            docked={false}
+            openSecondary={true}
+            width={250}
+            open={this.state.open}
+            onRequestChange={(open) => this.setState({open})}
+          >
+          <div>
+            <h2 style={{textAlign: 'center'}}>My lists</h2>
+            {this.state.lists.map((list, i) => {
+              return (
+                <ListItem
+                  className="my-list-item"
+                  data-id={list.id}
+                  key={i}>
+                    <a href={`lists/${list.id}`}
+                      target="_blank">{list.name}
+                    </a>
+                    <RaisedButton
                        icon={<ActionAndroid />}
                        style={btnStyle}
                        onTouchTap={this.handleEditClick}
                      />
+                     <RaisedButton
+                        icon={<ActionDelete />}
+                        style={btnStyle}
+                        onTouchTap={this.handleDeleteClick}
+                      />
+                </ListItem>)
+            })}
+          </div>
+        </Drawer>
+      </div>
+      )
+  }
+  handleEditClick = e => {
+    this.props.handleEdit(e)
+    this.setState({open: false})
+  }
 
     // <div>
 
@@ -72,40 +109,15 @@ class LoL extends React.Component {
                     //   />
                     // </div>
 
-  return (
-      <div >
-        <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
-        <Drawer // Sidebar where the LoL is kept
-          docked={false}
-          openSecondary={true}
-          width={250}
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})}
-        >
-        <div>
-          <h2 style={{textAlign: 'center'}}>My lists</h2>
-          {this.state.lists.map((list, i) => {
-            return (
-              <ListItem
-                className="my-list-item"
-                rightIconButton={edilete}
-                data-id={list.id}
-                key={i}>
-                  <a href={`lists/${list.id}`}
-                    target="_blank">{list.name}
-                  </a>
-              </ListItem>)
-          })}
-        </div>
-      </Drawer>
-    </div>
-    )
+  handleDeleteClick = e => {
+    this.props.handleDelete(e)
+    .then(this.fetchUserLists)
   }
-  handleEditClick = (e) => {
-    this.props.handleEdit(e)
-    this.setState({open: false})
+
+  handleToggle = () => {
+    this.fetchUserLists()
+    .then(() => this.setState({open: !this.state.open}))
   }
-  handleToggle = () => this.setState({open: !this.state.open})
 }
 
 export default LoL

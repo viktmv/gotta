@@ -32,6 +32,15 @@ class ListController < ApplicationController
     end
   end
 
+  # handle delete request
+  def delete
+    list = List.find(params[:id])
+    list.items.destroy_all
+    list.destroy
+
+    render json: params[:id]
+  end
+
   # Handle metadata request
   def connect
     og = OpenGraph.new(params[:url])
