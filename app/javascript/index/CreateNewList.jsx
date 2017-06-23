@@ -12,12 +12,7 @@ class CreateNewList extends React.Component {
   constructor(props) {
     super()
     this.state = {
-      listName: '',
-      listItems: [{itemName: 'Your first thing to add',
-                  itemLink: 'exapmle.com',
-                  itemDescription: 'Something you wanna get back to',
-                  itemKey: 'example-item'
-                }],
+      listItems: props.listItems || [],
       btn: {
         type: 'submit',
         value: 'Create List'
@@ -25,34 +20,49 @@ class CreateNewList extends React.Component {
       clicked: false,
       published: false,
       confirmationPopupOpen: false,
-      };
-      this.handleOpen = this.handleOpen.bind(this)
-      this.handleClose = this.handleClose.bind(this)
+      }
     }
 
-handleOpen = () => {
-  this.setState({confirmationPopupOpen: true});
-};
+  handleOpen = () => {
+    this.setState({confirmationPopupOpen: true});
+  };
 
-handleClose = () => {
-  this.setState({confirmationPopupOpen: false});
-};
+  handleClose = () => {
+    this.setState({confirmationPopupOpen: false});
+  };
 
-////Fancy button
+  ////Fancy button
   render() {
-    let input = `<input type=${this.state.btn.type}
-                       id="start-new-list"
-                       ${this.state.btn.type == 'submit' //Initially type is submit
-                       ? `value="${this.state.btn.value}" `
-                       : `placeholder="${this.state.btn.placeholder}"`}
-                       />`
+    // Check if a list is already there
+    let {list} = this.props
+    let listExists = !!Object.keys(list).length
 
-    let list = ''
-    if (this.state.clicked) {
-      list = <div>
-              <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}>
+    let input
+    // = `<input type=${this.state.btn.type}
+    //                    id="start-new-list"
+    //                    ${this.state.btn.type == 'submit' //Initially type is submit
+    //                    ? `value="${this.state.btn.value}" `
+    //                    : `placeholder="${this.state.btn.placeholder}"`}
+    //                    />`
+
+
+    if (this.state.btn.type == 'submit' && !listExists) {
+      input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
+    }
+    else if (listExists) {
+      input = `<input type="text" id="start-new-list" placeholder="${list.name}" value="" />`
+    }
+    else {
+      input = `<input type=${this.state.btn.type} id="start-new-list" placeholder="${this.state.btn.placeholder}" />`
+    }
+
+    let listStructure = ''
+
+    if (this.state.clicked || listExists) {
+      listStructure = <div>
+              <List name={this.props.listName} rmItem={this.props.rmItem} listItems={this.props.listItems}>
               </List>
-              <CreateListItem addItem={this.addItem} />
+              <CreateListItem addItem={this.props.addItem} />
               <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
              </div>
     }
@@ -63,8 +73,8 @@ handleClose = () => {
 
     return (
       <div id="new-list">
-        <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
-        {list}
+        <span onClick={this.handleClick} onKeyUp={this.props.handleNameChange} dangerouslySetInnerHTML={{__html: input}} />
+        {listStructure}
         {popup}
         <br></br>
 
@@ -74,17 +84,16 @@ handleClose = () => {
 
   //Fancy button - on click the type turns from submit to text
   handleClick = e => {
-    this.setState({ btn: { placeholder: 'Enter the list name', type: 'text', value: '' }, clicked: true})
-  }
-
-  handleEnter = e => {
-    if (e.key == 'Enter') this.setState({listName: e.target.value})
+    let {list} = this.props
+    let placeholder = Object.keys(list).length ? list.name : 'Enter the list name'
+    this.setState({ btn: { placeholder, type: 'text', value: '' }, clicked: true})
   }
 
   publishList = (list) => {
     this.setState({published: true, listID: list.id})
   }
 
+  // handle list creation request
   handleCreate = e => {
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
@@ -92,8 +101,8 @@ handleClose = () => {
     this.setState({confirmationPopupOpen: true});
 
     let list = {
-      name: this.state.listName,
-      items: this.state.listItems,
+      name: this.props.list.name,
+      items: this.props.listItems,
       user: this.props.user
     }
 
@@ -113,19 +122,6 @@ handleClose = () => {
     .catch(err => console.log(err))
   }
 
-  addItem = item => {
-    let {listItems} = this.state
-
-    listItems.push(item)
-    this.setState({listItems})
-  }
-
-  rmItem = item => {
-    let {listItems} = this.state
-
-    listItems.splice(listItems.findIndex(listItem => listItem.itemKey == item.id ), 1)
-    this.setState({listItems})
-  }
 }
 
 export default CreateNewList

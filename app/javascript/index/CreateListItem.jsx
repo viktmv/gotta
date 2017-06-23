@@ -16,19 +16,19 @@ class CreateListItem extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      itemName: '',
-      itemDescription: '',
-      itemLink: '',
-      itemImage: '',
+      name: '',
+      description: '',
+      link: '',
+      img: '',
 
       link: false,
-      name: false
+      text: false
     }
   }
   render () {
     let textFields
 
-    if (this.state.link || this.state.name) {
+    if (this.state.link || this.state.text) {
       textFields = <div>
                       <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
                       <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
@@ -49,13 +49,13 @@ class CreateListItem extends React.Component {
     const $ = el => document.querySelector(el)
 
     // Reset text fields display
-    this.setState({link: false, name: false})
+    this.setState({link: false, text: false})
 
-    let {itemName, itemDescription, itemLink, itemImage} = this.state
+    let {name, description, link, img} = this.state
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
-    this.props.addItem({itemName, itemDescription, itemLink, itemKey: key, itemImage})
+    this.props.addItem({name, description, link, itemKey: key, img})
 
     $('.create-name input').value = ''
     $('.create-link input').value = ''
@@ -65,19 +65,19 @@ class CreateListItem extends React.Component {
     $('.create-image').setAttribute('style', '');
 
     this.setState({
-      itemName: '',
-      itemDescription: '',
-      itemLink: '',
-      itemImage: ''
+      name: '',
+      description: '',
+      link: '',
+      img: ''
     })
   }
 
   updateName = (e) => {
-    this.setState({itemName: e.target.value})
+    this.setState({name: e.target.value})
   }
 
   updateDescription = (e) => {
-    this.setState({itemDescription: e.target.value})
+    this.setState({description: e.target.value})
   }
 
   updateLink = (e) => {
@@ -88,12 +88,12 @@ class CreateListItem extends React.Component {
     $('.create-link > div').style.opacity = 0
 
     let data = { url: e.target.value }
-    if (!data.url) return this.setState({link: false, name: false})
+    if (!data.url) return this.setState({link: false, text: false})
 
     // Check for the regular string TODO: Add some logic to handle not-link cases
     // Show other input fields
     if (!data.url.startsWith('http')) {
-      return this.setState({name: true, link: false})
+      return this.setState({text: true, link: false})
     }
 
     this.setState({link: true})
@@ -123,10 +123,10 @@ class CreateListItem extends React.Component {
       if (image)
         $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
-      this.setState({itemName: title[0]._value,
-                     itemLink: url[0]._value,
-                     itemDescription: description[0]._value,
-                     itemImage: image[0]._value,
+      this.setState({name: title[0]._value,
+                     link: url[0]._value,
+                     description: description[0]._value,
+                     img: image[0]._value,
                    })
     }).catch(err => console.log(err))
   }

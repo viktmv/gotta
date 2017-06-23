@@ -21,10 +21,10 @@ class ListController < ApplicationController
     list.save!
 
     params[:items].each do |item|
-      list.items.create(name: item[:itemName],
-                        description: item[:itemDescription],
-                        link: item[:itemLink],
-                        img: item[:itemImage])
+      list.items.create(name: item[:name],
+                        description: item[:description],
+                        link: item[:link],
+                        img: item[:img])
     end
 
     respond_to do |format|
@@ -43,6 +43,12 @@ class ListController < ApplicationController
   def user_lists
     user = User.find(params[:id])
     render json: user.lists
+  end
+
+  def edit
+    list = List.find(params[:id])
+    result = { list: list, list_items: list.items }
+    render json: result
   end
 
   def text_message

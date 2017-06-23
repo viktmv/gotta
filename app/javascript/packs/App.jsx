@@ -25,7 +25,9 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      published: false
+      published: false,
+      list: {},
+      listItems: []
     }
   }
 
@@ -37,8 +39,21 @@ class App extends React.Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Header user={this.state.user} authWithToken={this.authWithToken} setUser={this.setUser}></Header>
-          <main><div className="wrapper"><CreateNewList user={this.state.user} /></div></main>
+          <Header user={this.state.user}
+                  authWithToken={this.authWithToken}
+                  setUser={this.setUser}
+                  handleEdit={this.handleEdit}
+                  handleDelete={this.handleDelete}/>
+          <main>
+            <div className="wrapper">
+              <CreateNewList user={this.state.user}
+                             list={this.state.list}
+                             listItems={this.state.listItems}
+                             addItem={this.addItem}
+                             rmItem={this.rmItem}
+                             handleNameChange={this.handleNameChange} />
+            </div>
+          </main>
           <SelectBackground />
         </div>
       </MuiThemeProvider>
@@ -49,10 +64,6 @@ class App extends React.Component {
     this.setState({user})
   }
 
-  editList = list => {
-
-  }
-
   authWithToken = () => {
     console.log(Auth.isUserAuthenticated())
     if (Auth.isUserAuthenticated()) {
@@ -60,6 +71,44 @@ class App extends React.Component {
       console.log(user)
       this.setState({user})
     }
+  }
+
+  handleEdit = e => {
+    let listID =  e.target.closest('.my-list-item').dataset.id
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+    let init = {method: 'GET', headers}
+
+    fetch(`/lists/${listID}/edit`, init)
+    .then(response => response.json())
+    .then(result => this.setState({list: result.list, listItems: result.list_items }))
+    .catch(err => console.log(err))
+  }
+
+  handleDelete = e => {
+    let listID =  e.target.closest('.my-list-item').dataset.id
+    console.log(listID)
+  }
+
+  // Add item to the list
+  addItem = item => {
+    let {listItems} = this.state
+
+    listItems.push(item)
+    this.setState({listItems})
+  }
+
+  // Remove item from the list
+  rmItem = item => {
+    let {listItems} = this.state
+
+    listItems.splice(listItems.findIndex(listItem => listItem.itemKey == item.id ), 1)
+    this.setState({listItems})
+  }
+
+  handleNameChange = e => {
+    if (e.key == 'Enter') this.setState({list: {name: e.target.value}})
   }
 }
 
