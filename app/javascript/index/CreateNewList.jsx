@@ -50,8 +50,7 @@ handleClose = () => {
     let list = ''
     if (this.state.clicked) {
       list = <div>
-              <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}>
-              </List>
+              <List name={this.state.listName} rmItem={this.rmItem} listItems={this.state.listItems}></List>
               <CreateListItem addItem={this.addItem} />
               <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
              </div>
@@ -66,8 +65,6 @@ handleClose = () => {
         <span onClick={this.handleClick} onKeyUp={this.handleEnter} dangerouslySetInnerHTML={{__html: input}} />
         {list}
         {popup}
-        <br></br>
-
       </div>
     )
   }
