@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+// Components
 import CreateListItem from './CreateListItem.jsx'
 import List from './List.jsx'
+// Material-ui components
 import ConfirmationPopUp from '../index/ConfirmationPopUp'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog';
@@ -31,22 +32,14 @@ class CreateNewList extends React.Component {
     this.setState({confirmationPopupOpen: false});
   };
 
-  ////Fancy button
   render() {
 
     // Check if a list is already there
     let {list} = this.props
     let listExists = !!Object.keys(list).length
 
+    // Render various inputs depending on state
     let input
-    // = `<input type=${this.state.btn.type}
-    //                    id="start-new-list"
-    //                    ${this.state.btn.type == 'submit' //Initially type is submit
-    //                    ? `value="${this.state.btn.value}" `
-    //                    : `placeholder="${this.state.btn.placeholder}"`}
-    //                    />`
-
-
     if (this.state.btn.type == 'submit' && !listExists) {
       input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
     }
@@ -58,7 +51,6 @@ class CreateNewList extends React.Component {
     }
 
     let listStructure = ''
-
     if (this.state.clicked || listExists) {
       listStructure = <div>
               <List name={this.props.listName} rmItem={this.props.rmItem} listItems={this.props.listItems}>
@@ -120,7 +112,6 @@ class CreateNewList extends React.Component {
     })
     .catch(err => console.log(err))
   }
-
 }
 
 export default CreateNewList
