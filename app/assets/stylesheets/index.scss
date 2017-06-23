@@ -118,6 +118,10 @@ html {
       cursor: pointer;
     }
 
+    .my-list-item {
+      color: $primaryColor
+    }
+
     ul {
       list-style: none;
       margin-right: 35px;

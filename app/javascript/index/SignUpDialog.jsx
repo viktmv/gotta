@@ -41,7 +41,7 @@ export default class LoginDialog extends React.Component {
 
     return (
       <div>
-        <RaisedButton label="SignUp" onTouchTap={this.handleOpen} />
+        <div className="nav-button" onTouchTap={this.handleOpen}>Sign up</div>
         <Dialog
           title="Sign Up"
           actions={actions}

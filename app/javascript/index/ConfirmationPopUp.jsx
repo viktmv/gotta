@@ -17,12 +17,11 @@ class ConfirmationPopUp extends React.Component {
     ];
 
     return (
-      <Dialog title="Dialog With Actions"
+      <Dialog title="Your list has been published!"
           actions={actions}
           modal={false}
           open={this.props.confirmationPopupOpen}
           onRequestClose={this.props.handleClose} className="confirmtion-pop-up">
-        <h4>Your list has been published!</h4>
         <a href={`http://localhost:3000/lists/${this.props.list}`} target="_blank">Go check it out</a>
       </Dialog>
     )
