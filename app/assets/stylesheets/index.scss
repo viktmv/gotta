@@ -34,6 +34,16 @@ $secondaryColor: rgba(65, 234, 212, 1);
     font-weight: 300;
     }
 
+@font-face {
+  font-family: 'typicons';
+  src: url("typicons.font/src/font/typicons.eot");
+  src: url("typicons.font/src/font/typicons.eot?#iefix") format('embedded-opentype'),
+       url("typicons.font/src/font/typicons.woff") format('woff'),
+       url("typicons.font/src/font/typicons.ttf") format('truetype'),
+       url("typicons.font/src/font/typicons.svg#typicons") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 html {
@@ -263,4 +273,5 @@ html {
       }
     }
   }
+
 }

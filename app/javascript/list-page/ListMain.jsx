@@ -83,34 +83,20 @@ class List extends React.Component {
     let customContentStyle = {
       width: 350
     }
+
     return (<div>
               <Toolbar style={style}>
                 <ToolbarGroup className="socials" lastChild={true} firstChild={true}>
-                  <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>Email Your Friends!</a>
+                  <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}><span className="typcn typcn-mail"></span></a>
                   <div id="fb-root"></div>
                   <div className="fb-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
-                    <IconButton
-                      iconClassName="muidocs-icon-custom-github" tooltip="share on Facebook!"
-                      tooltipPosition="bottom-right"
-                      className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</IconButton>
+                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><span className="typcn typcn-social-facebook-circular"></span></a>
                   </div>
                   <div>
-                    <IconButton className="twitter-share-button"
-                      iconClassName="muidocs-icon-custom-github" tooltip="share on Twitter!"
-                      tooltipPosition="bottom-right"
-                      data-size="large"
-                      href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff">
-                      Tweet
-                    </IconButton>
+                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff"><span className="typcn typcn-social-twitter-circular"></span></a>
                   </div>
                   <div>
-                    <IconButton className="twilio-text-message"
-                      iconClassName="muidocs-icon-custom-github" tooltip="share with a text message!"
-                      tooltipPosition="bottom-right"
-                      data-size="large"
-                      onTouchTap={this.handleOpen}>
-                      Send Text!
-                    </IconButton>
+                    <span onClick={this.handleOpen} className="typcn typcn-device-phone"></span>
                     <Dialog
                        title="Share with a simple text message!"
                        actions={actions}
