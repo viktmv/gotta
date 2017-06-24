@@ -23,11 +23,16 @@ class CreateListItem extends React.Component {
 
       link: false,
       text: false,
+
       errorText: '',
     }
   }
+
+
   render () {
     let textFields
+
+
 
     if (this.state.link || this.state.text) {
       textFields = <div>
@@ -39,38 +44,18 @@ class CreateListItem extends React.Component {
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
-        <TextField hintText="Type or paste link here" className="create-link" errorText={this.state.errorText} type="link" onChange={this.updateLink.bind(this)} />
+        <TextField
+         hintText="Type or paste link here"
+         className="create-link"
+         errorText={this.state.errorText}
+         type="link"
+         onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
+         onChange={this.updateLink.bind(this)} />
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }
-
-
-//   class PhoneField extends Component
-//   constructor(props) {
-//     super(props)
-//     this.state = { errorText: '', value: props.value }
-//   }
-//   onChange(event) {
-//     if (event.target.value.match(phoneRegex)) {
-//       this.setState({ errorText: '' })
-//     } else {
-//       this.setState({ errorText: 'Invalid format: ###-###-####' })
-//     }
-//   }
-//   render() {
-//     return (
-//       <TextField hintText="Phone"
-//         floatingLabelText="Phone"
-//         name="phone"
-//         errorText= {this.state.errorText}
-//         onChange={this.onChange.bind(this)}
-//       />
-//     )
-//   }
-// }
-
 
   handleAddClick = () => {
     const $ = el => document.querySelector(el)
@@ -85,11 +70,14 @@ class CreateListItem extends React.Component {
     }
 
     // Reset text fields display
-    this.setState({link: false, text: false})
+    this.setState({
+      link: false,
+      text: false,
+      errorText: '',
+    })
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
-
     this.props.addItem({name, description, link, itemKey: key, img})
 
     $('.create-name input').value = ''
@@ -103,7 +91,7 @@ class CreateListItem extends React.Component {
       name: '',
       description: '',
       link: '',
-      img: ''
+      img: '',
     })
   }
 
@@ -114,6 +102,10 @@ class CreateListItem extends React.Component {
 
   updateDescription = (e) => {
     this.setState({description: e.target.value})
+  }
+
+   resetErrorText = (e) => {
+    this.setState({errorText: ''})
   }
 
   updateLink = (e) => {
