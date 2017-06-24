@@ -24,7 +24,6 @@ class CreateListItem extends React.Component {
       link: false,
       text: false,
       errorText: '',
-      value: props.value
     }
   }
   render () {
@@ -32,7 +31,7 @@ class CreateListItem extends React.Component {
 
     if (this.state.link || this.state.text) {
       textFields = <div>
-                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName.bind(this)} />
+                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
                       <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
                     </div>
     }
@@ -40,7 +39,7 @@ class CreateListItem extends React.Component {
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
-        <TextField hintText="Type or paste link here" className="create-link" errorText={this.state.errorText} type="link" onChange={this.updateLink} />
+        <TextField hintText="Type or paste link here" className="create-link" errorText={this.state.errorText} type="link" onChange={this.updateLink.bind(this)} />
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
@@ -79,12 +78,11 @@ class CreateListItem extends React.Component {
     let {name, description, link, img} = this.state
 
     // if name is empty, tell the user
-     if (!link) {
+     if (link) {
+      this.setState({ errorText: '' })
+     } else if (!link) {
       return this.setState({ errorText: 'Please enter something!' })
     }
-
-    // return if the item is not valid
-    // ----------------
 
     // Reset text fields display
     this.setState({link: false, text: false})
