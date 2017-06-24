@@ -22,7 +22,9 @@ class CreateListItem extends React.Component {
       img: '',
 
       link: false,
-      text: false
+      text: false,
+      errorText: '',
+      value: props.value
     }
   }
   render () {
@@ -30,7 +32,7 @@ class CreateListItem extends React.Component {
 
     if (this.state.link || this.state.text) {
       textFields = <div>
-                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
+                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName.bind(this)} />
                       <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
                     </div>
     }
@@ -38,23 +40,58 @@ class CreateListItem extends React.Component {
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
-        <TextField hintText="Type or paste link here" className="create-link" type="link" onChange={this.updateLink} />
+        <TextField hintText="Type or paste link here" className="create-link" errorText={this.state.errorText} type="link" onChange={this.updateLink} />
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }
 
+
+//   class PhoneField extends Component
+//   constructor(props) {
+//     super(props)
+//     this.state = { errorText: '', value: props.value }
+//   }
+//   onChange(event) {
+//     if (event.target.value.match(phoneRegex)) {
+//       this.setState({ errorText: '' })
+//     } else {
+//       this.setState({ errorText: 'Invalid format: ###-###-####' })
+//     }
+//   }
+//   render() {
+//     return (
+//       <TextField hintText="Phone"
+//         floatingLabelText="Phone"
+//         name="phone"
+//         errorText= {this.state.errorText}
+//         onChange={this.onChange.bind(this)}
+//       />
+//     )
+//   }
+// }
+
+
   handleAddClick = () => {
     const $ = el => document.querySelector(el)
 
+    let {name, description, link, img} = this.state
+
+    // if name is empty, tell the user
+     if (!link) {
+      return this.setState({ errorText: 'Please enter something!' })
+    }
+
+    // return if the item is not valid
+    // ----------------
+
     // Reset text fields display
     this.setState({link: false, text: false})
-
-    let {name, description, link, img} = this.state
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
+
     this.props.addItem({name, description, link, itemKey: key, img})
 
     $('.create-name input').value = ''
@@ -71,6 +108,7 @@ class CreateListItem extends React.Component {
       img: ''
     })
   }
+
 
   updateName = (e) => {
     this.setState({name: e.target.value})

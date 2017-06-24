@@ -21,6 +21,7 @@ class CreateNewList extends React.Component {
       published: false,
       confirmationPopupOpen: false,
       }
+
     }
 
   handleOpen = () => {
@@ -61,11 +62,10 @@ class CreateNewList extends React.Component {
 
     if (this.state.clicked || listExists) {
       listStructure = <div>
-              <List name={this.props.listName} rmItem={this.props.rmItem} listItems={this.props.listItems}>
-              </List>
+              <List name={this.props.name} rmItem={this.props.rmItem} listItems={this.props.listItems}></List>
               <CreateListItem addItem={this.props.addItem} />
               <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
-             </div>
+              </div>
     }
 
     let popup = this.state.published ? (<ConfirmationPopUp list={this.state.listID}
