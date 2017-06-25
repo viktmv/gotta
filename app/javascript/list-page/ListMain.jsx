@@ -84,9 +84,14 @@ class List extends React.Component {
       width: 350
     }
 
-    return (<div className="social-toolbox-container">
-              <Toolbar style={style}>
-                <ToolbarGroup className="socials" lastChild={true} firstChild={true}>
+    return (<div className="published-list-main">
+              <div className="published-list-header">
+
+                <div className="published-list-name">
+                  <h2>{this.props.name}</h2>
+                </div>
+
+                <div className="social-buttons-container">
 
                   <div className="list-share-button">
                     <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}><span className="typcn typcn-mail"></span></a>
@@ -119,16 +124,12 @@ class List extends React.Component {
                        />
                      </Dialog>
                   </div>
-
-                </ToolbarGroup>
-              </Toolbar>
-
-              <div className="published-list-name">
-                <h2>{this.props.name}</h2>
+                </div>
               </div>
 
               {fb(document, 'script', 'facebook-jssdk')}
               {twttr()}
+
               {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
 
             </div>)
