@@ -94,16 +94,17 @@ class List extends React.Component {
                 <div className="social-buttons-container">
 
                   <div className="list-share-button">
-                    <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}><span className="typcn typcn-mail"></span></a>
+                      <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>
+                      <span className="typcn typcn-mail"></span></a>
                   </div>
 
                   <div id="fb-root"></div>
                   <div className="list-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
-                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><span className="typcn typcn-social-facebook-circular"></span></a>
+                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><span className="typcn typcn-social-facebook"></span></a>
                   </div>
 
                   <div className="list-share-button">
-                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff"><span className="typcn typcn-social-twitter-circular"></span></a>
+                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff"><span className="typcn typcn-social-twitter"></span></a>
                   </div>
 
                   <div className="list-share-button">

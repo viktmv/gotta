@@ -2,48 +2,8 @@
 // font-family: 'PT Sans', sans-serif;
 // font-family: 'Fira Sans', sans-serif;
 
-/* Coolors Exported Palette - coolors.co/2e3532-2e86ab-f6f5ae-f5f749-f24236 */
-
-// /* RGB */
-// $color1: rgba(46, 53, 50, 1);
-// $color2: rgba(46, 134, 171, 1);
-// $color3: rgba(246, 245, 174, 1);
-// $color4: rgba(245, 247, 73, 1);
-// $color5: rgba(242, 66, 54, 1)
-
-// /* HEX */
-// $color1: #2e3532;
-// $color2: #2e86ab;
-// $color3: #f6f5ae;
-// $color4: #f5f749;
-// $color5: #f24236;
-
-// /* RGB */
-// $color1: rgba(12, 15, 10, 1);
-$primaryColor: rgba(255, 32, 110, 1);
-// $color3: rgba(251, 255, 18, 1);
-$secondaryColor: rgba(65, 234, 212, 1);
-// $color5: rgba(255, 255, 255, 1);
-
-%titleFont {
-    font-family: "Quicksand", sans-serif;
-    }
-
-%bodyFont {
-    font-family: "Fira Sands", sans-serif;
-    font-weight: 300;
-    }
-
-@font-face {
-  font-family: 'typicons';
-  src: url("typicons.font/src/font/typicons.eot");
-  src: url("typicons.font/src/font/typicons.eot?#iefix") format('embedded-opentype'),
-       url("typicons.font/src/font/typicons.woff") format('woff'),
-       url("typicons.font/src/font/typicons.ttf") format('truetype'),
-       url("typicons.font/src/font/typicons.svg#typicons") format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+@import "modules/colours";
+@import "partials/typography";
 
 
 html {
