@@ -59,6 +59,12 @@ html {
 
   h2 {
     @extend %titleFont;
+    color: $primaryColor;
+  }
+
+  h3 {
+    @extend %subtitleFont;
+    color: $secondaryColor;
   }
 
      #brand-logo {
