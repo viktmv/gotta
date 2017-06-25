@@ -84,18 +84,24 @@ class List extends React.Component {
       width: 350
     }
 
-    return (<div>
+    return (<div className="social-toolbox-container">
               <Toolbar style={style}>
                 <ToolbarGroup className="socials" lastChild={true} firstChild={true}>
-                  <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}><span className="typcn typcn-mail"></span></a>
+
+                  <div className="list-share-button">
+                    <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}><span className="typcn typcn-mail"></span></a>
+                  </div>
+
                   <div id="fb-root"></div>
-                  <div className="fb-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
+                  <div className="list-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
                      <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><span className="typcn typcn-social-facebook-circular"></span></a>
                   </div>
-                  <div>
+
+                  <div className="list-share-button">
                       <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff"><span className="typcn typcn-social-twitter-circular"></span></a>
                   </div>
-                  <div>
+
+                  <div className="list-share-button">
                     <span onClick={this.handleOpen} className="typcn typcn-device-phone"></span>
                     <Dialog
                        title="Share with a simple text message!"
@@ -113,12 +119,18 @@ class List extends React.Component {
                        />
                      </Dialog>
                   </div>
+
                 </ToolbarGroup>
               </Toolbar>
+
+              <div className="published-list-name">
+                <h2>{this.props.name}</h2>
+              </div>
+
               {fb(document, 'script', 'facebook-jssdk')}
               {twttr()}
-              <h2>{this.props.name}</h2>
               {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
+
             </div>)
   }
 
