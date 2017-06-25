@@ -23,17 +23,14 @@ class CreateListItem extends React.Component {
 
       link: false,
       text: false,
-
       errorText: '',
     }
   }
 
 
   render () {
+    // Conditional display of input fields
     let textFields
-
-
-
     if (this.state.link || this.state.text) {
       textFields = <div>
                       <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
@@ -60,12 +57,12 @@ class CreateListItem extends React.Component {
   handleAddClick = () => {
     const $ = el => document.querySelector(el)
 
-    let {name, description, link, img} = this.state
+    let {name, description, link, img, text} = this.state
 
     // if name is empty, tell the user
-     if (link) {
+     if (link || text) {
       this.setState({ errorText: '' })
-     } else if (!link) {
+    } else {
       return this.setState({ errorText: 'Please enter something!' })
     }
 
@@ -75,6 +72,8 @@ class CreateListItem extends React.Component {
       text: false,
       errorText: '',
     })
+
+    // generate unique key for react components
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
@@ -84,7 +83,6 @@ class CreateListItem extends React.Component {
     $('.create-link input').value = ''
     $('.create-link > div').style.opacity = 1
     $('.create-description input').value = ''
-
     $('.create-image').setAttribute('style', '');
 
     this.setState({
