@@ -22,11 +22,17 @@ class CreateListItem extends React.Component {
       img: '',
 
       link: false,
-      text: false
+      text: false,
+
+      errorText: '',
     }
   }
+
+
   render () {
     let textFields
+
+
 
     if (this.state.link || this.state.text) {
       textFields = <div>
@@ -38,7 +44,13 @@ class CreateListItem extends React.Component {
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
-        <TextField hintText="Type or paste link here" className="create-link" type="link" onChange={this.updateLink} />
+        <TextField
+         hintText="Type or paste link here"
+         className="create-link"
+         errorText={this.state.errorText}
+         type="link"
+         onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
+         onChange={this.updateLink.bind(this)} />
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
@@ -48,10 +60,21 @@ class CreateListItem extends React.Component {
   handleAddClick = () => {
     const $ = el => document.querySelector(el)
 
-    // Reset text fields display
-    this.setState({link: false, text: false})
-
     let {name, description, link, img} = this.state
+
+    // if name is empty, tell the user
+     if (link) {
+      this.setState({ errorText: '' })
+     } else if (!link) {
+      return this.setState({ errorText: 'Please enter something!' })
+    }
+
+    // Reset text fields display
+    this.setState({
+      link: false,
+      text: false,
+      errorText: '',
+    })
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
@@ -68,9 +91,10 @@ class CreateListItem extends React.Component {
       name: '',
       description: '',
       link: '',
-      img: ''
+      img: '',
     })
   }
+
 
   updateName = (e) => {
     this.setState({name: e.target.value})
@@ -78,6 +102,10 @@ class CreateListItem extends React.Component {
 
   updateDescription = (e) => {
     this.setState({description: e.target.value})
+  }
+
+   resetErrorText = (e) => {
+    this.setState({errorText: ''})
   }
 
   updateLink = (e) => {
