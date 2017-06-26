@@ -37,16 +37,6 @@ class Header extends React.Component {
       </header>
     )
   }
-
-  renderLoginWithProps = () => {
-    let {props} = this
-    return <Login {...props} />
-  }
-
-  renderLoLWithProps = () => {
-    let {props} = this
-    return <LoL {...props} />
-  }
 }
 
 export default Header
