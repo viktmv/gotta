@@ -1,15 +1,12 @@
-import React from 'react';
-import Dialog from 'material-ui/Dialog';
+import React from 'react'
+// Material-ui components
+import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import Auth from '../modules/Auth'
 import TextField from 'material-ui/TextField'
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
+// Auth module
+import Auth from '../modules/Auth'
+
 export default class LoginDialog extends React.Component {
   constructor()  {
     super()
@@ -21,6 +18,7 @@ export default class LoginDialog extends React.Component {
   render() {
     // Material-ui buttons for dialog
     const actions = [
+      <div className="error-message login-errors"></div>,
       <FlatButton
         label="Cancel"
         primary={true}
@@ -31,8 +29,8 @@ export default class LoginDialog extends React.Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleLogin}
-      />,
-    ];
+      />
+    ]
 
     // Dynamic Login-logout btn
     let sessionBtn = this.props.user
@@ -51,12 +49,14 @@ export default class LoginDialog extends React.Component {
           <form className="login-form">
             <TextField
               id="text-field-controlled"
+              className="login-email"
               name="email"
               type="email"
               floatingLabelText="Email"
             />
             <TextField
               id="text-field-controlled"
+              className="login-password"
               name="password"
               type="password"
               floatingLabelText="Password"
@@ -64,30 +64,29 @@ export default class LoginDialog extends React.Component {
           </form>
         </Dialog>
       </div>
-    );
+    )
   }
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({open: true})
   }
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({open: false})
   }
 
   handleLogin = e => {
     e.preventDefault()
-    if (this.props.user) {
-      Auth.deauthenticateUser()
-      return this.props.setUser(null)
-    }
+
+    let inputsCheck = this.validateInputs()
+    let errMsg = document.querySelector('.error-message.login-errors')
+    if (!inputsCheck.valid) return errMsg.textContent = inputsCheck.error
+    errMsg.textContent = ''
 
     let form = document.querySelector('.login-form')
     let meta = document.querySelector('meta[name="csrf-token"]').content
-
     let data = new FormData(form)
     let headers = new Headers({'X-CSRF-Token': meta})
-
 
     let init = {
       method: 'POST',
@@ -99,7 +98,6 @@ export default class LoginDialog extends React.Component {
       return response.json()
     }).then(res => {
       let {user} = res
-      console.log(user)
       if (user) {
         Auth.authenticateUser(user)
         this.handleClose()
@@ -113,5 +111,20 @@ export default class LoginDialog extends React.Component {
        Auth.deauthenticateUser()
        return this.props.setUser(null)
      }
+  }
+
+  validateInputs = () => {
+    const $ = el => document.querySelector(el)
+
+    let email = $('.login-email input').value
+      , password = $('.login-password input').value
+
+    let validationResult = {valid: false, error: ''}
+    if (!email || !password) {
+      validationResult.error = 'Please fill in all the fields'
+      return validationResult
+    }
+    validationResult.valid = true
+    return validationResult
   }
 }

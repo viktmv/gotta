@@ -1,4 +1,5 @@
 import React from 'react'
+// Material-ui components
 import RaisedButton from 'material-ui/RaisedButton'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -20,13 +21,12 @@ class CreateListItem extends React.Component {
       description: '',
       link: '',
       img: '',
-
+      // Flags:
       link: false,
       text: false,
-      errorText: '',
+      errorText: ''
     }
   }
-
 
   render () {
     // Conditional display of input fields
@@ -55,12 +55,12 @@ class CreateListItem extends React.Component {
   }
 
   handleAddClick = () => {
+    // Helper function
     const $ = el => document.querySelector(el)
 
     let {name, description, link, img, text} = this.state
-
     // if name is empty, tell the user
-     if (link || text) {
+    if (link || text) {
       this.setState({ errorText: '' })
     } else {
       return this.setState({ errorText: 'Please enter something!' })
@@ -73,12 +73,13 @@ class CreateListItem extends React.Component {
       errorText: '',
     })
 
-    // generate unique key for react components
+    // Generate unique key for react components
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
     this.props.addItem({name, description, link, itemKey: key, img})
 
+    // Reset input fields
     $('.create-name input').value = ''
     $('.create-link input').value = ''
     $('.create-link > div').style.opacity = 1
@@ -93,7 +94,6 @@ class CreateListItem extends React.Component {
     })
   }
 
-
   updateName = (e) => {
     this.setState({name: e.target.value})
   }
@@ -102,7 +102,7 @@ class CreateListItem extends React.Component {
     this.setState({description: e.target.value})
   }
 
-   resetErrorText = (e) => {
+  resetErrorText = (e) => {
     this.setState({errorText: ''})
   }
 
@@ -124,7 +124,7 @@ class CreateListItem extends React.Component {
 
     this.setState({link: true})
 
-    // request options
+    // Request options
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json'})
     let init = {
@@ -132,7 +132,7 @@ class CreateListItem extends React.Component {
                  headers: headers,
                  body: JSON.stringify(data)
                }
-
+    // Perform the request
     fetch('/connect', init)
     .then(response => response.json())
     .then(res => {
@@ -154,7 +154,7 @@ class CreateListItem extends React.Component {
                      description: description[0]._value,
                      img: image[0]._value,
                    })
-    }).catch(err => console.log(err))
+    }).catch(err => console.warn(err))
   }
 
   generateKey = (() => {

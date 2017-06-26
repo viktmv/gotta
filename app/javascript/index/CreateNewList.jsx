@@ -6,8 +6,8 @@ import List from './List.jsx'
 // Material-ui components
 import ConfirmationPopUp from '../index/ConfirmationPopUp'
 import RaisedButton from 'material-ui/RaisedButton'
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -20,21 +20,11 @@ class CreateNewList extends React.Component {
       },
       clicked: false,
       published: false,
-      confirmationPopupOpen: false,
-      }
-
+      confirmationPopupOpen: false
     }
-
-  handleOpen = () => {
-    this.setState({confirmationPopupOpen: true});
-  };
-
-  handleClose = () => {
-    this.setState({confirmationPopupOpen: false});
-  };
+  }
 
   render() {
-
     // Check if a list is already there
     let {list} = this.props
     let listExists = !!Object.keys(list).length
@@ -54,15 +44,25 @@ class CreateNewList extends React.Component {
     let listStructure = ''
     if (this.state.clicked || listExists) {
       listStructure = <div>
-              <List name={this.props.name} rmItem={this.props.rmItem} listItems={this.props.listItems}></List>
-              <CreateListItem addItem={this.props.addItem} />
-              <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
-              </div>
+                        <List name={list.name}
+                              rmItem={this.props.rmItem}
+                              listItems={this.props.listItems}>
+                        </List>
+                        <CreateListItem addItem={this.props.addItem} />
+                        <RaisedButton className="publish-list-btn"
+                                      label="Publish Your List"
+                                      primary={true}
+                                      onClick={this.handleCreate}
+                                      onTouchTap={this.handleOpen}>
+                        </RaisedButton>
+                      </div>
     }
 
-    let popup = this.state.published ? (<ConfirmationPopUp list={this.state.listID}
+    let popup = this.state.published
+              ? <ConfirmationPopUp list={this.state.listID}
                 confirmationPopupOpen={this.state.confirmationPopupOpen}
-                handleClose={this.handleClose} />) : ('')
+                handleClose={this.handleClose} />
+              : ''
 
     return (
       <div id="new-list">
@@ -71,6 +71,14 @@ class CreateNewList extends React.Component {
         {popup}
       </div>
     )
+  }
+
+  handleOpen = () => {
+    this.setState({confirmationPopupOpen: true})
+  }
+
+  handleClose = () => {
+    this.setState({confirmationPopupOpen: false})
   }
 
   //Fancy button - on click the type turns from submit to text
@@ -89,6 +97,7 @@ class CreateNewList extends React.Component {
     let {list} = this.props
     let id = Object.keys(list).length ? list.id : ''
 
+    if (!this.props.listItems.length) return console.log('list is too short')
 
     if (id) {
       let meta = document.querySelector('meta[name="csrf-token"]').content
@@ -103,7 +112,7 @@ class CreateNewList extends React.Component {
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
-    this.setState({confirmationPopupOpen: true});
+    this.setState({confirmationPopupOpen: true})
 
     let newList = {
       name: this.props.list.name,
