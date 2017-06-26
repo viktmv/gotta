@@ -16,6 +16,11 @@ html {
     float: left;
     color: red;
   }
+
+  .publish-list-btn {
+    margin: 20px auto;
+  }
+
   //Removes blue highlight from text fields
   input:focus,
   select:focus,
@@ -245,5 +250,4 @@ html {
       }
     }
   }
-
 }
