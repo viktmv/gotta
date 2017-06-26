@@ -44,7 +44,7 @@ class CreateNewList extends React.Component {
     let listStructure = ''
     if (this.state.clicked || listExists) {
       listStructure = <div>
-                        <List name={this.props.name}
+                        <List name={list.name}
                               rmItem={this.props.rmItem}
                               listItems={this.props.listItems}>
                         </List>
@@ -96,6 +96,8 @@ class CreateNewList extends React.Component {
   handleCreate = e => {
     let {list} = this.props
     let id = Object.keys(list).length ? list.id : ''
+
+    if (!this.props.listItems.length) return console.log('list is too short')
 
     if (id) {
       let meta = document.querySelector('meta[name="csrf-token"]').content
