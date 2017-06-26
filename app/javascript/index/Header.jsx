@@ -2,12 +2,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch
-} from 'react-router-dom'
 
 import LoL from './LoL'
 import LoginDialog from './LoginDialog'
@@ -26,14 +20,12 @@ class Header extends React.Component {
     return (
       <header className="main-header">
         <div id="brand-logo"><h1>GOTTA</h1></div>
-          <Router>
-            <nav className="login-register-controls">
-                <ul className="navItems">
-                  <li><LoginDialog {...this.props}>Login</LoginDialog></li>
-                  <li>{controls}</li>
-                </ul>
-            </nav>
-          </Router>
+          <nav className="login-register-controls">
+              <ul className="navItems">
+                <li><LoginDialog {...this.props}>Login</LoginDialog></li>
+                <li>{controls}</li>
+              </ul>
+          </nav>
       </header>
     )
   }
