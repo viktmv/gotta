@@ -1,15 +1,12 @@
-import React from 'react';
-import Dialog from 'material-ui/Dialog';
+import React from 'react'
+// Material-ui components
+import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
-import Auth from '../modules/Auth'
 import TextField from 'material-ui/TextField'
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
+// Auth module
+import Auth from '../modules/Auth'
+
 export default class LoginDialog extends React.Component {
   constructor()  {
     super()
@@ -32,8 +29,8 @@ export default class LoginDialog extends React.Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={this.handleLogin}
-      />,
-    ];
+      />
+    ]
 
     // Dynamic Login-logout btn
     let sessionBtn = this.props.user
@@ -67,15 +64,15 @@ export default class LoginDialog extends React.Component {
           </form>
         </Dialog>
       </div>
-    );
+    )
   }
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({open: true})
   }
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({open: false})
   }
 
   handleLogin = e => {
@@ -85,7 +82,7 @@ export default class LoginDialog extends React.Component {
     let errMsg = document.querySelector('.error-message.login-errors')
     if (!inputsCheck.valid) return errMsg.textContent = inputsCheck.error
     errMsg.textContent = ''
-    
+
     let form = document.querySelector('.login-form')
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let data = new FormData(form)
@@ -123,12 +120,10 @@ export default class LoginDialog extends React.Component {
       , password = $('.login-password input').value
 
     let validationResult = {valid: false, error: ''}
-
     if (!email || !password) {
       validationResult.error = 'Please fill in all the fields'
       return validationResult
     }
-
     validationResult.valid = true
     return validationResult
   }
