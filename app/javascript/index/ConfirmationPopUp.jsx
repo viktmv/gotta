@@ -1,8 +1,8 @@
 import React from 'react'
 
 import RaisedButton from 'material-ui/RaisedButton'
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
 
 
 class ConfirmationPopUp extends React.Component {
@@ -13,8 +13,8 @@ class ConfirmationPopUp extends React.Component {
         label="Okay"
         primary={true}
         onTouchTap={this.props.handleClose}
-      />,
-    ];
+      />
+    ]
 
     return (
       <Dialog title="Your list has been published!"
