@@ -31,7 +31,7 @@ export default class LoginDialog extends React.Component {
 
   render() {
     const actions = [
-      <div className="error-message"></div>,
+      <div className="error-message signup-errors"></div>,
       <FlatButton
         label="Cancel"
         primary={true}
@@ -98,9 +98,11 @@ export default class LoginDialog extends React.Component {
     e.preventDefault()
 
     let inputsCheck = this.validateInputs()
-    let errMsg = document.querySelector('.error-message')
+    let errMsg = document.querySelector('.error-message.signup-errors')
     if (!inputsCheck.valid) return errMsg.textContent = inputsCheck.error
 
+    errMsg.textContent = ''
+    
     let form = document.querySelector('.sign-up-form form')
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let data = new FormData(form)
