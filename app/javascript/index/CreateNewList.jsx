@@ -35,7 +35,7 @@ class CreateNewList extends React.Component {
       input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
     }
     else if (listExists) {
-      input = `<input type="text" id="start-new-list" placeholder="${list.name}" value="" />`
+      input = `<input type="text" id="start-new-list" placeholder="Edit the name here" value="" />`
     }
     else {
       input = `<input type=${this.state.btn.type} id="start-new-list" placeholder="${this.state.btn.placeholder}" />`
@@ -66,11 +66,17 @@ class CreateNewList extends React.Component {
 
     return (
       <div id="new-list">
-        <span onClick={this.handleClick} onKeyUp={this.props.handleNameChange} dangerouslySetInnerHTML={{__html: input}} />
+        <span onClick={this.handleClick} onKeyUp={this.handleKeyInput} dangerouslySetInnerHTML={{__html: input}} />
         {listStructure}
         {popup}
       </div>
     )
+  }
+
+  handleKeyInput = e => {
+    this.props.handleNameChange(e)
+    let placeholder = Object.keys(this.props.list).length ? 'Edit the name here' : 'Enter the list name'
+    this.setState({btn: { placeholder, type: 'text', value: '' }})
   }
 
   handleOpen = () => {
@@ -84,11 +90,11 @@ class CreateNewList extends React.Component {
   //Fancy button - on click the type turns from submit to text
   handleClick = e => {
     let {list} = this.props
-    let placeholder = Object.keys(list).length ? list.name : 'Enter the list name'
+    let placeholder = Object.keys(list).length ? 'Edit the name here' : 'Enter the list name'
     this.setState({ btn: { placeholder, type: 'text', value: '' }, clicked: true})
   }
 
-  publishList = (list) => {
+  publishList = list => {
     this.setState({published: true, listID: list.id})
   }
 

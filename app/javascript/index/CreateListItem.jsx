@@ -24,7 +24,9 @@ class CreateListItem extends React.Component {
       // Flags:
       link: false,
       text: false,
-      errorText: ''
+      errorText: '',
+      searchResults: [],
+      titles: []
     }
   }
 
@@ -33,7 +35,7 @@ class CreateListItem extends React.Component {
     let textFields
     if (this.state.link || this.state.text) {
       textFields = <div>
-                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
+                      <TextField  hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
                       <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
                     </div>
     }
@@ -46,12 +48,40 @@ class CreateListItem extends React.Component {
          className="create-link"
          errorText={this.state.errorText}
          type="link"
-         onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
-         onChange={this.updateLink.bind(this)} />
+         onBlur={this.clearSearch}
+         onFocus={this.resetErrorText} //removes error text when user clicks in text field
+         onChange={this.updateLink} />
+       <div className="autocomplete-field"><ul>{this.state.titles.map(t => <li><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
+  }
+
+  populateInputs = e => {
+
+    const $ = el => document.querySelector(el)
+    let name = e.target.text
+    console.log(name)
+    let selected = this.state.searchResults.find(item => item.Text == name)
+    console.log(selected)
+
+    $('.create-name input').value = selected.Text
+    $('.create-name > div').style.opacity = 0
+
+    $('.create-description input').value = selected.Text
+    $('.create-description > div').style.opacity = 0
+
+    $('.create-image').setAttribute('style', `background-image: url(${selected.Icon.URL}); width: 72px; height: 72px;`)
+    // this.setState({})
+
+  }
+
+  clearSearch = (flag = 1) => {
+    if (!flag) {
+      this.setState({link: false, text: false, titles: [], errorText: ''})
+    }
+    else this.setState({titles: [], errorText: ''})
   }
 
   handleAddClick = () => {
@@ -67,11 +97,7 @@ class CreateListItem extends React.Component {
     }
 
     // Reset text fields display
-    this.setState({
-      link: false,
-      text: false,
-      errorText: '',
-    })
+    this.clearSearch(0)
 
     // Generate unique key for react components
     let key = this.generateKey()
@@ -94,8 +120,9 @@ class CreateListItem extends React.Component {
     })
   }
 
-  updateName = (e) => {
-    this.setState({name: e.target.value})
+  updateName = e => {
+    let name = e.target.value
+    this.setState({name})
   }
 
   updateDescription = (e) => {
@@ -114,11 +141,21 @@ class CreateListItem extends React.Component {
     $('.create-link > div').style.opacity = 0
 
     let data = { url: e.target.value }
-    if (!data.url) return this.setState({link: false, text: false})
+    if (!data.url) return  this.clearSearch()
 
     // Check for the regular string TODO: Add some logic to handle not-link cases
     // Show other input fields
     if (!data.url.startsWith('http')) {
+      let name = data.url
+
+      // this.googleName(name)
+      this.duckduckName(name)
+      .then(() => {
+        let items = this.state.searchResults.map(item => item.Text)
+        this.setState({titles: items})
+        // document.querySelector('.autocomplete-field ul').innerHTML =
+        //   items.reduce((total, title) => total += `<li>${title}</li>`, '')
+      }).catch(console.warn)
       return this.setState({text: true, link: false})
     }
 
@@ -136,6 +173,7 @@ class CreateListItem extends React.Component {
     fetch('/connect', init)
     .then(response => response.json())
     .then(res => {
+
       let {title, site_name, description, url, image} = res
 
       if (title) {
@@ -155,6 +193,35 @@ class CreateListItem extends React.Component {
                      img: image[0]._value,
                    })
     }).catch(err => console.warn(err))
+  }
+
+  duckduckName = name => {
+    let q = name
+    let url  = `http://api.duckduckgo.com/?q=${q}&format=json&pretty=1`
+
+    return fetch(url)
+            .then(res => res.json())
+            .then(data => this.setState({searchResults: data.RelatedTopics}))
+            .then(console.log)
+            .catch(console.warn)
+  }
+
+  googleName = name => {
+    let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
+    let key2 = 'AIzaSyCoYF61Hi1HrfEwjHUEiGIz1kkDUsZzafI'
+
+    let cx = '003795560815676233470:zx_lx55noqy';
+    let query = name
+
+
+    let url = `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=${cx}&q=${query}`
+    let headers = new Headers({'Access-Control-Allow-Origin': '*'})
+    let options = {headers}
+
+    return fetch(url, options)
+            .then(res => res.json())
+            .then(data => this.setState({searchResults: data.items}))
+            .catch(console.warn)
   }
 
   generateKey = (() => {

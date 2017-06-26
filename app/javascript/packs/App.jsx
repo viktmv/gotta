@@ -11,7 +11,6 @@ import CreateNewList from '../index/CreateNewList'
 import Auth from '../modules/Auth'
 import SelectBackground from '../index/SelectBackground'
 
-
 ///// Material UI stuff ////////
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
