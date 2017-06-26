@@ -95,20 +95,22 @@ class List extends React.Component {
 
                   <div className="list-share-button">
                       <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>
-                      <span className="typcn typcn-mail"></span></a>
+                      <span className="published-list-icon typcn typcn-mail"></span></a>
                   </div>
 
                   <div id="fb-root"></div>
                   <div className="list-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
-                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"><span className="typcn typcn-social-facebook"></span></a>
+                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+                     <span className="published-list-icon typcn typcn-social-facebook"></span></a>
                   </div>
 
                   <div className="list-share-button">
-                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff"><span className="typcn typcn-social-twitter"></span></a>
+                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff">
+                      <span className="published-list-icon typcn typcn-social-twitter"></span></a>
                   </div>
 
                   <div className="list-share-button">
-                    <span onClick={this.handleOpen} className="typcn typcn-device-phone"></span>
+                    <span onClick={this.handleOpen} className="published-list-icon typcn typcn-device-phone"></span>
                     <Dialog
                        title="Share with a simple text message!"
                        actions={actions}

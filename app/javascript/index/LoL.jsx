@@ -51,7 +51,7 @@ class LoL extends React.Component {
           <Drawer
             docked={false}
             openSecondary={true}
-            width={250}
+            width={350}
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}
           >
@@ -66,16 +66,15 @@ class LoL extends React.Component {
                     <a href={`lists/${list.id}`}
                       target="_blank">{list.name}
                     </a>
-                    <RaisedButton
-                       icon={<ActionAndroid />}
-                       style={btnStyle}
-                       onTouchTap={this.handleEditClick}
-                     />
-                     <RaisedButton
-                        icon={<ActionDelete />}
-                        style={btnStyle}
-                        onTouchTap={this.handleDeleteClick}
-                      />
+
+                    <span onClick={this.handleEditClick}
+                    onTouchTap={this.handleEditClick}
+                    className="drawer-icon typcn typcn-edit"></span>
+
+                    <span onClick={this.handleEditClick}
+                    onTouchTap={this.handleDeleteClick}
+                    className="drawer-icon typcn typcn-trash"></span>
+
                 </ListItem>)
             })}
           </div>
@@ -83,6 +82,7 @@ class LoL extends React.Component {
       </div>
       )
   }
+
   handleEditClick = e => {
     this.props.handleEdit(e)
     this.setState({open: false})
