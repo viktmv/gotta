@@ -10,6 +10,12 @@ html {
   background-color: #EFFDE0;
   @extend %bodyFont;
 
+  // Error message basic styles
+  .error-message {
+    margin-left: 15px;
+    float: left;
+    color: red;
+  }
   //Removes blue highlight from text fields
   input:focus,
   select:focus,
