@@ -46,7 +46,7 @@ class LoL extends React.Component {
     )
 
     return (
-        <div >
+        <div>
           <div className="nav-button" onTouchTap={this.handleToggle}>My Lists</div>
           <Drawer
             docked={false}
@@ -55,28 +55,30 @@ class LoL extends React.Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})}
           >
-          <div>
-            <h2 style={{textAlign: 'center'}}>My lists</h2>
-            {this.state.lists.map((list, i) => {
-              return (
-                <ListItem
-                  className="my-list-item"
-                  data-id={list.id}
-                  key={i}>
-                    <a href={`lists/${list.id}`}
-                      target="_blank">{list.name}
-                    </a>
+          <div className="drawer-wrapper">
+            <div>
+              <h2 className="drawer-list-title">My lists</h2>
+              {this.state.lists.map((list, i) => {
+                return (
+                  <ListItem
+                    className="my-list-item"
+                    data-id={list.id}
+                    key={i}>
+                      <a href={`lists/${list.id}`}
+                        target="_blank">{list.name}
+                      </a>
 
-                    <span onClick={this.handleEditClick}
-                    onTouchTap={this.handleEditClick}
-                    className="drawer-icon typcn typcn-edit"></span>
+                      <span onClick={this.handleEditClick}
+                      onTouchTap={this.handleDeleteClick}
+                      className="drawer-icon typcn typcn-trash"></span>
 
-                    <span onClick={this.handleEditClick}
-                    onTouchTap={this.handleDeleteClick}
-                    className="drawer-icon typcn typcn-trash"></span>
+                      <span onClick={this.handleEditClick}
+                      onTouchTap={this.handleEditClick}
+                      className="drawer-icon typcn typcn-edit"></span>
 
-                </ListItem>)
-            })}
+                  </ListItem>)
+              })}
+            </div>
           </div>
         </Drawer>
       </div>

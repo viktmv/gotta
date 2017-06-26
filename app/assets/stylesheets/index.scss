@@ -51,6 +51,7 @@ html {
 
   a {
     text-decoration: none;
+    color: $primaryColor;
   }
 
   h1 {
@@ -60,6 +61,7 @@ html {
   h2 {
     @extend %titleFont;
     color: $primaryColor;
+    margin: 0;
   }
 
   h3 {
@@ -92,10 +94,6 @@ html {
       border: none;
       color: white;
       cursor: pointer;
-    }
-
-    .my-list-item {
-      color: $primaryColor
     }
 
     ul {
