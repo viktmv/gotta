@@ -1,9 +1,8 @@
 import React from 'react'
-
+// Material-ui components
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
-
 
 class ConfirmationPopUp extends React.Component {
   render() {
