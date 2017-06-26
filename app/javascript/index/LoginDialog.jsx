@@ -21,6 +21,7 @@ export default class LoginDialog extends React.Component {
   render() {
     // Material-ui buttons for dialog
     const actions = [
+      <div className="error-message login-errors"></div>,
       <FlatButton
         label="Cancel"
         primary={true}
@@ -51,12 +52,14 @@ export default class LoginDialog extends React.Component {
           <form className="login-form">
             <TextField
               id="text-field-controlled"
+              className="login-email"
               name="email"
               type="email"
               floatingLabelText="Email"
             />
             <TextField
               id="text-field-controlled"
+              className="login-password"
               name="password"
               type="password"
               floatingLabelText="Password"
@@ -77,17 +80,16 @@ export default class LoginDialog extends React.Component {
 
   handleLogin = e => {
     e.preventDefault()
-    if (this.props.user) {
-      Auth.deauthenticateUser()
-      return this.props.setUser(null)
-    }
 
+    let inputsCheck = this.validateInputs()
+    let errMsg = document.querySelector('.error-message.login-errors')
+    if (!inputsCheck.valid) return errMsg.textContent = inputsCheck.error
+    errMsg.textContent = ''
+    
     let form = document.querySelector('.login-form')
     let meta = document.querySelector('meta[name="csrf-token"]').content
-
     let data = new FormData(form)
     let headers = new Headers({'X-CSRF-Token': meta})
-
 
     let init = {
       method: 'POST',
@@ -99,7 +101,6 @@ export default class LoginDialog extends React.Component {
       return response.json()
     }).then(res => {
       let {user} = res
-      console.log(user)
       if (user) {
         Auth.authenticateUser(user)
         this.handleClose()
@@ -113,5 +114,22 @@ export default class LoginDialog extends React.Component {
        Auth.deauthenticateUser()
        return this.props.setUser(null)
      }
+  }
+
+  validateInputs = () => {
+    const $ = el => document.querySelector(el)
+
+    let email = $('.login-email input').value
+      , password = $('.login-password input').value
+
+    let validationResult = {valid: false, error: ''}
+
+    if (!email || !password) {
+      validationResult.error = 'Please fill in all the fields'
+      return validationResult
+    }
+
+    validationResult.valid = true
+    return validationResult
   }
 }

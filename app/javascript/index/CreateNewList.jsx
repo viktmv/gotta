@@ -56,7 +56,7 @@ class CreateNewList extends React.Component {
       listStructure = <div>
               <List name={this.props.name} rmItem={this.props.rmItem} listItems={this.props.listItems}></List>
               <CreateListItem addItem={this.props.addItem} />
-              <RaisedButton label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
+              <RaisedButton className="publish-list-btn" label="Publish Your List" primary={true} onClick={this.handleCreate} onTouchTap={this.handleOpen}></RaisedButton>
               </div>
     }
 
