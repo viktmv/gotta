@@ -49,7 +49,7 @@ class CreateListItem extends React.Component {
          onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
          onChange={this.updateLink.bind(this)} />
         {textFields}
-        <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+        <FloatingActionButton mini={true} className="add-list-item" style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }
