@@ -50,7 +50,7 @@ class CreateListItem extends React.Component {
          type="link"
          onFocus={this.resetErrorText} //removes error text when user clicks in text field
          onKeyUp={this.updateLink} />
-       <div onBlur={() => this.clearSearch(0)} className="autocomplete-field"><ul>{this.state.titles.map(t => <li><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
+       <div onBlur={() => this.clearSearch(0)} className="autocomplete-field"><ul>{this.state.titles.map((t,i) => <li key={i}><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
@@ -105,16 +105,15 @@ class CreateListItem extends React.Component {
       return this.setState({ errorText: 'Please enter something!' })
     }
 
-    // Reset text fields display
+    // Reset text fields display and all the input fields
     this.clearSearch(0)
+    this.resetInputs()
 
     // Generate unique key for react components
     let key = this.generateKey()
 
     // Add item to the list of items on the CreateNewList component
     this.props.addItem({name, description, link, itemKey: key, img})
-
-    this.resetInputs()
 
     this.setState({
       name: '',
@@ -144,15 +143,14 @@ class CreateListItem extends React.Component {
     // hide placeholder text
     $('.create-link > div').style.opacity = 0
 
-    if (e.key != 'Enter') return
-
     let data = { url: e.target.value }
     if (!data.url) {
+      // this.resetInputs()
       this.clearSearch(0)
-      this.resetInputs()
       return
     }
 
+    if (e.key != 'Enter') return
     // Check for the regular string
     // Show other input fields
     // Send request via Google search API
@@ -210,7 +208,6 @@ class CreateListItem extends React.Component {
     return fetch(url)
             .then(res => res.json())
             .then(data => this.setState({searchResults: data.RelatedTopics}))
-            .then(console.log)
             .catch(console.warn)
   }
 
