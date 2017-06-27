@@ -40,6 +40,8 @@ class CreateListItem extends React.Component {
                     </div>
     }
 
+    let fieldHeight = this.state.titles.length ? 'auto' : 0
+
     return (
       <div className="list-form">
         <div className="create-image item-image"></div>
@@ -50,7 +52,7 @@ class CreateListItem extends React.Component {
          type="link"
          onFocus={this.resetErrorText} //removes error text when user clicks in text field
          onKeyUp={this.updateLink} />
-       <div onBlur={() => this.clearSearch(0)} className="autocomplete-field"><ul>{this.state.titles.map((t,i) => <li key={i}><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
+       <div onBlur={() => this.clearSearch(0)} style={{height: fieldHeight}}className="autocomplete-field"><ul>{this.state.titles.map((t,i) => <li key={i}><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
