@@ -59,23 +59,27 @@ class CreateListItem extends React.Component {
 
   populateInputs = e => {
 
+    console.log('hey')
     const $ = el => document.querySelector(el)
     let name = e.target.text
-    console.log(name)
-    let selected = this.state.searchResults.find(item => item.Text == name)
+
+    let selected = this.state.searchResults.find(item => item.title == name)
     console.log(selected)
 
-    $('.create-name input').value = selected.Text
+    $('.create-name input').value = selected.title
     $('.create-name > div').style.opacity = 0
 
-    $('.create-description input').value = selected.Text
+    $('.create-description input').value = selected.snippet
     $('.create-description > div').style.opacity = 0
 
-    $('.create-image').setAttribute('style', `background-image: url(${selected.Icon.URL}); width: 72px; height: 72px;`)
-    this.setState({name: selected.Text,
-                   link: url[0]._value,
-                   description: description[0]._value,
-                   img: image[0]._value})
+
+    let image = selected.pagemap.metatags[0]['og:image']
+
+    $('.create-image').setAttribute('style', `background-image: url(${image}); width: 72px; height: 72px;`)
+    this.setState({name: selected.title,
+                   link: selected.link || '',
+                   description: selected.snippet || '',
+                   img: image || ''})
     this.clearSearch()
   }
 
@@ -115,13 +119,6 @@ class CreateListItem extends React.Component {
 
     // Add item to the list of items on the CreateNewList component
     this.props.addItem({name, description, link, itemKey: key, img})
-
-    // Reset input fields
-    // $('.create-name input').value = ''
-    // $('.create-link input').value = ''
-    // $('.create-link > div').style.opacity = 1
-    // $('.create-description input').value = ''
-    // $('.create-image').setAttribute('style', '');
 
     this.resetInputs()
 
@@ -165,13 +162,14 @@ class CreateListItem extends React.Component {
     if (!data.url.startsWith('http')) {
       let name = data.url
 
-      // this.googleName(name)
-      this.duckduckName(name)
-      .then(() => {
-        let items = this.state.searchResults.map(item => item.Text)
+      this.googleName(name)
+      // this.duckduckName(name)
+      .then((res) => {
+        console.log(res)
+        let items = this.state.searchResults.map(item => item.title)
         this.setState({titles: items})
         // document.querySelector('.autocomplete-field ul').innerHTML =
-        //   items.reduce((total, title) => total += `<li>${title}</li>`, '')
+          // items.reduce((total, title) => total += `<li>${title}</li>`, '')
         return this.setState({text: true, link: false})
       }).catch(console.warn)
     }
@@ -204,17 +202,19 @@ class CreateListItem extends React.Component {
       if (image)
         $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
-      this.setState({name: title[0]._value,
-                     link: url[0]._value,
-                     description: description[0]._value,
-                     img: image[0]._value,
+
+
+      this.setState({name: title ? title[0]._value : '',
+                     link: url ? url[0]._value : '',
+                     description: description? description[0]._value : '',
+                     img: image? image[0]._value : '',
                    })
     }).catch(err => console.warn(err))
   }
 
   duckduckName = name => {
     let q = name
-    let url  = `http://api.duckduckgo.com/?q=${q}&format=json&pretty=1`
+    let url = `http://api.duckduckgo.com/?q=${q}&format=json&pretty=1`
 
     return fetch(url)
             .then(res => res.json())
@@ -225,13 +225,13 @@ class CreateListItem extends React.Component {
 
   googleName = name => {
     let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
-    let key2 = 'AIzaSyCoYF61Hi1HrfEwjHUEiGIz1kkDUsZzafI'
+    // let key2 = 'AIzaSyCoYF61Hi1HrfEwjHUEiGIz1kkDUsZzafI'
 
     let cx = '003795560815676233470:zx_lx55noqy';
     let query = name
+    if (name.length < 1) return
 
-
-    let url = `https://www.googleapis.com/customsearch/v1?key=${key2}&cx=${cx}&q=${query}`
+    let url = `https://www.googleapis.com/customsearch/v1?key=${key}&cx=${cx}&q=${query}`
     let headers = new Headers({'Access-Control-Allow-Origin': '*'})
     let options = {headers}
 
