@@ -27,7 +27,8 @@ class App extends React.Component {
     this.state = {
       published: false,
       list: {},
-      listItems: []
+      listItems: [],
+      theme: ''
     }
   }
 
@@ -54,23 +55,40 @@ class App extends React.Component {
                              handleNameChange={this.handleNameChange} />
             </div>
           </main>
-          <SelectBackground />
+          <SelectBackground addTheme={this.addTheme}/>
         </div>
       </MuiThemeProvider>
     )
   }
+  addTheme = (theme) => {
+    this.setState({theme})
+    document.querySelector('html').style.background = theme
+
+    if (!this.state.user) return
+    let {id} = this.state.user
+
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
+    let options = {method: 'POST', headers, body: JSON.stringify({theme})}
+
+    fetch(`/${id}/theme`, options)
+    .then(res => res.json())
+    .then(console.log)
+    .catch(console.warn)
+
+  }
 
   setUser = user => {
+    if (user) this.addTheme(user.theme)
     this.setState({user})
   }
 
   // Authenticate the user
   authWithToken = () => {
-    console.log(Auth.isUserAuthenticated())
     if (Auth.isUserAuthenticated()) {
       let user = Auth.getUser()
-      console.log(user)
-      this.setState({user})
+      this.setState({user, theme: user.theme})
+      document.querySelector('html').style.background = user.theme
     }
   }
 

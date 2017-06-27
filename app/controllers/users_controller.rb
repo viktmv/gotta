@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_theme
+    @user = User.find(params[:id])
+    @user.update_columns(theme: params[:theme])
+    render json: @user
+  end
+
   private
 
   def user_params

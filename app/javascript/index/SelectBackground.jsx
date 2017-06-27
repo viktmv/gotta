@@ -43,8 +43,7 @@ class SelectBackground extends React.Component {
       default:
         colour = '#fff'
     }
-
-    document.querySelector('html').style.background = colour
+    this.props.addTheme(colour)
   }
 }
 
