@@ -13,6 +13,9 @@ const style = {
   marginRight: 30,
 };
 
+// Helper
+const $ = el => document.querySelector(el)
+
 class CreateListItem extends React.Component {
   constructor(props) {
     super(props)
@@ -60,7 +63,6 @@ class CreateListItem extends React.Component {
   }
 
   populateInputs = e => {
-    const $ = el => document.querySelector(el)
     let name = e.target.text
     let selected = this.state.searchResults.find(item => item.title == name)
 
@@ -87,18 +89,14 @@ class CreateListItem extends React.Component {
   }
 
   resetInputs = () => {
-    const $ = el => document.querySelector(el)
     $('.create-name input').value = ''
     $('.create-link input').value = ''
     $('.create-link > div').style.opacity = 1
     $('.create-description input').value = ''
-    $('.create-image').setAttribute('style', '');
+    $('.create-image').setAttribute('style', '')
   }
 
   handleAddClick = () => {
-    // Helper function
-    const $ = el => document.querySelector(el)
-
     let {name, description, link, img, text} = this.state
     // if name is empty, tell the user
     if (link || text) {
@@ -139,13 +137,8 @@ class CreateListItem extends React.Component {
   }
 
   updateLink = e => {
-    // Helper
-    const $ = el => document.querySelector(el)
-
-
     let data = { url: e.target.value }
     if (!data.url) {
-      // this.resetInputs()
       this.clearSearch(0)
       return
     }
@@ -153,7 +146,9 @@ class CreateListItem extends React.Component {
     // hide placeholder text
     $('.create-link > div').style.opacity = 0
 
+    // Search on Enter
     if (e.key != 'Enter') return
+
     // Check for the regular string
     // Show other input fields
     // Send request via Google search API
@@ -161,7 +156,6 @@ class CreateListItem extends React.Component {
       let name = data.url
 
       this.googleName(name)
-      // this.duckduckName(name)
       .then((res) => {
         let items = this.state.searchResults.map(item => item.title)
         return this.setState({text: true, link: false, titles: items})
@@ -202,16 +196,6 @@ class CreateListItem extends React.Component {
                      img: image? image[0]._value : '',
                    })
     }).catch(err => console.warn(err))
-  }
-
-  duckduckName = name => {
-    let q = name
-    let url = `http://api.duckduckgo.com/?q=${q}&format=json&pretty=1`
-
-    return fetch(url)
-            .then(res => res.json())
-            .then(data => this.setState({searchResults: data.RelatedTopics}))
-            .catch(console.warn)
   }
 
   googleName = name => {
