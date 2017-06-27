@@ -28,16 +28,16 @@ ActiveRecord::Schema.define(version: 20170627010841) do
 
   create_table "lists", force: :cascade do |t|
     t.string "name", null: false
-    t.string "kind"
-    t.bigint "user_id"
+    t.string "type"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "password_digest", null: false
+    t.string "email"
+    t.string "password_digest"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
