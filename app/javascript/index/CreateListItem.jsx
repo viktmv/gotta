@@ -146,39 +146,39 @@ class CreateListItem extends React.Component {
     // hide placeholder text
     $('.create-link > div').style.opacity = 0
 
-    // Search on Enter
+    // Search only on Enter
     if (e.key != 'Enter') return
 
-    // Check for the regular string
+    // -> If it's a regular query string:
     // Show other input fields
     // Send request via Google search API
     if (!data.url.startsWith('http')) {
       let name = data.url
-
-      this.googleName(name)
-      .then((res) => {
-        let items = this.state.searchResults.map(item => item.title)
-        return this.setState({text: true, link: false, titles: items})
-      }).catch(console.warn)
+      // Google data and get search results
+      return this.googleName(name)
+              .then(res => {
+                let items = this.state.searchResults.map(item => item.title)
+                this.setState({text: true, link: false, titles: items})
+              }).catch(console.warn)
     }
 
+    // -> If it is a direct link:
     this.setState({link: true})
-
     // Request options
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json'})
     let init = {
-                 method: 'POST',
-                 headers: headers,
-                 body: JSON.stringify(data)
-               }
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(data)
+    }
     // Perform the request
     fetch('/connect', init)
     .then(response => response.json())
     .then(res => {
-
       let {title, site_name, description, url, image} = res
 
+      // Set values if exist
       if (title) {
         $('.create-name input').value = title[0]._value
         $('.create-name > div').style.opacity = 0
@@ -188,13 +188,14 @@ class CreateListItem extends React.Component {
         $('.create-description > div').style.opacity = 0
       }
       if (image)
-        $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
+      $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
-      this.setState({name: title ? title[0]._value : '',
-                     link: url ? url[0]._value : '',
-                     description: description? description[0]._value : '',
-                     img: image? image[0]._value : '',
-                   })
+      this.setState({
+        name: title ? title[0]._value : '',
+        link: url ? url[0]._value : '',
+        description: description? description[0]._value : '',
+        img: image? image[0]._value : '',
+      })
     }).catch(err => console.warn(err))
   }
 
