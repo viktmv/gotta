@@ -4,7 +4,6 @@ import TextField from 'material-ui/TextField'
 import Dialog from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 class List extends React.Component {
   constructor(props) {
