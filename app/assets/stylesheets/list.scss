@@ -38,6 +38,8 @@
   // }
 
   .list-item-name {
+    @extend %titleFont;
+    color: #502279;
     font-size: 1em;
     width: 100%;
     display: inline-block;
@@ -46,7 +48,8 @@
 
   .list-item-description {
     font-size: 0.8em;
-    line-height: 1.1em;
+    color: #27A796;
+    line-height: 1.3em;
     width: 100%;
     display: inline-block;
   }

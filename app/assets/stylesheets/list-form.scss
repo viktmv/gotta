@@ -8,20 +8,21 @@
   padding: 25px 0;
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   // border-bottom: solid 1px $primaryColor;
   }
 
   .list-form-image-container {
-    width: 20%;
-    margin-right: 15px;
+    width: 15%;
+    margin-right: 10px;
   }
 
   .list-form-text-field-container {
-    width: 80%;
+    width: 72%;
   }
 
   .list-form-add-list-item-container {
-    width: 10%;
+    // width: 10%;
   }
 
   .add-list-item-button {
