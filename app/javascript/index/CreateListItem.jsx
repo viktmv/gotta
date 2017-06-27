@@ -6,12 +6,12 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 
 //Style for round Material UI buttons
-const style = {
-  marginLeft: 10,
-  verticalAlign: 30,
-  cssFloat: "right",
-  marginRight: 30,
-};
+// const style = {
+//   marginLeft: 10,
+//   verticalAlign: 30,
+//   cssFloat: "right",
+//   marginRight: 30,
+// };
 
 class CreateListItem extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ class CreateListItem extends React.Component {
          onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
          onChange={this.updateLink.bind(this)} />
         {textFields}
-        <FloatingActionButton mini={true} className="add-list-item" style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+        <FloatingActionButton mini={true} className="add-list-item" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
     )
   }

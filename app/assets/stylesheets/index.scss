@@ -187,6 +187,25 @@ html {
         width: 100%;
         padding: 15px 0;
         border-bottom: solid 1px grey;
+
+        .add-list-item {
+          width: 33px;
+          height: 33px;
+
+           button {
+           width: 35px !important;
+           height: 35px !important;
+           background-color: $primaryColor !important;
+
+           svg {
+             height: 35px !important;
+             line-height: 35px !important;
+           }
+          }
+
+        }
+
+
       }
 
       .list-item, {
@@ -241,31 +260,11 @@ html {
 
         }
 
-        .add-list-item {
-          width: 33px;
-          height: 33px;
 
-           button {
-           width: 35px !important;
-           height: 35px !important;
-           background-color: $primaryColor !important;
-
-           svg {
-             height: 35px !important;
-             line-height: 35px !important;
-           }
-          }
-
-        }
 
         span.list-icon {
           color: $tertiaryColor;
         }
-
-
-
-
-
 
 
       }
