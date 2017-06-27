@@ -5,7 +5,7 @@ class ListItem extends React.Component {
   render() {
     return (<div className="list-item" key={this.props.data.itemKey}>
 
-              <div className="item-image" style={{backgroundImage: `url(${this.props.data.img})`, width: '72px', height: '72px'}}></div>
+              <div className="published-list-item-image" style={{backgroundImage: `url(${this.props.data.img})`, width: '72px', height: '72px'}}></div>
 
               <div className="published-list-text-container">
                 <h3 className="published-list-item-title">{this.props.data.name}</h3>

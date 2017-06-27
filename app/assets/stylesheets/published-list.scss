@@ -22,6 +22,24 @@ a:hover + .box,.box:hover{
   width: 100%;
 }
 
+.published-list-item-image {
+  border-radius: 50%;
+  vertical-align: middle;
+  background-position: center;
+  background-size: cover;
+  margin-right: 15px;
+  width: 20%;
+}
+
+.published-list-text-container {
+  width: 80%
+}
+
+h3.published-list-item-title {
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
 .published-list-name {
   width: 70%;
 }
