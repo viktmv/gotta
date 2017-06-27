@@ -22,7 +22,7 @@ class SessionController < ApplicationController
     auth_token = AuthToken.encode({ user_id: user.id })
     {
       auth_token: auth_token,
-      user: { id: user.id, email: user.email, auth_token: auth_token, name: user.name} # return whatever user info you need
+      user: { id: user.id, email: user.email, auth_token: auth_token, name: user.name, theme: user.theme} # return whatever user info you need
     }
   end
 

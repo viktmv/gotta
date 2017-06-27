@@ -9,6 +9,7 @@ class Auth {
     localStorage.setItem('email', user.email)
     localStorage.setItem('name', user.name)
     localStorage.setItem('id', user.id)
+    localStorage.setItem('theme', user.theme)
   }
 
   /**
@@ -38,7 +39,8 @@ class Auth {
     let user = {}
     user.name = localStorage.getItem('name')
     user.email = localStorage.getItem('email')
-    user.auth_token = localStorage.getItem('token')
+    user.auth_token = localStorage.getItem('auth_token')
+    user.theme = localStorage.getItem('theme')
     user.id = localStorage.getItem('id')
 
     return user
