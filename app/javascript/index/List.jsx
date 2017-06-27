@@ -8,8 +8,8 @@ class List extends React.Component {
   }
 
   render() {
-    return (<div>
-              <h2>{this.props.name}</h2>
+    return (<div className="new-list-name-container">
+              <h2 className="new-list-name">{this.props.name}</h2>
               {this.props.listItems.map((item, i) => <ListItem key={i}
                                                               data={item}
                                                               handleRemoveClick={this.handleRemoveClick}/>)}
