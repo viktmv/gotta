@@ -21,12 +21,12 @@ class CreateListItem extends React.Component {
       description: '',
       link: '',
       img: '',
+      searchResults: [],
+      titles: [],
+      errorText: '',
       // Flags:
       link: false,
-      text: false,
-      errorText: '',
-      searchResults: [],
-      titles: []
+      text: false
     }
   }
 
@@ -49,7 +49,7 @@ class CreateListItem extends React.Component {
          errorText={this.state.errorText}
          type="link"
          onFocus={this.resetErrorText} //removes error text when user clicks in text field
-         onChange={this.updateLink} />
+         onKeyUp={this.updateLink} />
        <div onBlur={() => this.clearSearch(0)} className="autocomplete-field"><ul>{this.state.titles.map(t => <li><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
@@ -58,20 +58,14 @@ class CreateListItem extends React.Component {
   }
 
   populateInputs = e => {
-
-    console.log('hey')
     const $ = el => document.querySelector(el)
     let name = e.target.text
-
     let selected = this.state.searchResults.find(item => item.title == name)
-    console.log(selected)
 
     $('.create-name input').value = selected.title
     $('.create-name > div').style.opacity = 0
-
     $('.create-description input').value = selected.snippet
     $('.create-description > div').style.opacity = 0
-
 
     let image = selected.pagemap.metatags[0]['og:image']
 
@@ -143,34 +137,33 @@ class CreateListItem extends React.Component {
     this.setState({errorText: ''})
   }
 
-  updateLink = (e) => {
+  updateLink = e => {
     // Helper
     const $ = el => document.querySelector(el)
 
     // hide placeholder text
     $('.create-link > div').style.opacity = 0
 
+    if (e.key != 'Enter') return
+
     let data = { url: e.target.value }
     if (!data.url) {
-      this.clearSearch()
+      this.clearSearch(0)
       this.resetInputs()
       return
     }
 
-    // Check for the regular string TODO: Add some logic to handle not-link cases
+    // Check for the regular string
     // Show other input fields
+    // Send request via Google search API
     if (!data.url.startsWith('http')) {
       let name = data.url
 
       this.googleName(name)
       // this.duckduckName(name)
       .then((res) => {
-        console.log(res)
         let items = this.state.searchResults.map(item => item.title)
-        this.setState({titles: items})
-        // document.querySelector('.autocomplete-field ul').innerHTML =
-          // items.reduce((total, title) => total += `<li>${title}</li>`, '')
-        return this.setState({text: true, link: false})
+        return this.setState({text: true, link: false, titles: items})
       }).catch(console.warn)
     }
 
@@ -202,8 +195,6 @@ class CreateListItem extends React.Component {
       if (image)
         $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
 
-
-
       this.setState({name: title ? title[0]._value : '',
                      link: url ? url[0]._value : '',
                      description: description? description[0]._value : '',
@@ -225,7 +216,6 @@ class CreateListItem extends React.Component {
 
   googleName = name => {
     let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
-    // let key2 = 'AIzaSyCoYF61Hi1HrfEwjHUEiGIz1kkDUsZzafI'
 
     let cx = '003795560815676233470:zx_lx55noqy';
     let query = name
