@@ -1,0 +1,27 @@
+@import "modules/colours";
+@import "partials/typography";
+
+
+
+.drawer-wrapper {
+  background-color: $secondaryColor;
+  padding: 20px 15px;
+  height: 100%;
+}
+
+.drawer-list-title {
+  margin-bottom: 7px;
+  padding-left: 16px;
+}
+
+.my-list-item {
+  color: $primaryColor;
+  padding: 0;
+  margin: 10px 0;
+}
+
+span.drawer-icon {
+  color: $primaryColor;
+  float: right;
+  margin: 0 5px;
+}
