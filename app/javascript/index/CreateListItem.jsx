@@ -48,10 +48,9 @@ class CreateListItem extends React.Component {
          className="create-link"
          errorText={this.state.errorText}
          type="link"
-         onBlur={this.clearSearch}
          onFocus={this.resetErrorText} //removes error text when user clicks in text field
          onChange={this.updateLink} />
-       <div className="autocomplete-field"><ul>{this.state.titles.map(t => <li><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
+       <div onBlur={() => this.clearSearch(0)} className="autocomplete-field"><ul>{this.state.titles.map(t => <li><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
         {textFields}
         <FloatingActionButton mini={true} style={style} onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
       </div>
@@ -73,8 +72,11 @@ class CreateListItem extends React.Component {
     $('.create-description > div').style.opacity = 0
 
     $('.create-image').setAttribute('style', `background-image: url(${selected.Icon.URL}); width: 72px; height: 72px;`)
-    // this.setState({})
-
+    this.setState({name: selected.Text,
+                   link: url[0]._value,
+                   description: description[0]._value,
+                   img: image[0]._value})
+    this.clearSearch()
   }
 
   clearSearch = (flag = 1) => {
@@ -82,6 +84,15 @@ class CreateListItem extends React.Component {
       this.setState({link: false, text: false, titles: [], errorText: ''})
     }
     else this.setState({titles: [], errorText: ''})
+  }
+
+  resetInputs = () => {
+    const $ = el => document.querySelector(el)
+    $('.create-name input').value = ''
+    $('.create-link input').value = ''
+    $('.create-link > div').style.opacity = 1
+    $('.create-description input').value = ''
+    $('.create-image').setAttribute('style', '');
   }
 
   handleAddClick = () => {
@@ -106,11 +117,13 @@ class CreateListItem extends React.Component {
     this.props.addItem({name, description, link, itemKey: key, img})
 
     // Reset input fields
-    $('.create-name input').value = ''
-    $('.create-link input').value = ''
-    $('.create-link > div').style.opacity = 1
-    $('.create-description input').value = ''
-    $('.create-image').setAttribute('style', '');
+    // $('.create-name input').value = ''
+    // $('.create-link input').value = ''
+    // $('.create-link > div').style.opacity = 1
+    // $('.create-description input').value = ''
+    // $('.create-image').setAttribute('style', '');
+
+    this.resetInputs()
 
     this.setState({
       name: '',
@@ -141,7 +154,11 @@ class CreateListItem extends React.Component {
     $('.create-link > div').style.opacity = 0
 
     let data = { url: e.target.value }
-    if (!data.url) return  this.clearSearch()
+    if (!data.url) {
+      this.clearSearch()
+      this.resetInputs()
+      return
+    }
 
     // Check for the regular string TODO: Add some logic to handle not-link cases
     // Show other input fields
@@ -155,8 +172,8 @@ class CreateListItem extends React.Component {
         this.setState({titles: items})
         // document.querySelector('.autocomplete-field ul').innerHTML =
         //   items.reduce((total, title) => total += `<li>${title}</li>`, '')
+        return this.setState({text: true, link: false})
       }).catch(console.warn)
-      return this.setState({text: true, link: false})
     }
 
     this.setState({link: true})
