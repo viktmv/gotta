@@ -110,6 +110,7 @@ html {
     }
   }
 
+
   body {
     margin: 0;
     padding: 0;
@@ -140,24 +141,35 @@ html {
       max-width: 600px;
       padding-top: 30px;
 
+      .list-item {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .image-container {
+        margin-right: 4px;
+      }
+
       .item-image {
-        margin-right: 15px;
-        float: left;
         border-radius: 50px;
         vertical-align: middle;
         background-position: center;
         background-size: cover;
       }
 
-      .list-item-description {
-        font-size: 0.8em;
-        line-height: 0.5em;
-        width: 100px;
+      .list-body-container {
+        width: 80%;
       }
 
       .list-item-name {
         font-size: 1em;
         width: 100px;
+      }
+
+      .list-item-description {
+        font-size: 0.8em;
+        line-height: 0.5em;
+        width: 100%;
       }
 
       .list-form {
@@ -173,17 +185,16 @@ html {
 
         .item-image {
           margin-right: 15px;
-          float: left;
+          width: 10%;
           border-radius: 50px;
           vertical-align: middle;
           background-position: center;
           background-size: cover;
-          display: inline-block;
         }
 
         .list-item-name {
           font-size: 1em;
-          width: 60%;
+          width: 100%;
           display: inline-block;
           margin-bottom: 5px;
         }
@@ -191,9 +202,36 @@ html {
         .list-item-description {
           font-size: 0.8em;
           line-height: 1.1em;
-          width: 60%;
+          width: 100%;
           display: inline-block;
         }
+
+        .list-button-container {
+          margin-left: 10px;
+          width: 10%
+        }
+
+        .rm-list-item {
+          width: 33px;
+          height: 33px;
+
+           button {
+           width: 35px !important;
+           height: 35px !important;
+           background-color: $primaryColor !important;
+
+           svg {
+             height: 35px !important;
+             line-height: 35px !important;
+           }
+          }
+
+        }
+
+        span.list-icon {
+          color: $tertiaryColor;
+        }
+
 
       }
 
@@ -219,20 +257,18 @@ html {
         }
 
         input#start-new-list {
-          font-family: 'Fira Sans', sans-serif;
-          font-weight: 300;
+          @extend %titleFont;
           display: block;
-          margin: 0 auto;
+          margin: 0 auto 25px auto;
           width: 150px;
           height: 150px;
           border-radius: 100px;
           border: none;
-          background-color: rgba(255, 32, 110, 1);
-          color: white;
+          background-color: $primaryColor;
+          color: $tertiaryColor;
           font-size: 1em;
           text-align: center;
-          box-shadow: 10px 10px 0 rgba(65, 234, 212, 1);
-
+          box-shadow: 10px 10px 0 $secondaryColor;
 
         }
       }
