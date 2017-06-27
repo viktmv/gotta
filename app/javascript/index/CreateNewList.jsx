@@ -43,18 +43,20 @@ class CreateNewList extends React.Component {
 
     let listStructure = ''
     if (this.state.clicked || listExists) {
-      listStructure = <div>
+      listStructure = <div className="list-structure">
                         <List name={list.name}
                               rmItem={this.props.rmItem}
                               listItems={this.props.listItems}>
                         </List>
                         <CreateListItem addItem={this.props.addItem} />
-                        <RaisedButton className="publish-list-btn"
-                                      label="Publish Your List"
-                                      primary={true}
-                                      onClick={this.handleCreate}
-                                      onTouchTap={this.handleOpen}>
-                        </RaisedButton>
+                        <div className="publish-list-btn-container">
+                          <RaisedButton className="publish-list-btn"
+                                        label="Publish Your List"
+                                        primary={true}
+                                        onClick={this.handleCreate}
+                                        onTouchTap={this.handleOpen}>
+                          </RaisedButton>
+                        </div>
                       </div>
     }
 

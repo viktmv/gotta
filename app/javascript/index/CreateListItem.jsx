@@ -69,7 +69,7 @@ class CreateListItem extends React.Component {
         </div>
 
         <div className="list-form-add-list-item-container">
-          <FloatingActionButton mini={true} className="add-list-item" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+          <FloatingActionButton mini={true} className="add-list-item-button" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
         </div>
 
       </div>
