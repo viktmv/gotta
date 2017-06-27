@@ -150,7 +150,11 @@ html {
     .autocomplete-field ul {
       padding-left: 20px;
     }
-    
+
+    .autocomplete-field a {
+      cursor: pointer
+    }
+
     .list-form {
       position: relative;
     }
