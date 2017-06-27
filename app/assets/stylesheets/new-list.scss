@@ -1,0 +1,43 @@
+
+@import "modules/colours";
+@import "partials/typography";
+
+
+#new-list {
+
+        // .create-image {
+        //   width: 0;
+        //   height: 0;
+        //   vertical-align: middle;
+        //   background-position: center;
+        //   background-size: cover;
+        // }
+
+        .create-link,
+        .create-name,
+        .create-description  {
+          outline: none;
+          display: inline-block;
+          padding: 5px;
+          border-radius: 5px;
+          width: 80% !important;
+          height: 30px;
+        }
+
+        // Styling for fancy button
+        input#start-new-list {
+          @extend %titleFont;
+          display: block;
+          margin: 0 auto 25px auto;
+          width: 150px;
+          height: 150px;
+          border-radius: 100px;
+          border: none;
+          background-color: $primaryColor;
+          color: $tertiaryColor;
+          font-size: 1em;
+          text-align: center;
+          box-shadow: 10px 10px 0 $secondaryColor;
+
+        }
+      }

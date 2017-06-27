@@ -33,23 +33,45 @@ class CreateListItem extends React.Component {
     let textFields
     if (this.state.link || this.state.text) {
       textFields = <div>
-                      <TextField hintText="list-item name" className="create-name" type="name" onChange={this.updateName} />
-                      <TextField hintText="list-item description" className="create-description" type="description" onChange={this.updateDescription} />
+
+                      <TextField
+                      hintText="list-item name"
+                      className="create-name"
+                      type="name"
+                      onChange={this.updateName} />
+
+                      <TextField
+                      hintText="list-item description"
+                      className="create-description"
+                      type="description"
+                      onChange={this.updateDescription} />
+
                     </div>
     }
 
     return (
       <div className="list-form">
-        <div className="create-image item-image"></div>
-        <TextField
-         hintText="Type or paste link here"
-         className="create-link"
-         errorText={this.state.errorText}
-         type="link"
-         onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
-         onChange={this.updateLink.bind(this)} />
-        {textFields}
-        <FloatingActionButton mini={true} className="add-list-item" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+
+        <div className="list-form-image-container">
+          <div className="create-image item-image"></div>
+        </div>
+
+        <div className="list-form-text-field-container">
+          <TextField
+           hintText="Type or paste link here"
+           className="create-link"
+           errorText={this.state.errorText}
+           type="link"
+           onFocus={this.resetErrorText.bind(this)} //removes error text when user clicks in text field
+           onChange={this.updateLink.bind(this)} />
+
+         {textFields}
+        </div>
+
+        <div className="list-form-add-list-item-container">
+          <FloatingActionButton mini={true} className="add-list-item" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+        </div>
+
       </div>
     )
   }

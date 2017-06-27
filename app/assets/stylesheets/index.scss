@@ -81,47 +81,6 @@ html {
     color: $secondaryColor;
   }
 
-     #brand-logo {
-      font-family: "Quicksand", sans-serif;
-      font-size: 2em;
-      color: $primaryColor;
-    }
-
-    header.main-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .login-register-controls {
-      background-color: none;
-    }
-
-    nav{
-      background-color: rgba(65, 234, 212, 1);
-      border-radius: 0 0 0 25px;
-      height: 55px;
-
-    .nav-button {
-      background-color: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-
-    ul {
-      list-style: none;
-      margin-right: 35px;
-      display: flex;
-      flex-direction: row;
-
-        li {
-          padding: 0 7px;
-        }
-      }
-    }
-  }
-
-
   body {
     margin: 0;
     padding: 0;
@@ -129,182 +88,29 @@ html {
     font-weight: 300;
     color: #303030;
 
+    .wrapper {
+      margin: 0 auto;
+      width: 50%;
+      max-width: 600px;
+      padding-top: 30px;
+    }
+
     .select-bg-colour {
-      margin: 20px 0;
+      margin: 5px 10px;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       position: fixed;
       bottom: 0;
     }
 
     .colour-controls {
-      margin: 0 10px;
+      margin: 5px 0;
       width: 35px;
       height: 35px;
       border: 5px solid #fff;
       border-radius: 50%;
       cursor: pointer;
-    }
-
-    .wrapper {
-      margin: 0 auto;
-      width: 50%;
-      max-width: 600px;
-      padding-top: 30px;
-
-      .list-item {
-        display: flex;
-        flex-direction: row;
-      }
-
-      .image-container {
-        margin-right: 4px;
-      }
-
-      .item-image {
-        border-radius: 50px;
-        vertical-align: middle;
-        background-position: center;
-        background-size: cover;
-      }
-
-      .list-body-container {
-        width: 80%;
-      }
-
-      .list-item-name {
-        font-size: 1em;
-        width: 100px;
-      }
-
-      .list-item-description {
-        font-size: 0.8em;
-        line-height: 0.5em;
-        width: 100%;
-      }
-
-      .list-form {
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: solid 1px grey;
-
-        .add-list-item {
-          width: 33px;
-          height: 33px;
-
-           button {
-           width: 35px !important;
-           height: 35px !important;
-           background-color: $primaryColor !important;
-
-           svg {
-             height: 35px !important;
-             line-height: 35px !important;
-           }
-          }
-
-        }
-
-
-      }
-
-      .list-item, {
-        width: 100%;
-        padding: 15px 0;
-        border-bottom: solid 1px grey;
-
-        .item-image {
-          margin-right: 15px;
-          width: 10%;
-          border-radius: 50px;
-          vertical-align: middle;
-          background-position: center;
-          background-size: cover;
-        }
-
-        .list-item-name {
-          font-size: 1em;
-          width: 100%;
-          display: inline-block;
-          margin-bottom: 5px;
-        }
-
-        .list-item-description {
-          font-size: 0.8em;
-          line-height: 1.1em;
-          width: 100%;
-          display: inline-block;
-        }
-
-        .list-button-container {
-          margin-left: 10px;
-          width: 10%;
-          margin-top: auto;
-          margin-bottom: auto;
-        }
-
-        .rm-list-item {
-          width: 33px;
-          height: 33px;
-
-           button {
-           width: 35px !important;
-           height: 35px !important;
-           background-color: $primaryColor !important;
-
-           svg {
-             height: 35px !important;
-             line-height: 35px !important;
-           }
-          }
-
-        }
-
-
-
-        span.list-icon {
-          color: $tertiaryColor;
-        }
-
-
-      }
-      #new-list {
-
-        .create-image {
-          width: 0;
-          height: 0;
-          vertical-align: middle;
-          background-position: center;
-          background-size: cover;
-        }
-
-        .create-link,
-        .create-name,
-        .create-description  {
-          outline: none;
-          display: inline-block;
-          padding: 5px;
-          border-radius: 5px;
-          width: 200px;
-          height: 30px;
-        }
-
-        input#start-new-list {
-          @extend %titleFont;
-          display: block;
-          margin: 0 auto 25px auto;
-          width: 150px;
-          height: 150px;
-          border-radius: 100px;
-          border: none;
-          background-color: $primaryColor;
-          color: $tertiaryColor;
-          font-size: 1em;
-          text-align: center;
-          box-shadow: 10px 10px 0 $secondaryColor;
-
-        }
-      }
     }
   }
 }

@@ -1,0 +1,54 @@
+// Place all the styles related to the List controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "modules/colours";
+@import "partials/typography";
+
+.box{
+    display: none;
+    width: 100%;
+}
+
+a:hover + .box,.box:hover{
+    display: block;
+    position: relative;
+    z-index: 100;
+}
+
+.published-list-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.published-list-name {
+  width: 70%;
+}
+
+.social-buttons-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.list-share-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $primaryColor;
+  margin: auto 5px;
+  text-align: center;
+  line-height: 47px;
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+span.published-list-icon {
+  color: $tertiaryColor;
+}
+
+
+
+
+
+
