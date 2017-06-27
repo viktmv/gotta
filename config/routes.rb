@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post '/connect' => 'list#connect'
 
   post '/lists/:id/sms' => 'list#text_message'
+  post '/:id/theme' => 'users#set_theme'
 
   get '/lists/new' => 'home#new'
   get '/lists/:id' => 'list#show'
