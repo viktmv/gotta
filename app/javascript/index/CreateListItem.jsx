@@ -140,8 +140,6 @@ class CreateListItem extends React.Component {
     // Helper
     const $ = el => document.querySelector(el)
 
-    // hide placeholder text
-    $('.create-link > div').style.opacity = 0
 
     let data = { url: e.target.value }
     if (!data.url) {
@@ -149,6 +147,9 @@ class CreateListItem extends React.Component {
       this.clearSearch(0)
       return
     }
+
+    // hide placeholder text
+    $('.create-link > div').style.opacity = 0
 
     if (e.key != 'Enter') return
     // Check for the regular string
