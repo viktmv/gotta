@@ -38,18 +38,23 @@
           font-size: 1em;
           text-align: center;
           box-shadow: 10px 10px 0 $secondaryColor;
+          cursor: pointer;
         }
 
         .publish-list-btn-container {
           width: 170px;
+          // height: 25px;
           margin: 20px auto;
         }
 
          div .publish-list-btn {
           width: 170px !important;
+          height: 40px !important;
+
 
           button {
             background-color: $secondaryColor !important;
+            height: 40px !important;
           }
 
           span {

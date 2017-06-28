@@ -45,8 +45,10 @@ class CreateNewList extends React.Component {
       input = `<input type=${this.state.btn.type} id="start-new-list" placeholder="${this.state.btn.placeholder}" />`
     }
 
+    let introText
     let listStructure = ''
     if (this.state.clicked || listExists) {
+      introText = ''
       listStructure = <div className="list-structure">
                         <List name={list.name}
                               rmItem={this.props.rmItem}
@@ -62,13 +64,6 @@ class CreateNewList extends React.Component {
                           </RaisedButton>
                         </div>
                       </div>
-    }
-
-    let introText = ''
-    if (this.state.clicked) {
-      introText = ""
-    } else if (listExists) {
-      introText = ""
     } else {
       introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
     }

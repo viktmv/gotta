@@ -50,7 +50,11 @@ class List extends React.Component {
               fjs.parentNode.insertBefore(js, fjs);
             }
 
+
     // Twitter share button
+
+    let tweet = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
+
     let twttr = function() {
                  window.twttr = (function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0],
@@ -104,7 +108,7 @@ class List extends React.Component {
                   </div>
 
                   <div className="list-share-button">
-                      <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20cool%20stuff">
+                      <a href={`https://twitter.com/intent/tweet?text=${tweet}`}>
                       <span className="published-list-icon typcn typcn-social-twitter"></span></a>
                   </div>
 
