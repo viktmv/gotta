@@ -73,6 +73,10 @@ html {
     margin: 0;
   }
 
+  li {
+    list-style: none;
+  }
+
   h3 {
     @extend %subtitleFont;
     color: $secondaryColor;
@@ -99,6 +103,26 @@ html {
       justify-content: center;
       position: fixed;
       bottom: 0;
+    }
+
+    .autocomplete-field {
+      position: absolute;
+      background: #fff;
+      z-index: 99;
+      width: 400px;
+      border-radius: 25px;
+    }
+
+    .autocomplete-field ul {
+      padding-left: 20px;
+    }
+
+    .autocomplete-field a {
+      cursor: pointer
+    }
+
+    .list-form {
+      position: relative;
     }
 
     .colour-controls {
