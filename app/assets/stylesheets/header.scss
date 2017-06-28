@@ -23,6 +23,8 @@
     border-radius: 0 0 0 25px;
     height: 55px;
     @extend %subtitleFont;
+    box-shadow: -1px 1px 2px lightpink;
+    // border: 1px solid $secondaryColor;
 
 
   .nav-button {
@@ -34,12 +36,12 @@
 
   ul {
     list-style: none;
-    margin-right: 35px;
+    margin-right: 5px;
     display: flex;
     flex-direction: row;
 
       li {
-        padding: 0 7px;
+        padding-right: 35px;
       }
     }
   }
