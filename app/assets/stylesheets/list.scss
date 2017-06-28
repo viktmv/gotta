@@ -26,7 +26,7 @@
   justify-content: space-around;
   width: 100%;
   padding: 25px 0;
-  border-bottom: solid 1px $primaryColor;
+  border-bottom: dotted 1px $primaryColor;
 
   // .item-image {
   //   margin-right: 15px;
@@ -38,17 +38,18 @@
   // }
 
   .list-item-name {
-    @extend %titleFont;
+    @extend %subsubtitleFont;
     color: #502279;
-    font-size: 1em;
+    font-size: 1.1em;
     width: 100%;
     display: inline-block;
     margin-bottom: 5px;
   }
 
   .list-item-description {
-    font-size: 0.8em;
-    color: #27A796;
+    @extend %bodyFont;
+    font-size: 0.9em;
+    color: $quadColor;
     line-height: 1.3em;
     width: 100%;
     display: inline-block;

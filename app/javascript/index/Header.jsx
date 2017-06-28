@@ -19,7 +19,7 @@ class Header extends React.Component {
 
     return (
       <header className="main-header">
-        <div id="brand-logo"><h1>GOTTA</h1></div>
+        <div id="brand-logo"><h1>gotta</h1></div>
           <nav className="login-register-controls">
               <ul className="navItems">
                 <li><LoginDialog {...this.props}>Login</LoginDialog></li>

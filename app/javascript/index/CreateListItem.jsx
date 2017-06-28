@@ -5,13 +5,6 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import TextField from 'material-ui/TextField';
 
-//Style for round Material UI buttons
-// const style = {
-//   marginLeft: 10,
-//   verticalAlign: 30,
-//   cssFloat: "right",
-//   marginRight: 30,
-// };
 
 // Helper
 const $ = el => document.querySelector(el)
