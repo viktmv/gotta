@@ -8,6 +8,7 @@ import ConfirmationPopUp from '../index/ConfirmationPopUp'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
+import Snackbar from 'material-ui/Snackbar'
 
 class CreateNewList extends React.Component {
   constructor(props) {
@@ -20,7 +21,9 @@ class CreateNewList extends React.Component {
       },
       clicked: false,
       published: false,
-      confirmationPopupOpen: false
+      confirmationPopupOpen: false,
+      snackOpen: false,
+      publishError: ''
     }
   }
 
@@ -69,6 +72,12 @@ class CreateNewList extends React.Component {
         <span onClick={this.handleClick} onKeyUp={this.handleKeyInput} dangerouslySetInnerHTML={{__html: input}} />
         {listStructure}
         {popup}
+        <Snackbar
+          open={this.state.snackOpen}
+          message={this.state.publishError}
+          autoHideDuration={4000}
+          onRequestClose={this.handleSnackClose}
+        />
       </div>
     )
   }
@@ -87,6 +96,12 @@ class CreateNewList extends React.Component {
     this.setState({confirmationPopupOpen: false})
   }
 
+  handleSnackClose = () => {
+    this.setState({
+      snackOpen: false
+    })
+  }
+
   //Fancy button - on click the type turns from submit to text
   handleClick = e => {
     let {list} = this.props
@@ -103,7 +118,8 @@ class CreateNewList extends React.Component {
     let {list} = this.props
     let id = Object.keys(list).length ? list.id : ''
 
-    if (!this.props.listItems.length) return console.log('list is too short')
+    if (!this.props.listItems.length)
+      return this.setState({snackOpen: true, publishError: 'Please add at least one item to the list!'})
 
     if (id) {
       let meta = document.querySelector('meta[name="csrf-token"]').content
@@ -126,6 +142,9 @@ class CreateNewList extends React.Component {
       user: this.props.user
     }
 
+    // Check it name exists
+    if (!newList.name)
+      return this.setState({snackOpen: true, publishError: 'Please enter the list name!'})
     // Options for request
     let options = {method: 'POST', headers, body: JSON.stringify(newList)}
 
