@@ -36,6 +36,7 @@ class CreateNewList extends React.Component {
     let input
     if (this.state.btn.type == 'submit' && !listExists) {
       input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
+
     }
     else if (listExists) {
       input = `<input type="text" id="start-new-list" placeholder="Edit the name here" value="" />`
@@ -63,6 +64,13 @@ class CreateNewList extends React.Component {
                       </div>
     }
 
+    let introText = ''
+    if (!this.state.clicked) {
+        introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
+    } else {
+      introText = ""
+    }
+
     let popup = this.state.published
               ? <ConfirmationPopUp list={this.state.listID}
                 confirmationPopupOpen={this.state.confirmationPopupOpen}
@@ -73,6 +81,7 @@ class CreateNewList extends React.Component {
       <div id="new-list">
         <span onClick={this.handleClick} onKeyUp={this.handleKeyInput} dangerouslySetInnerHTML={{__html: input}} />
         {listStructure}
+        {introText}
         {popup}
         <Snackbar
           open={this.state.snackOpen}
@@ -112,6 +121,10 @@ class CreateNewList extends React.Component {
   }
 
   publishList = list => {
+    this.setState({published: true, listID: list.id})
+  }
+
+ publishList = list => {
     this.setState({published: true, listID: list.id})
   }
 
