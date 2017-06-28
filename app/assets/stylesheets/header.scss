@@ -19,14 +19,16 @@
   }
 
   nav{
-    background-color: rgba(65, 234, 212, 1);
+    background-color: $secondaryColor;
     border-radius: 0 0 0 25px;
     height: 55px;
+    @extend %subtitleFont;
+
 
   .nav-button {
     background-color: none;
     border: none;
-    color: white;
+    color: $primaryColor;
     cursor: pointer;
   }
 
