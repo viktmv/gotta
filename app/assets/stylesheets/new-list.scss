@@ -49,11 +49,22 @@
         }
 
         .publish-list-btn-container {
-          width: 32%;
+          width: 170px;
           margin: 20px auto;
         }
 
          div .publish-list-btn {
+          width: 170px !important;
+
+          button {
+            background-color: $secondaryColor !important;
+          }
+
+          span {
+            padding: 0 4px !important;
+            color: $primaryColor !important;
+            @extend %titleFont;
+          }
 
         }
 
