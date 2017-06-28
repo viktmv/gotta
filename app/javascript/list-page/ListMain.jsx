@@ -86,8 +86,8 @@ class List extends React.Component {
     return (<div className="published-list-main">
               <div className="published-list-header">
 
-                <div className="published-list-name">
-                  <h2>{this.props.name}</h2>
+                <div className="published-list-name-container">
+                  <h2 className="published-list-name">{this.props.name}</h2>
                 </div>
 
                 <div className="social-buttons-container">

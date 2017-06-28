@@ -38,10 +38,19 @@ a:hover + .box,.box:hover{
 h3.published-list-item-title {
   margin-bottom: 5px;
   margin-top: 0;
+  color: $cinqColor;
+}
+
+.published-list-item-body {
+  color: $quadColor;
+}
+
+.published-list-name-container {
+  width: 70%;
 }
 
 .published-list-name {
-  width: 70%;
+  font-size: 2em;
 }
 
 .social-buttons-container {
@@ -54,7 +63,7 @@ h3.published-list-item-title {
   height: 50px;
   border-radius: 50%;
   background-color: $primaryColor;
-  margin: auto 5px;
+  margin: auto 3px;
   text-align: center;
   line-height: 47px;
   font-size: 1.5em;
