@@ -65,10 +65,12 @@ class CreateNewList extends React.Component {
     }
 
     let introText = ''
-    if (!this.state.clicked) {
-        introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
-    } else {
+    if (this.state.clicked) {
       introText = ""
+    } else if (listExists) {
+      introText = ""
+    } else {
+      introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
     }
 
     let popup = this.state.published

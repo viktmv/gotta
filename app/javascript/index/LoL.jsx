@@ -68,7 +68,7 @@ class LoL extends React.Component {
                         target="_blank">{list.name}
                       </a>
 
-                      <span onClick={this.handleEditClick}
+                      <span onClick={this.handleDeleteClick}
                       onTouchTap={this.handleDeleteClick}
                       className="drawer-icon typcn typcn-trash"></span>
 
