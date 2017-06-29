@@ -19,25 +19,28 @@
   }
 
   nav{
-    background-color: rgba(65, 234, 212, 1);
+    background-color: $secondaryColor;
     border-radius: 0 0 0 25px;
     height: 55px;
+    width: 250px;
+    @extend %subtitleFont;
+    box-shadow: -1px 1px 2px lightpink;
 
   .nav-button {
     background-color: none;
     border: none;
-    color: white;
+    color: $primaryColor;
     cursor: pointer;
   }
 
   ul {
     list-style: none;
-    margin-right: 35px;
+    margin-right: 5px;
     display: flex;
     flex-direction: row;
 
       li {
-        padding: 0 7px;
+        padding-right: 35px;
       }
     }
   }

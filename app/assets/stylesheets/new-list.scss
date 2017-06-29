@@ -5,14 +5,6 @@
 
 #new-list {
 
-        // .create-image {
-        //   width: 0;
-        //   height: 0;
-        //   vertical-align: middle;
-        //   background-position: center;
-        //   background-size: cover;
-        // }
-
         .new-list-name-container {
           text-align: center;
         }
@@ -22,14 +14,19 @@
           padding-top: 20px;
         }
 
-        .create-link,
-        .create-name,
-        .create-description  {
+        div.create-link,
+        div.create-name,
+        div.create-description  {
           outline: none;
           display: inline-block;
           padding: 5px;
           width: 92% !important;
           height: 38px !important;
+
+            input {
+              color: $cinqColor !important;
+              -webkit-text-fill-color: $cinqColor !important;
+            }
         }
 
         // Styling for fancy button
@@ -46,26 +43,42 @@
           font-size: 1em;
           text-align: center;
           box-shadow: 10px 10px 0 $secondaryColor;
+          cursor: pointer;
         }
 
         .publish-list-btn-container {
           width: 170px;
+          height: 36px;
           margin: 20px auto;
         }
 
-         div .publish-list-btn {
+         div.publish-list-btn {
           width: 170px !important;
+          height: 36px !important;
 
           button {
             background-color: $secondaryColor !important;
+            // height: 36px !important;
+
+            div {
+             // height: 36px !important;
+            }
           }
 
           span {
-            padding: 0 4px !important;
+            // padding: 0 4px !important;
             color: $primaryColor !important;
             @extend %subtitleFont;
           }
+        }
 
+        div.snack-bar {
+
+          div {
+            background-color: $tertiaryColor !important;
+            color: $primaryColor !important;
+            text-align: center;
+          }
         }
 
 }

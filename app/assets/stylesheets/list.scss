@@ -27,15 +27,7 @@
   width: 100%;
   padding: 25px 0;
   border-bottom: dotted 1px $primaryColor;
-
-  // .item-image {
-  //   margin-right: 15px;
-  //   width: 10%;
-  //   border-radius: 50px;
-  //   vertical-align: middle;
-  //   background-position: center;
-  //   background-size: cover;
-  // }
+}
 
   .list-item-name {
     @extend %subtitleFont;
@@ -75,13 +67,9 @@
        line-height: 35px !important;
      }
     }
-
-  }
-
-
+   }
 
   span.list-icon {
     color: $tertiaryColor;
   }
 
-}

@@ -18,6 +18,7 @@
   color: $primaryColor;
   padding: 0;
   margin: 10px 0;
+  @extend %subtitleFont;
 }
 
 span.drawer-icon {
