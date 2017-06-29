@@ -81,6 +81,7 @@ class CreateNewList extends React.Component {
         {introText}
         {popup}
         <Snackbar
+          className="snack-bar"
           open={this.state.snackOpen}
           message={this.state.publishError}
           autoHideDuration={4000}
