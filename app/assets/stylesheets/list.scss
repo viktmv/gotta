@@ -1,7 +1,6 @@
 @import "modules/colours";
 @import "partials/typography";
 
-
 .image-container {
   margin-right: 4px;
 }
@@ -17,7 +16,7 @@
 
 .list-body-container {
   width: 70%;
-  text-align: left
+  text-align: left;
 }
 
 .list-item, {
@@ -68,6 +67,8 @@
      }
     }
    }
+
+
 
   span.list-icon {
     color: $tertiaryColor;
