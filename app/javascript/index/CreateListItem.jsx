@@ -75,20 +75,26 @@ class CreateListItem extends React.Component {
   populateInputs = e => {
     let name = e.target.text
     let selected = this.state.searchResults.find(item => item.title == name)
+    try {
+      $('.create-name input').value = selected.title
+      $('.create-name > div').style.opacity = 0
+      $('.create-description input').value = selected.snippet
+      $('.create-description > div').style.opacity = 0
 
-    $('.create-name input').value = selected.title
-    $('.create-name > div').style.opacity = 0
-    $('.create-description input').value = selected.snippet
-    $('.create-description > div').style.opacity = 0
+      let image = selected.pagemap.metatags[0]['og:image']
 
-    let image = selected.pagemap.metatags[0]['og:image']
-
-    $('.create-image').setAttribute('style', `background-image: url(${image}); width: 72px; height: 72px;`)
-    this.setState({name: selected.title,
-                   link: selected.link || '',
-                   description: selected.snippet || '',
-                   img: image || ''})
-    this.clearSearch()
+      $('.create-image').setAttribute('style', `background-image: url(${image}); width: 72px; height: 72px;`)
+      this.setState({name: selected.title,
+        link: selected.link || '',
+        description: selected.snippet || '',
+        img: image || ''})
+    }
+    catch (err) {
+      console.warn(err)
+    }
+    finally {
+      this.clearSearch()
+    }
   }
 
   clearSearch = (flag = 1) => {
@@ -209,12 +215,11 @@ class CreateListItem extends React.Component {
     }).catch(err => console.warn(err))
   }
 
-  googleName = name => {
+  googleName = query => {
     let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
-
     let cx = '003795560815676233470:zx_lx55noqy';
-    let query = name
-    if (name.length < 1) return
+
+    if (query.length < 1) return
 
     let url = `https://www.googleapis.com/customsearch/v1?key=${key}&cx=${cx}&q=${query}`
     let headers = new Headers({'Access-Control-Allow-Origin': '*'})
