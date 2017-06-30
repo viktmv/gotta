@@ -5,12 +5,7 @@ import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
-/**
- * Dialog with action buttons. The actions are passed in as an array of React objects,
- * in this example [FlatButtons](/#/components/flat-button).
- *
- * You can also close this dialog by clicking outside the dialog, or with the 'Esc' key.
- */
+
 export default class LoginDialog extends React.Component {
   state = {
     open: false,
@@ -102,7 +97,7 @@ export default class LoginDialog extends React.Component {
     if (!inputsCheck.valid) return errMsg.textContent = inputsCheck.error
 
     errMsg.textContent = ''
-    
+
     let form = document.querySelector('.sign-up-form form')
     let meta = document.querySelector('meta[name="csrf-token"]').content
     let data = new FormData(form)
@@ -122,7 +117,7 @@ export default class LoginDialog extends React.Component {
        this.handleClose()
      }
      this.props.setUser(user)
-    }).catch(err => console.log(err))
+   }).catch(err => console.warn(err))
   }
 
   validateInputs = () => {
