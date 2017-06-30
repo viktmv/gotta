@@ -27,6 +27,35 @@ class List extends React.Component {
     head.innerHTML += meta
   }
 
+
+  componentDidMount() {
+    // Twitter share button
+     window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+      return ''
+    }(document, "script", "twitter-wjs"))
+
+    // Facebook share button
+    !function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk')
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -41,37 +70,8 @@ class List extends React.Component {
       />,
     ];
 
-    // Facebook share button
-    let fb = function(d, s, id) {
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) return;
-              js = d.createElement(s); js.id = id;
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-              fjs.parentNode.insertBefore(js, fjs);
-            }
-
-
-    // Twitter share button
-
-    let tweet = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
-
-    let twttr = function() {
-                 window.twttr = (function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0],
-                    t = window.twttr || {};
-                  if (d.getElementById(id)) return t;
-                  js = d.createElement(s);
-                  js.id = id;
-                  js.src = "https://platform.twitter.com/widgets.js";
-                  fjs.parentNode.insertBefore(js, fjs);
-
-                  t._e = [];
-                  t.ready = function(f) {
-                    t._e.push(f);
-                  };
-                  return ''
-                }(document, "script", "twitter-wjs"))
-              }
+    // Default tweet text
+    let defaultTweet = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
 
     // Email sharing
     let body = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
@@ -89,13 +89,11 @@ class List extends React.Component {
 
     return (<div className="published-list-main">
               <div className="published-list-header">
-
                 <div className="published-list-name-container">
                   <h2 className="published-list-name">{this.props.name}</h2>
                 </div>
 
                 <div className="social-buttons-container">
-
                   <div className="list-share-button">
                       <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>
                       <span className="published-list-icon typcn typcn-mail"></span></a>
@@ -108,7 +106,7 @@ class List extends React.Component {
                   </div>
 
                   <div className="list-share-button">
-                      <a href={`https://twitter.com/intent/tweet?text=${tweet}`}>
+                      <a href={`https://twitter.com/intent/tweet?text=${defaultTweet}`}>
                       <span className="published-list-icon typcn typcn-social-twitter"></span></a>
                   </div>
 
@@ -132,10 +130,7 @@ class List extends React.Component {
                   </div>
                 </div>
               </div>
-
-              {fb(document, 'script', 'facebook-jssdk')}
-              {twttr()}
-
+              
               {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
 
             </div>)
