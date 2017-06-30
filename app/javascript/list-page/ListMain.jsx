@@ -30,7 +30,7 @@ class List extends React.Component {
 
   componentDidMount() {
     // Twitter share button
-     window.twttr = (function(d, s, id) {
+     window.twttr = !function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
         t = window.twttr || {}
       if (d.getElementById(id)) return t
@@ -44,7 +44,7 @@ class List extends React.Component {
         t._e.push(f)
       }
       return ''
-    }(document, "script", "twitter-wjs"))
+    }(document, "script", "twitter-wjs")
 
     // Facebook share button
     !function(d, s, id) {
