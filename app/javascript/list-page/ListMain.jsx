@@ -1,9 +1,9 @@
 import React from 'react'
 import ListItem from './ListItem'
 import TextField from 'material-ui/TextField'
-import Dialog from 'material-ui/Dialog';
-import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog'
+import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
 
 class List extends React.Component {
   constructor(props) {
@@ -15,44 +15,45 @@ class List extends React.Component {
   }
 
   componentWillMount() {
+    // OpenGraph meta tags
     let meta = `
-                <meta property="og:url"         content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
-                <meta property="og:type"        content="article" />
-                <meta property="og:title"       content="When Great Minds Don’t Think Alike" />
+                <meta property="og:url" content="http://www.nytimes.com/2015/02/19/arts/international/when-great-minds-dont-think-alike.html" />
+                <meta property="og:type" content="article" />
+                <meta property="og:title" content="When Great Minds Don’t Think Alike" />
                 <meta property="og:description" content="How much does culture influence creative thinking?" />
-                <meta property="og:image"       content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
+                <meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />
               `
 
     let head = document.querySelector('head')
     head.innerHTML += meta
   }
 
-
   componentDidMount() {
     // Twitter share button
      window.twttr = (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0],
-        t = window.twttr || {};
-      if (d.getElementById(id)) return t;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://platform.twitter.com/widgets.js";
-      fjs.parentNode.insertBefore(js, fjs);
+        t = window.twttr || {}
+      if (d.getElementById(id)) return t
+      js = d.createElement(s)
+      js.id = id
+      js.src = "https://platform.twitter.com/widgets.js"
+      fjs.parentNode.insertBefore(js, fjs)
 
-      t._e = [];
+      t._e = []
       t.ready = function(f) {
-        t._e.push(f);
-      };
+        t._e.push(f)
+      }
       return ''
     }(document, "script", "twitter-wjs"))
 
     // Facebook share button
     !function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-      fjs.parentNode.insertBefore(js, fjs);
+      var js, fjs = d.getElementsByTagName(s)[0]
+      if (d.getElementById(id)) return
+      js = d.createElement(s)
+      js.id = id
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8"
+      fjs.parentNode.insertBefore(js, fjs)
     }(document, 'script', 'facebook-jssdk')
   }
 
@@ -67,8 +68,8 @@ class List extends React.Component {
         label="Submit"
         primary={true}
         onTouchTap={this.sendMessage}
-      />,
-    ];
+      />
+    ]
 
     // Default tweet text
     let defaultTweet = `Hey, here are some cool things I found!\n Here's the link: http://localhost:3000/lists/${this.props.id} `.replace('%20', ' ')
@@ -87,58 +88,68 @@ class List extends React.Component {
       width: 350
     }
 
-    return (<div className="published-list-main">
-              <div className="published-list-header">
-                <div className="published-list-name-container">
-                  <h2 className="published-list-name">{this.props.name}</h2>
-                </div>
+    return (
+      <div className="published-list-main">
+        <div className="published-list-header">
+          <div className="published-list-name-container">
+            <h2 className="published-list-name">{this.props.name}</h2>
+          </div>
 
-                <div className="social-buttons-container">
-                  <div className="list-share-button">
-                      <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>
-                      <span className="published-list-icon typcn typcn-mail"></span></a>
-                  </div>
+          <div className="social-buttons-container">
+            <div className="list-share-button">
+                <a href={`mailto:friend@somemail.com?subject=${subj}&body=${body}`}>
+                <span className="published-list-icon typcn typcn-mail"></span>
+                </a>
+            </div>
 
-                  <div id="fb-root"></div>
-                  <div className="list-share-button" data-href="https://github.com" data-layout="button_count" data-size="large" data-mobile-iframe="true">
-                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
-                     <span className="published-list-icon typcn typcn-social-facebook"></span></a>
-                  </div>
+            <div id="fb-root"></div>
+            <div className="list-share-button"
+                 data-href="https://github.com"
+                 data-layout="button_count"
+                 data-size="large"
+                 data-mobile-iframe="true">
+               <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&ampsrc=sdkpreparse">
+                 <span className="published-list-icon typcn typcn-social-facebook"></span>
+               </a>
+            </div>
 
-                  <div className="list-share-button">
-                      <a href={`https://twitter.com/intent/tweet?text=${defaultTweet}`}>
-                      <span className="published-list-icon typcn typcn-social-twitter"></span></a>
-                  </div>
+            <div className="list-share-button">
+                <a href={`https://twitter.com/intent/tweet?text=${defaultTweet}`}>
+                  <span className="published-list-icon typcn typcn-social-twitter"></span>
+                </a>
+            </div>
 
-                  <div className="list-share-button">
-                    <span onClick={this.handleOpen} className="published-list-icon typcn typcn-device-phone"></span>
-                    <Dialog
-                       title="Share with a simple text message!"
-                       actions={actions}
-                       modal={false}
-                       contentStyle={customContentStyle}
-                       open={this.state.open}
-                     >
-                       <TextField
-                         id="text-field-controlled"
-                         className="phone-sms"
-                         name="Phone number"
-                         type="tel"
-                         floatingLabelText="Friend's phone number"
-                       />
-                     </Dialog>
-                  </div>
-                </div>
-              </div>
-              
-              {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
+            <div className="list-share-button">
+              <span onClick={this.handleOpen}
+                    className="published-list-icon typcn typcn-device-phone"></span>
+              <Dialog
+                 title="Share with a simple text message!"
+                 actions={actions}
+                 modal={false}
+                 contentStyle={customContentStyle}
+                 open={this.state.open}
+               >
+                 <TextField
+                   id="text-field-controlled"
+                   className="phone-sms"
+                   name="Phone number"
+                   type="tel"
+                   floatingLabelText="Friend's phone number"
+                 />
+               </Dialog>
+            </div>
+          </div>
+        </div>
 
-            </div>)
+        {this.state.listItems.map((item, i)=> <ListItem key={i} data={item} />)}
+
+      </div>
+    )
   }
 
   handleOpen = () => {
     this.setState({open: true})
-  };
+  }
 
   sendMessage = () => {
     const $ = el => document.querySelector(el)
@@ -160,8 +171,7 @@ class List extends React.Component {
     // Post the creation request
     fetch(`/lists/${this.props.id}/sms`, init)
     .then(response => response.json())
-    .then(result => console.log(result)) // TODO: Clean up console.logs before deploying
-    .catch(err => console.log(err))
+    .catch(err => console.warn(err))
 
     this.handleClose()
   }
