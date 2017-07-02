@@ -1,10 +1,9 @@
 import React from 'react'
 // Material-ui components
 import RaisedButton from 'material-ui/RaisedButton'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import TextField from 'material-ui/TextField';
-
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import TextField from 'material-ui/TextField'
 
 // Helper
 const $ = el => document.querySelector(el)
@@ -36,7 +35,6 @@ class CreateListItem extends React.Component {
                       className="create-name"
                       type="name"
                       onChange={this.updateName} />
-
                       <TextField
                       hintText="list-item description"
                       className="create-description"
@@ -59,14 +57,26 @@ class CreateListItem extends React.Component {
            className="create-link"
            errorText={this.state.errorText}
            type="link"
-           onFocus={this.resetErrorText} //removes error text when user clicks in text field
+           onFocus={this.resetErrorText}
            onKeyUp={this.updateLink} />
-          <div onBlur={() => this.clearSearch(0)} style={{height: fieldHeight}}className="autocomplete-field"><ul>{this.state.titles.map((t,i) => <li key={i}><a onClick={this.populateInputs}>{t}</a></li>)}</ul></div>
-           {textFields}
+          <div onBlur={() => this.clearSearch(0)}
+               style={{height: fieldHeight}}
+               className="autocomplete-field">
+            <ul>
+              {this.state.titles.map((t,i) => <li key={i}>
+                                                  <a onClick={this.populateInputs}>{t}</a>
+                                                </li>)}
+            </ul>
           </div>
+          {textFields}
+        </div>
 
          <div className="list-form-add-list-item-container">
-           <FloatingActionButton mini={true} className="add-list-item-button" onClick={this.handleAddClick}><ContentAdd /></FloatingActionButton>
+           <FloatingActionButton mini={true}
+                                 className="add-list-item-button"
+                                 onClick={this.handleAddClick}>
+             <ContentAdd />
+           </FloatingActionButton>
         </div>
       </div>
     )
@@ -144,11 +154,11 @@ class CreateListItem extends React.Component {
     this.setState({name})
   }
 
-  updateDescription = (e) => {
+  updateDescription = e => {
     this.setState({description: e.target.value})
   }
 
-  resetErrorText = (e) => {
+  resetErrorText = e => {
     this.setState({errorText: ''})
   }
 
@@ -204,7 +214,7 @@ class CreateListItem extends React.Component {
         $('.create-description > div').style.opacity = 0
       }
       if (image)
-      $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`);
+      $('.create-image').setAttribute('style', `background-image: url(${image[0]._value}); width: 72px; height: 72px;`)
 
       this.setState({
         name: title ? title[0]._value : '',
@@ -217,7 +227,7 @@ class CreateListItem extends React.Component {
 
   googleName = query => {
     let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
-    let cx = '003795560815676233470:zx_lx55noqy';
+    let cx = '003795560815676233470:zx_lx55noqy'
 
     if (query.length < 1) return
 
