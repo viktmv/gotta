@@ -4,10 +4,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 
-// const style = {
-//   width: 30%,
-// }
-
 class ConfirmationPopUp extends React.Component {
   render() {
 
@@ -23,14 +19,12 @@ class ConfirmationPopUp extends React.Component {
       <div className="pop-up-container">
       <Dialog title="Your list has been published!"
           actions={actions}
-          // style={style}
           modal={false}
           open={this.props.confirmationPopupOpen}
           onRequestClose={this.props.handleClose} className="confirmation-pop-up">
         <a href={`http://localhost:3000/lists/${this.props.list}`} target="_blank">Go check it out</a>
       </Dialog>
       </div>
-
     )
   }
 }
