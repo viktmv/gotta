@@ -32,7 +32,7 @@ class CreateNewList extends React.Component {
     let {list} = this.props
     let listExists = !!Object.keys(list).length
 
-    // Render various inputs depending on state
+    // Render various inputs depending on state - Main Button
     let input
     if (this.state.btn.type == 'submit' && !listExists) {
       input = `<input type=${this.state.btn.type} id="start-new-list" value="${this.state.btn.value}" />`
@@ -45,6 +45,7 @@ class CreateNewList extends React.Component {
       input = `<input type=${this.state.btn.type} id="start-new-list" placeholder="${this.state.btn.placeholder}" />`
     }
 
+    // Confitional Rendering of List Creation Fields && Intro Text
     let introText
     let listStructure = ''
     if (this.state.clicked || listExists) {
@@ -67,7 +68,7 @@ class CreateNewList extends React.Component {
     } else {
       introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
     }
-
+    // Pop-up on successful list publishing
     let popup = this.state.published
               ? <ConfirmationPopUp list={this.state.listID}
                 confirmationPopupOpen={this.state.confirmationPopupOpen}
@@ -90,13 +91,15 @@ class CreateNewList extends React.Component {
       </div>
     )
   }
-
+  // Change or change the list name and display correct placeholder
   handleKeyInput = e => {
     this.props.handleNameChange(e)
-    let placeholder = Object.keys(this.props.list).length ? 'Edit the name here' : 'Enter the list name'
+    let placeholder = Object.keys(this.props.list).length
+                    ? 'Edit the name here'
+                    : 'Enter the list name'
     this.setState({btn: { placeholder, type: 'text', value: '' }})
   }
-
+  // State of confirmation-pop-up
   handleOpen = () => {
     this.setState({confirmationPopupOpen: true})
   }
@@ -104,48 +107,51 @@ class CreateNewList extends React.Component {
   handleClose = () => {
     this.setState({confirmationPopupOpen: false})
   }
-
+  // Snackbar open-close
   handleSnackClose = () => {
     this.setState({
       snackOpen: false
     })
   }
-
-  //Fancy button - on click the type turns from submit to text
+  // Handle initial click on the main button and correct placeholder display
   handleClick = e => {
     let {list} = this.props
-    let placeholder = Object.keys(list).length ? 'Edit the name here' : 'Enter the list name'
+    let placeholder = Object.keys(list).length
+                    ? 'Edit the name here'
+                    : 'Enter the list name'
     this.setState({ btn: { placeholder, type: 'text', value: '' }, clicked: true})
   }
-
+  // Set 'published' flag on the successful list creation
   publishList = list => {
     this.setState({published: true, listID: list.id})
   }
-
- publishList = list => {
-    this.setState({published: true, listID: list.id})
-  }
-
   // handle list creation request
   handleCreate = e => {
     let {list} = this.props
     let id = Object.keys(list).length ? list.id : ''
 
+    // Check for at least one item in the list
     if (!this.props.listItems.length)
-      return this.setState({snackOpen: true, publishError: 'Please add at least one item to the list!'})
+      return this.setState({
+        snackOpen: true,
+        publishError: 'Please add at least one item to the list!'
+      })
 
+    // Request meta info
+    let meta = document.querySelector('meta[name="csrf-token"]').content
+    let headers = new Headers({
+      'X-CSRF-Token': meta,
+      'Content-Type': 'application/json'
+    })
+
+    // Delete previous list if editing
     if (id) {
-      let meta = document.querySelector('meta[name="csrf-token"]').content
-      let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
       let options = {method: 'DELETE', headers, body: JSON.stringify({id})}
 
        fetch(`/lists/${id}/delete`, options)
        .then(response => response.json())
        .catch(err => console.log(err))
     }
-
-    let meta = document.querySelector('meta[name="csrf-token"]').content
-    let headers = new Headers({'X-CSRF-Token': meta, 'Content-Type': 'application/json' })
 
     this.setState({confirmationPopupOpen: true})
 
@@ -158,15 +164,14 @@ class CreateNewList extends React.Component {
     // Check it name exists
     if (!newList.name)
       return this.setState({snackOpen: true, publishError: 'Please enter the list name!'})
+
     // Options for request
     let options = {method: 'POST', headers, body: JSON.stringify(newList)}
 
     // Post the creation request
-    fetch('/lists/create', options).then(response => {
-      return response.json()
-    }).then(result => {
-      this.publishList(result)
-    })
+    fetch('/lists/create', options)
+    .then(response => response.json())
+    .then(result => this.publishList(result))
     .catch(err => console.log(err))
   }
 }
