@@ -66,7 +66,11 @@ class CreateNewList extends React.Component {
                         </div>
                       </div>
     } else {
-      introText = <div className="intro-text">Gotta makes recommending things&nbsp;easy. <br />Just create a list, publish and&nbsp;share.<br /><span className="intro-emphasis"> You Gotta try&nbsp;it!</span></div>
+      introText =
+        <div className="intro-text">Gotta makes recommending things&nbsp;easy.<br />
+          Just create a list, publish and&nbsp;share.<br />
+          <span className="intro-emphasis"> You Gotta try&nbsp;it!</span>
+        </div>
     }
     // Pop-up on successful list publishing
     let popup = this.state.published
