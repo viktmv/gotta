@@ -47,5 +47,4 @@ class SelectBackground extends React.Component {
   }
 }
 
-
 export default SelectBackground

@@ -12,17 +12,6 @@ export default class LoginDialog extends React.Component {
     errorText: ''
   }
 
-  handleOpen = () => {
-    this.setState({open: true})
-  }
-
-  handleClose = () => {
-    this.setState({open: false})
-  }
-
-  resetErrorText = () => {
-    this.setState({errorText: ''})
-   }
 
   render() {
     const actions = [
@@ -89,6 +78,18 @@ export default class LoginDialog extends React.Component {
     )
   }
 
+  handleOpen = () => {
+    this.setState({open: true})
+  }
+
+  handleClose = () => {
+    this.setState({open: false})
+  }
+
+  resetErrorText = () => {
+    this.setState({errorText: ''})
+  }
+
   signUpHandler = e => {
     e.preventDefault()
 
@@ -109,15 +110,15 @@ export default class LoginDialog extends React.Component {
                 body: data
               }
 
-    fetch('/users', init).then(response => {
-     return response.json()
-   }).then(user => {
+    fetch('/users', init)
+    .then(response => response.json())
+    .then(user => {
      if (user) {
        Auth.authenticateUser(user)
        this.handleClose()
      }
      this.props.setUser(user)
-   }).catch(err => console.warn(err))
+     }).catch(err => console.warn(err))
   }
 
   validateInputs = () => {

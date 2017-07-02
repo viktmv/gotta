@@ -94,9 +94,9 @@ export default class LoginDialog extends React.Component {
       body: data
     }
 
-    fetch('/login', init).then(response => {
-      return response.json()
-    }).then(res => {
+    fetch('/login', init)
+    .then(response => response.json())
+    .then(res => {
       let {user} = res
       if (user) {
         Auth.authenticateUser(user)

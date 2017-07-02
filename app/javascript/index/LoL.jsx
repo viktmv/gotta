@@ -75,7 +75,6 @@ class LoL extends React.Component {
                       <span onClick={this.handleEditClick}
                       onTouchTap={this.handleEditClick}
                       className="drawer-icon typcn typcn-edit"></span>
-
                   </ListItem>)
               })}
             </div>

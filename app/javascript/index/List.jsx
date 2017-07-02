@@ -1,6 +1,6 @@
 import React from 'react'
 import ListItem from './ListItem'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class List extends React.Component {
   constructor(props) {
