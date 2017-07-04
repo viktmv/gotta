@@ -59,7 +59,8 @@ class App extends React.Component {
       </MuiThemeProvider>
     )
   }
-  addTheme = (theme) => {
+
+  addTheme = theme => {
     this.setState({theme})
     document.querySelector('html').style.background = theme
 
@@ -72,9 +73,7 @@ class App extends React.Component {
 
     fetch(`/${id}/theme`, options)
     .then(res => res.json())
-    .then(console.log)
     .catch(console.warn)
-
   }
 
   setUser = user => {
