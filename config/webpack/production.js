@@ -13,18 +13,18 @@ module.exports = merge(sharedConfig, {
   stats: 'normal',
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: true,
-
-      compress: {
-        warnings: true
-      },
-
-      output: {
-        comments: true
-      }
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   minimize: true,
+    //   sourceMap: true,
+    //
+    //   compress: {
+    //     warnings: true
+    //   },
+    //
+    //   output: {
+    //     comments: true
+    //   }
+    // }),
 
     new CompressionPlugin({
       asset: '[path].gz[query]',
