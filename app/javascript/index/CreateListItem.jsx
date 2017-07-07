@@ -226,7 +226,7 @@ class CreateListItem extends React.Component {
   }
 
   googleName = query => {
-    let key = 'AIzaSyA34xUs-ixxAaUibuSTrjRJ0CKsDtPpJvs'
+    let key = $('meta[name="google-key"]').content
     let cx = '003795560815676233470:zx_lx55noqy'
 
     if (query.length < 1) return
