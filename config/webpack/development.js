@@ -26,16 +26,7 @@ module.exports = merge(sharedConfig, {
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: true,
     watchOptions: {
-      ignored: /node_modules/,
-      poll: true
+      ignored: /node_modules/
     }
-  },
-
-  externals: {
-     'jsdom': 'window',
-     'cheerio': 'window',
-     'react/lib/ExecutionEnvironment': true,
-     'react/addons': true,
-     'react/lib/ReactContext': 'window'
-   }
+  }
 })
