@@ -2,7 +2,8 @@
   "name": "gotta-app",
   "private": true,
   "scripts": {
-    "postinstall": "npm rebuild node-sass"
+    "webpack:deploy": "webpack --config=webpack/webpack.config.js -p",
+    "heroku-postbuild": "npm run webpack:deploy"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
