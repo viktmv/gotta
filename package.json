@@ -35,7 +35,7 @@
     "webpack": "^2.6.1",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0",
-    "yarn": "^0.24.5"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "babel-jest": "^20.0.3",
